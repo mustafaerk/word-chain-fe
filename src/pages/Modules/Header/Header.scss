@@ -1,0 +1,13 @@
+@import "../../../styles/varible.scss";
+@import "../../../styles/mixin.scss";
+
+.header__wrapper {
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding: 0 50px;
+  height: $header-height;
+  @include breakpoint(mobile) {
+    background-color: red;
+  }
+}

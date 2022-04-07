@@ -1,0 +1,12 @@
+@import "~antd/dist/antd.css";
+@import "../../styles/varible.scss";
+
+.content__wrapper {
+  background-color: $bg-color;
+}
+
+.footer__wrapper {
+  background-color: $gray-dark;
+  bottom: 0;
+  color: $white;
+}
