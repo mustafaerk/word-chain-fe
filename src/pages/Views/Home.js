@@ -1,29 +1,32 @@
 import React from "react";
 
-import { Text } from "components";
-import Main from "pages/Layout/Main";
-
 import { useGetPokemonByNameQuery } from "redux/slices/pokemon/pokemon";
 
 const Home = () => {
-  const { data, error, isLoading } = useGetPokemonByNameQuery("charmander");
+  const { data, error, isLoading } = useGetPokemonByNameQuery();
   console.log(data, error);
-
+  const pokemons = data?.results;
   return (
-    <Main>
-      <Text type="md" weight="bold">
+    <div>
+      <ul className="divide-y divide-gray-200">
         {error ? (
           <></>
         ) : isLoading ? (
           <>Loading...</>
         ) : data ? (
-          <>
-            <h3>{data.species.name}</h3>
-            <img src={data.sprites.front_shiny} alt={data.species.name} />
-          </>
+          pokemons.map((pokemon) => (
+            <li key={pokemon.name} className="py-4 flex">
+              <div className="ml-3">
+                <p className="text-sm font-medium text-gray-900">
+                  {pokemon.name}
+                </p>
+                <p className="text-sm text-gray-500">{pokemon.url}</p>
+              </div>
+            </li>
+          ))
         ) : null}
-      </Text>
-    </Main>
+      </ul>
+    </div>
   );
 };
 
