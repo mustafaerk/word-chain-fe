@@ -1,0 +1,23 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+
+function WordItem({ englishWord, nativeWord }) {
+    return (
+        <div className='flex p-2 gap-x-2'>
+            <div className='flex bg-primary w-2/3 rounded-lg justify-between md:h-10 sm:h-8 items-center'>
+                <span className='mx-auto text-white font-semibold'>{englishWord}</span>
+                <div className='flex w-8 lg:w-12 md:w-10 h-full bg-purple px-1 text-white font-semibold rounded-lg  items-center justify-center'>{englishWord.slice(-1).toUpperCase()}</div>
+            </div>
+            <div className='flex w-1/3 bg-primary items-center justify-center rounded-lg'>
+                <span className='text-white font-semibold'>{nativeWord}</span>
+            </div>
+        </div>
+    );
+}
+
+WordItem.propTypes = {
+    englishWord: PropTypes.string.isRequired,
+    nativeWord: PropTypes.string.isRequired,
+};
+export default WordItem;
