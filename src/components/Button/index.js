@@ -30,7 +30,7 @@ function Button({ id, buttonIcon, buttonText, borderType, variant }) {
     >
       <img className="" src={buttonIcon} alt="Icon" />
       <span>
-        {buttonText} {borderType}
+        {buttonText ?? null} {borderType}
       </span>
     </div>
   );

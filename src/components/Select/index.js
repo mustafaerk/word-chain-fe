@@ -37,7 +37,7 @@ export default function Select({ data, onChange, labelText, LabelIcon }) {
                                 <Listbox.Option
                                     key={itemIdx}
                                     className={({ active }) =>
-                                        `cursor-default select-none rounded-md relative py-2 pl-10 pr-4 ${active ? 'text-amber-900 bg-amber-100' : 'text-gray-900'} hover:bg-lightGray hover:text-darkGray`
+                                        `cursor-default select-none rounded-md relative py-2 pl-10 pr-4 ${active ? 'text-amber-900 bg-amber-100' : 'text-gray-900'} hover:bg-white hover:text-darkGray`
                                     }
                                     value={item}
                                 >
