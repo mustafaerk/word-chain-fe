@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const Home = React.lazy(() => import("pages/Views/Home"));
 const Example = React.lazy(() => import("pages/Views/Example"));
+const Login = React.lazy(() => import("pages/Views/Login"));
 
 function Router() {
   return (
@@ -17,10 +18,10 @@ function Router() {
           }
         />
         <Route
-          path="/home"
+          path="/login"
           element={
             <React.Suspense fallback={<>...</>}>
-              <Home />
+              <Login />
             </React.Suspense>
           }
         />

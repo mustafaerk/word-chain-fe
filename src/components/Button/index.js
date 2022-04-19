@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Button({ id, buttonIcon, buttonText, borderType, variant }) {
+function Button({ id, buttonIcon, buttonText, buttonClass, borderType, variant, onClick }) {
   const handleButtonColor = () => {
     switch (variant) {
       case "primary":
@@ -26,9 +26,10 @@ function Button({ id, buttonIcon, buttonText, borderType, variant }) {
   return (
     <div
       id={id}
-      className={`flex items-center justify-center text-white gap-x-2 shadow-3xl ${handleButtonColor()} ${handleBorder()} cursor-pointer rounded-lg mx-1 my-1 h-12`}
+      className={`flex items-center justify-center text-white gap-x-2 shadow-3xl ${handleButtonColor()} ${handleBorder()} w-full cursor-pointer rounded-lg mx-1 my-1 h-12 ${buttonClass}`}
+      onClick={onClick}
     >
-      <img className="" src={buttonIcon} alt="Icon" />
+      <img className="" width={25} src={buttonIcon} alt="Icon" />
       <span>
         {buttonText ?? null} {borderType}
       </span>
@@ -40,12 +41,16 @@ Button.propTypes = {
   id: PropTypes.string,
   buttonIcon: PropTypes.any.isRequired,
   buttonText: PropTypes.string,
+  buttonClass: PropTypes.string,
   borderType: PropTypes.bool,
   variant: PropTypes.string,
+  onClick: PropTypes.func,
 };
 Button.defaultProps = {
   borderType: false,
   variant: "primary",
+  onClick: () => { },
+  buttonClass: "",
 };
 
 export default Button;
