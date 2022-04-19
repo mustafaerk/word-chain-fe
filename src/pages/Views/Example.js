@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 import UserIcon from "assets/icons/userIcon.svg";
-import { Input, WordItem, Select } from "components";
+import roomIcon from "assets/icons/room.svg";
+import { Input, WordItem, Select, Button } from "components";
 
 
 const Example = () => {
@@ -9,7 +10,7 @@ const Example = () => {
 
 
   return (
-    <div className="bg-darkGray w-full">
+    <div className="bg-darkGray w-full h-screen">
       <Input id="input1" inputName="userName" LabelIcon={UserIcon} labelText="Kullanıcı Adı" placeholder="Kullanıcı Adı" value={userName} onChange={e => setUserName(e.target.value)} />
       <Select
         data={[
@@ -26,6 +27,11 @@ const Example = () => {
       <Input id="input2" inputName="surName" placeholder="Kullanıcı Adı" value={userName} onChange={e => setUserName(e.target.value)} />
       <WordItem englishWord="Apple" nativeWord="Elma" />
       <WordItem englishWord="Word" nativeWord="Kelime" />
+      <Button id="button1" buttonIcon={roomIcon} variant="shadowPurple" buttonText="Katıl"/>
+      <Button id="button2" buttonIcon={roomIcon} variant="secondary" buttonText="Katıl"/>
+      <Button id="button3" buttonIcon={roomIcon} variant="primary" buttonText="Katıl"/>
+      <Button id="button4" buttonIcon={roomIcon} variant="shadowPurple" buttonText="Katıl" borderType/>
+      <Button id="button4" buttonIcon={roomIcon} variant="shadowSecondary" borderType/>
 
     </div>
   );
