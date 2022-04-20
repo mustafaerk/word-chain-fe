@@ -2,17 +2,35 @@ import React, { useState } from "react";
 
 import UserIcon from "assets/icons/userIcon.svg";
 import roomIcon from "assets/icons/room.svg";
-import { Input, WordItem, Select, Button, Modal, UserCard, ProgressBar } from "components";
+import {
+  Input,
+  WordItem,
+  Select,
+  Button,
+  Modal,
+  UserCard,
+  ProgressBar,
+} from "components";
 
 const Example = () => {
   const [userName, setUserName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-darkGray w-full h-screen">
-      <div className="w-96">
-        <UserCard id="userCard" name="CigiBugule" avatarId={9} isActive={true} />
-        <UserCard id="userCard2" name="CigiBugule" avatarId={3} isActive={false} />
+    <div className="bg-darkGray w-1/2 h-screen m-auto">
+      <div className="w-96 m-auto">
+        <UserCard
+          id="userCard"
+          name="CigiBugule"
+          avatarId={9}
+          isActive={true}
+        />
+        <UserCard
+          id="userCard2"
+          name="CigiBugule"
+          avatarId={3}
+          isActive={false}
+        />
       </div>
       <Input
         id="input1"
@@ -78,6 +96,7 @@ const Example = () => {
       >
         <span> Hello</span>
       </Modal>
+
       <ProgressBar duration={15}></ProgressBar>
     </div>
   );
