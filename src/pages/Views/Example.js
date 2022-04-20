@@ -17,7 +17,7 @@ const Example = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-darkGray w-1/2 h-screen m-auto">
+    <div className="bg-darkGray w-full md:w-1/2 h-full m-auto">
       <div className="w-96 m-auto">
         <UserCard
           id="userCard"
