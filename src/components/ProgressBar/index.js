@@ -21,7 +21,7 @@ const ProgressBar = ({ id, duration ,endCallBack}) => {
   }, [currentWidth]);
 
   return (
-    <div id={id} className="progress-bar-container h-4 bg-primary m-2 rounded-lg">
+    <div id={id} className="progress-bar-container h-4 bg-primary m-2 rounded-lg border-[#7B61FF] border">
       <div
         className={`progress bg-purple transition-[width] duration-[1000ms] rounded-lg h-full w-s${currentWidth}`}
       ></div>
