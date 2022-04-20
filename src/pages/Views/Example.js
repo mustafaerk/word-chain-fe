@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import UserIcon from "assets/icons/userIcon.svg";
 import roomIcon from "assets/icons/room.svg";
-import { Input, WordItem, Select, Button, Modal, UserCard } from "components";
+import { Input, WordItem, Select, Button, Modal, UserCard, ProgressBar } from "components";
 
 const Example = () => {
   const [userName, setUserName] = useState("");
@@ -78,6 +78,7 @@ const Example = () => {
       >
         <span> Hello</span>
       </Modal>
+      <ProgressBar duration={15}></ProgressBar>
     </div>
   );
 };
