@@ -2,14 +2,18 @@ import React, { useState } from "react";
 
 import UserIcon from "assets/icons/userIcon.svg";
 import roomIcon from "assets/icons/room.svg";
-import { Input, WordItem, Select, Button, Modal } from "components";
+import { Input, WordItem, Select, Button, Modal, UserCard } from "components";
 
 const Example = () => {
   const [userName, setUserName] = useState("");
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="bg-darkGray w-full h-screen">
+      <div className="w-96">
+        <UserCard id="userCard" name="CigiBugule" avatarId={9} isActive={true} />
+        <UserCard id="userCard2" name="CigiBugule" avatarId={3} isActive={false} />
+      </div>
       <Input
         id="input1"
         inputName="userName"
