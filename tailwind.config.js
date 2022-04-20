@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
+    container: {
+      center: true,
+    },
     colors: {
       transparent: 'transparent',
       white: '#F5F5F7',
@@ -14,7 +17,7 @@ module.exports = {
       darkGray: "#373E51",
       lightGray: "#D8D8D8"
     },
-    borders:{
+    borders: {
       borderNone: "none",
       borderyes: "1px solid #E5E5E5",
     },
@@ -23,7 +26,7 @@ module.exports = {
       'secondary': '3px 4px 1px -1px rgb(38 184 161 / 0.6) !important',
       'purple': '3px 4px 1px -1px rgb(123 97 255 / 0.6) !important',
     }
-    
+
   },
   variants: {
     extend: {},
