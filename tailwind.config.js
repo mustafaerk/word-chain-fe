@@ -1,8 +1,58 @@
 module.exports = {
-  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+  purge: {
+    content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+    safelist: [
+      "w-s0",
+      "w-s1",
+      "w-s2",
+      "w-s3",
+      "w-s4",
+      "w-s5",
+      "w-s6",
+      "w-s7",
+      "w-s8",
+      "w-s9",
+      "w-s10",
+      "w-s11",
+      "w-s12",
+      "w-s13",
+      "w-s14",
+      "w-s15",
+    ],
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        "bar-load": "ease 3s linear infinite",
+      },
+      transitionProperty: {
+        width: "width",
+      },
+      transitionDuration: {
+        0: "0ms",
+        500: "500ms",
+        1000: "100ms",
+      },
+      width: {
+        s0: "0%",
+        s1: "7%",
+        s2: "13%",
+        s3: "20%",
+        s4: "26%",
+        s5: "33%",
+        s6: "40%",
+        s7: "46%",
+        s8: "52%",
+        s9: "59%",
+        s10: "65%",
+        s11: "72%",
+        s12: "78%",
+        s13: "85%",
+        s14: "92%",
+        s15: "100%",
+      },
+    },
     container: {
       center: true,
     },
@@ -16,7 +66,9 @@ module.exports = {
       darkPurple: "#9073B5",
       darkGray: "#373E51",
       lightGray: "#D8D8D8",
-      pureBlack: "#373E51",
+      lightPurple: "#B8AAFF",
+      sky: "#3D4559",
+      trying: "#454545",
     },
     borders: {
       borderNone: "none",

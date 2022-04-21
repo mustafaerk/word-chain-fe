@@ -3,30 +3,45 @@ import PropTypes from "prop-types";
 
 import { avatarList } from "constant/Avatar";
 
-const UserCard = ({ avatarId, username, point, isActive }) => {
+function UserCard({ id, name, point, isActive, avatarId }) {
   return (
     <div
-      className={` ${
-        isActive ? "bg-purple" : "bg-primary"
-      } rounded-md h-28 text-white flex items-center justify-center space-x-4 mx-auto`}
+      id={id}
+      className={`flex items-center justify-around md:flex-row flex-col text-white ${
+        isActive ? "md:bg-purple" : "md:bg-primary"
+      }  rounded-lg p-2`}
     >
-      <div className="bg-darkGray rounded-full pb-2 px-2 relative w-16">
-        <img src={avatarList[avatarId]} alt="" className="w-16 h-16 object-cover" />
+      <div
+        className={`user-card-img-area rounded-full ${
+          isActive ? "bg-lightPurple md:bg-darkGray" : "bg-sky"
+        }`}
+      >
+        <img
+          className="user-card-img rounded-full"
+          width={100}
+          src={avatarList[avatarId]}
+          alt="Icon"
+        />
       </div>
-      <div className="flex flex-col w-1/2">
-        <span className="text-base text-white font-semibold">{username}</span>
-        <span className="text-xs text-lightGray">{point} point</span>
+
+      <div className="user-card-name-point-area flex flex-col gap-y-2 md:items-start items-center">
+        <span className="user-card-name text-xl">{name}</span>
+        <span className="user-card-point text-xs">{point} Points</span>
       </div>
     </div>
   );
+}
+
+UserCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  avatarId: PropTypes.number.isRequired,
+  point: PropTypes.number,
+  isActive: PropTypes.bool,
+};
+UserCard.defaultProps = {
+  point: 0,
+  isActive: false,
 };
 
 export default UserCard;
-
-UserCard.propTypes = {
-  username: PropTypes.string.isRequired,
-  isActive: PropTypes.bool.isRequired,
-  avatarId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    .isRequired,
-  point: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-};
