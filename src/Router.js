@@ -9,6 +9,7 @@ import { updateUserInfoField } from "redux/slices/user/userSlice";
 const Home = React.lazy(() => import("pages/Views/Home"));
 const Example = React.lazy(() => import("pages/Views/Example"));
 const Login = React.lazy(() => import("pages/Views/Login"));
+const Game = React.lazy(() => import("pages/Views/Game"));
 
 function Router() {
   const dispatch = useDispatch();
@@ -45,6 +46,14 @@ function Router() {
           element={
             <React.Suspense fallback={<>...</>}>
               <Login />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="/play"
+          element={
+            <React.Suspense fallback={<>...</>}>
+              <Game />
             </React.Suspense>
           }
         />
