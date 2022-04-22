@@ -21,7 +21,7 @@ const UserList = () => {
           key={user.name + user.avatarId + idx}
           avatarId={user.avatarId}
           point={user.point}
-          username={user.name}
+          name={user.name}
           isActive={user.isActive}
         />
       ))}

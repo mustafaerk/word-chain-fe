@@ -11,11 +11,12 @@ function Input({ placeholder, labelText, LabelIcon, onChange, id, inputName }) {
         </label>
       )}
       <input
-        className="h-12 outline-none bg-primary  p-4 rounded-lg text-lightGray"
+        className="h-12 outline-none bg-primary  p-7 rounded-lg text-lightGray"
         id={inputName}
         name={inputName}
         placeholder={placeholder}
         onChange={onChange}
+        maxLength={30}
       />
     </div>
   );
