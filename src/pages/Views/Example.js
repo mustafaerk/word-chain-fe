@@ -88,7 +88,6 @@ const Example = () => {
         buttonText="Katıl"
         borderType
       />
-
       <Modal
         ModalTitle="Are you sure?"
         isOpen={isOpen}

@@ -26,6 +26,6 @@ html { font-family: 'Inter', sans-serif; }
 }
 
 .main__background {
-  background-image: url("assets/bg-image.png");
+  background-image: url("assets/background.png");
   background-size: cover;
 }
