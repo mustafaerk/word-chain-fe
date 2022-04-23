@@ -7,27 +7,27 @@ function HowToPlay({ id }) {
   return (
     <div
       id={id}
-      className={`flex flex-col text-white gap-y-10 shadow-3xl w-full cursor-pointer rounded-lg m-1 h-12}`}
+      className={`flex flex-col text-white gap-y-10 shadow-3xl w-full rounded-lg m-1 h-12}`}
     >
-      <h1 className="font-bold">HOW TO PLAY?</h1>
+      <h1 className="font-bold text-lg">How To Play?</h1>
       <InfoBox
         id="one"
         iconId="2"
-        infoTitle="SELECT LANGUAGE:"
+        infoTitle="Select Language!"
         infoText="Select the language you want to see the meaning of English words in
             the game."
       />
       <InfoBox
         id="two"
         iconId="3"
-        infoTitle="FOLLOW THE LAST WORD:"
+        infoTitle="Follow the last word!"
         infoText="When it is your turn, you are expected to write a word that starts
         with the last letter of the last word."
       />
       <InfoBox
         id="three"
         iconId="4"
-        infoTitle="ATTENTION TO THE TIME:"
+        infoTitle="Attention to the time!"
         infoText="It will be 15 seconds while it is your turn, hurry up."
       />
     </div>

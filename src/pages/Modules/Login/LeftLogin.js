@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import UserIcon from "assets/icons/userIcon.svg";
 import RoomIcon from "assets/icons/room.svg";
 import GameIcon from "assets/icons/game.svg";
+import EditIcon from "assets/icons/edit.svg";
 
 import LanguageIcon from "assets/icons/language.svg";
 import PlusIcon from "assets/icons/plus.svg";
@@ -78,12 +79,13 @@ const LeftLogin = () => {
   }
 
   return (
-    <div className="w-full sm:w-1/2 md:w-1/4 space-y-2 flex flex-col items-center mx-4 sm:mx-0">
+    <div className="w-full sm:w-1/2  md:w-1/3 space-y-2 flex flex-col items-center mx-4 sm:mx-0">
       <div
         onClick={() => setIsOpen(true)}
-        className="flex items-cent justify-center border-2 border-purple rounded-full pb-5 w-44 h-44 cursor-pointer"
+        className="relative flex items-cent justify-center border-2 border-purple rounded-full pb-5 w-44 h-44 cursor-pointer"
       >
         <img src={avatarList[avatarId]} className="w-36 h-36" alt="avatar" />
+        <img src={EditIcon} alt="" className="absolute top-0 right-0"   />
       </div>
       <Input
         id="u_name"
