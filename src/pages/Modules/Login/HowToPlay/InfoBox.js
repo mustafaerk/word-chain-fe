@@ -6,7 +6,6 @@ import { EmojiList } from "constant/Emoji";
 
 
 const InfoBox = ({id, iconId, infoTitle, infoText}) => {
-  console.log(id,iconId,infoTitle,infoText);
   return (
     <div id={id} className="flex gap-x-5 items-center">
       <div className="h-fit w-fit rounded-full p-5 bg-purple"><img width="35" src={EmojiList[iconId]} /></div>
@@ -23,5 +22,4 @@ InfoBox.propTypes = {
   infoText: PropTypes.string,
   infoTitle: PropTypes.string,
 };
-InfoBox.defaultProps = {};
 export default InfoBox;

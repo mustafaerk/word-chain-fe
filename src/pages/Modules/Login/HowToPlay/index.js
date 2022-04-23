@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import InfoBox from "./InfoBox";
 
 function HowToPlay({ id }) {
@@ -36,6 +37,5 @@ function HowToPlay({ id }) {
 HowToPlay.propTypes = {
   id: PropTypes.string.isRequired,
 };
-HowToPlay.defaultProps = {};
 
 export default HowToPlay;
