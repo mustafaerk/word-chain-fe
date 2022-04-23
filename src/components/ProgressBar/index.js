@@ -9,7 +9,6 @@ const ProgressBar = ({ id, duration ,endCallBack}) => {
   useEffect(() => {
     loop = setInterval(() => {
         setCurrentWidth(currentWidth => (currentWidth - 1));
-        console.log(currentWidth);
     }, 1000);
   }, []);
 

@@ -4,7 +4,6 @@ import { useGetPokemonByNameQuery } from "redux/slices/pokemon/pokemon";
 
 const Home = () => {
   const { data, error, isLoading } = useGetPokemonByNameQuery();
-  console.log(data, error);
   const pokemons = data?.results;
   return (
     <div>
