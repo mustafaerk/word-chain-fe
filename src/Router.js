@@ -5,6 +5,8 @@ import { v4 as uuid } from "uuid";
 
 import { useGetUserIpQuery } from "redux/slices/app/appApi";
 import { updateUserInfoField } from "redux/slices/user/userSlice";
+import { updateToken } from "redux/slices/app/appSlice";
+import { getStoragedItem } from "utils/localstorage";
 
 const Example = React.lazy(() => import("pages/Views/Example"));
 const Login = React.lazy(() => import("pages/Views/Login"));
@@ -14,6 +16,17 @@ function Router() {
   const dispatch = useDispatch();
 
   const { data } = useGetUserIpQuery();
+
+  const getToken = async () => {
+    const token = await getStoragedItem({ key: 'u_tkn' });
+    if (token.value) {
+      dispatch(updateToken(token.value));
+    }
+  }
+
+  useEffect(() => {
+    getToken();
+  }, [])
 
   useEffect(() => {
     const userLang = navigator.language || navigator.userLanguage;
@@ -42,7 +55,7 @@ function Router() {
           }
         />
         <Route
-          path="/play"
+          path="/play/:id"
           element={
             <React.Suspense fallback={<>...</>}>
               <Game />

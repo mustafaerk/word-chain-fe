@@ -1,10 +1,10 @@
 import axios from "axios";
 
 import { API_URL } from "constant/Varible";
+import { getStoragedItem } from "utils/localstorage";
 
-const axiosParameterBuilder = (config) => {
-  const { method = "GET", headers = {}, data = {}, clientToken = "" } = config;
-
+const axiosParameterBuilder = async (config) => {
+  const { method, headers = {}, data = {} } = config;
   // #region HEADERS
   const headerParameters = {
     Accept: "application/json",
@@ -13,9 +13,11 @@ const axiosParameterBuilder = (config) => {
     ...headers,
   };
 
-  if (clientToken) {
-    headerParameters.Authorization = `Bearer ${clientToken}`;
+  const token = await getStoragedItem({ key: 'u_tkn' });
+  if (token.value) {
+    headerParameters.Authorization = `Bearer ${token.value}`;
   }
+
   // #endregion HEADERS
 
   // #region DATA
@@ -40,37 +42,35 @@ const apiURLBuilder = (params) => {
 
 export const axiosBaseQuery =
   ({ baseUrl } = { baseUrl: API_URL }) =>
-  async (queryParams) => {
-    try {
-      const { path, ...rest } = queryParams;
+    async (queryParams) => {
+      try {
+        const { path, ...rest } = queryParams;
+        const params = await axiosParameterBuilder(rest);
+        const requestUrl = apiURLBuilder({ baseUrl, path });
 
-      const params = axiosParameterBuilder(rest);
-      const requestUrl = apiURLBuilder({ baseUrl, path });
-
-      const { data } = await axios(requestUrl, params);
-      return { data };
-    } catch (axiosError) {
-      const err = axiosError;
-      return {
-        error: { status: err.response?.status, data: err.response?.data },
-      };
-    }
-  };
+        const { data } = await axios(requestUrl, params);
+        return { data };
+      } catch (axiosError) {
+        const err = axiosError;
+        return {
+          error: { status: err.response?.status, data: err.response?.data },
+        };
+      }
+    };
 
 export const apiResHandler = (
   promise,
-  callback = () => {},
-  failCallback = () => {}
+  callback = () => { },
+  failCallback = () => { }
 ) => {
   promise
     .then((res) => {
       const { data, error } = res;
       if (!data && error)
         throw new Error(error?.data?.Message || "Something went wrong!");
-      const { Data, Success, Message } = data;
-      if (Success === false)
-        throw new Error(Message || "Data could not emitted");
-      callback?.(Data);
+      /*     if (status != 200 || status != 201)
+            throw new Error(message || "Data could not emitted"); */
+      callback?.(data.data);
     })
     .catch((err) => {
       const { message } = err;

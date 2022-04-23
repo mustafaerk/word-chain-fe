@@ -5,22 +5,27 @@ import { useNavigate } from "react-router-dom";
 import UserIcon from "assets/icons/userIcon.svg";
 import RoomIcon from "assets/icons/room.svg";
 import GameIcon from "assets/icons/game.svg";
+import EditIcon from "assets/icons/edit.svg";
 
 import LanguageIcon from "assets/icons/language.svg";
-import { Button, Modal, Select, Input } from "components";
-import RadioGroup from "pages/Modules/Login/RadioGroup";
 import PlusIcon from "assets/icons/plus.svg";
+import { Button, Modal, Select, Input } from "components";
 import { LANGUAGE_LIST } from "constant/LanguageList";
 import { avatarList, avatars } from "constant/Avatar";
+import { apiResHandler } from "utils/axiosBaseQuery";
+import { storageItem } from "utils/localstorage";
+import RadioGroup from "pages/Modules/Login/RadioGroup";
 import {
   updateUserAvatar,
   updateUserInfoField,
   userInfoSelector,
   selectUserAvatarId,
 } from "redux/slices/user/userSlice";
-import { useLoginMutation } from "redux/slices/user/userApi";
+import { useLoginMutation, useQuickJoinMutation } from "redux/slices/user/userApi";
+import { updateToken } from "redux/slices/app/appSlice";
+import { updateRoom } from "redux/slices/room/roomSlice";
 
-const Login = () => {
+const LeftLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const avatarId = useSelector(selectUserAvatarId);
@@ -30,6 +35,7 @@ const Login = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(avatars[0]);
 
   const [login, { isLoading }] = useLoginMutation();
+  const [quickJoin, { isLoading: i1 }] = useQuickJoinMutation();
 
   const handleSelectAvatar = () => {
     dispatch(updateUserAvatar(selectedAvatar.val));
@@ -40,30 +46,50 @@ const Login = () => {
     dispatch(updateUserInfoField({ value, field }));
   };
 
-  const handleLogin = async () => {
-
+  const handleLogin = (callback) => {
     try {
       const data = {
         ...userInfo,
       };
-      await login(data);
+      apiResHandler(login({ data }), (res) => {
+        storageItem('u_tkn', res?.token);
+        dispatch(updateToken(res?.token));
+        callback();
+      });
     } catch {
-      console.log("he");
+      // TODO: PUT ERROR MESSAGE HERE.
+      navigate('/');
     }
-    navigate('/play')
+  }
+
+  const handleQuickLogin = () => {
+    apiResHandler(quickJoin(), (res) => {
+      const { room } = res;
+      dispatch(updateRoom(room))
+      navigate(`/play/${room.roomId}`);
+    });
   };
 
+  const handlePlay = () => {
+    handleLogin(() => handleQuickLogin())
+  }
+
+  const handleGoToRoomList = () => {
+    handleLogin(() => navigate(`/rooms`))
+  }
+
   return (
-    <div className="w-full sm:w-1/2 md:w-1/4 space-y-2 flex flex-col items-center mx-4 sm:mx-0">
+    <div className="w-full sm:w-1/2  md:w-1/3 space-y-2 flex flex-col items-center mx-4 sm:mx-0">
       <div
         onClick={() => setIsOpen(true)}
-        className="flex items-cent justify-center border-2 border-purple rounded-full pb-5 w-44 h-44 cursor-pointer"
+        className="relative flex items-cent justify-center border-2 border-purple rounded-full pb-5 w-44 h-44 cursor-pointer"
       >
         <img src={avatarList[avatarId]} className="w-36 h-36" alt="avatar" />
+        <img src={EditIcon} alt="" className="absolute top-0 right-0"   />
       </div>
       <Input
-        id="input2"
-        inputName="username"
+        id="u_name"
+        inputName="u_name"
         placeholder="Username"
         LabelIcon={UserIcon}
         labelText="Username"
@@ -81,17 +107,17 @@ const Login = () => {
           id="room"
           buttonIcon={RoomIcon}
           variant="shadowSecondary"
-          buttonText="Odalar"
-          onClick={handleLogin}
-          disabled={isLoading}
+          buttonText="Rooms"
+          onClick={handleGoToRoomList}
+          disabled={isLoading || i1}
         />
         <Button
           id="button1"
           buttonIcon={GameIcon}
           variant="shadowPurple"
-          buttonText="Oyna"
-          onClick={handleLogin}
-          disabled={isLoading}
+          buttonText="Play"
+          onClick={handlePlay}
+          disabled={isLoading || i1}
         />
       </div>
       <Modal isOpen={isOpen} handleModalClose={() => setIsOpen(false)}>
@@ -116,4 +142,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LeftLogin;

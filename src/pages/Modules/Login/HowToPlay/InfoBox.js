@@ -5,13 +5,13 @@ import { EmojiList } from "constant/Emoji";
 
 
 
-const InfoBox = ({id, iconId, infoTitle, infoText}) => {
+const InfoBox = ({ id, iconId, infoTitle, infoText }) => {
   return (
     <div id={id} className="flex gap-x-5 items-center">
-      <div className="h-fit w-fit rounded-full p-5 bg-purple"><img width="35" src={EmojiList[iconId]} /></div>
-      <div className="flex flex-col gap-1 justify-center">
-        <span className="font-bold">{infoTitle}</span>
-        <span>{infoText}</span>
+      <div className="rounded-full p-2 lg:p-3 bg-purple w-1/5 "><img className="w-full h-full" src={EmojiList[iconId]} /></div>
+      <div className="flex flex-col gap-1 justify-center w-4/5">
+        <span className="font-bold text-sm">{infoTitle}</span>
+        <span className="text-xs text-lightGray">{infoText}</span>
       </div>
     </div>
   );
