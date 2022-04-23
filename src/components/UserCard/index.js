@@ -7,9 +7,9 @@ function UserCard({ id, name, point, isActive, avatarId }) {
   return (
     <div
       id={id}
-      className={`flex items-center justify-around md:flex-row flex-col text-white ${
+      className={`flex items-center justify-between md:flex-row flex-col text-white ${
         isActive ? "md:bg-purple" : "md:bg-primary"
-      }  rounded-lg p-2`}
+      }  rounded-lg p-2 gap-x-4`}
     >
       <div
         className={`user-card-img-area rounded-full ${
@@ -17,16 +17,15 @@ function UserCard({ id, name, point, isActive, avatarId }) {
         }`}
       >
         <img
-          className="user-card-img rounded-full"
-          width={100}
+          className="user-card-img rounded-full w-16 md:w-16"
           src={avatarList[avatarId]}
           alt="Icon"
         />
       </div>
 
-      <div className="user-card-name-point-area flex flex-col gap-y-2 md:items-start items-center">
-        <span className="user-card-name text-xl">{name}</span>
-        <span className="user-card-point text-xs">{point} Points</span>
+      <div className="user-card-name-point-area w-full md:w-1/2 flex flex-col gap-y-2 md:items-start items-center">
+        <div className="user-card-name text-xl text-white">{name}</div>
+        <div className="user-card-point text-xs text-skyDark"> {point} Points</div>
       </div>
     </div>
   );

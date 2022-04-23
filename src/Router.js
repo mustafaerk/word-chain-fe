@@ -6,9 +6,9 @@ import { v4 as uuid } from "uuid";
 import { useGetUserIpQuery } from "redux/slices/app/appApi";
 import { updateUserInfoField } from "redux/slices/user/userSlice";
 
-const Home = React.lazy(() => import("pages/Views/Home"));
 const Example = React.lazy(() => import("pages/Views/Example"));
 const Login = React.lazy(() => import("pages/Views/Login"));
+const Game = React.lazy(() => import("pages/Views/Game"));
 
 function Router() {
   const dispatch = useDispatch();
@@ -32,19 +32,20 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
+
         <Route
           path="/"
           element={
             <React.Suspense fallback={<>...</>}>
-              <Home />
+              <Login />
             </React.Suspense>
           }
         />
         <Route
-          path="/login"
+          path="/play"
           element={
             <React.Suspense fallback={<>...</>}>
-              <Login />
+              <Game />
             </React.Suspense>
           }
         />

@@ -64,10 +64,11 @@ module.exports = {
       purple: "#7B61FF",
       green: "#26B8A2",
       darkPurple: "#9073B5",
-      darkGray: "#373E51",
+      darkGray: "rgb(55, 62, 81)",
       lightGray: "#D8D8D8",
       lightPurple: "#B8AAFF",
       sky: "#3D4559",
+      skyDark: "#B5B5B5",
       trying: "#454545",
     },
     borders: {

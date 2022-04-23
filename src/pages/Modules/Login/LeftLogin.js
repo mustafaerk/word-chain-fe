@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import UserIcon from "assets/icons/userIcon.svg";
 import RoomIcon from "assets/icons/room.svg";
@@ -20,6 +21,7 @@ import {
 import { useLoginMutation } from "redux/slices/user/userApi";
 
 const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const avatarId = useSelector(selectUserAvatarId);
   const userInfo = useSelector(userInfoSelector);
@@ -39,6 +41,7 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
+
     try {
       const data = {
         ...userInfo,
@@ -47,10 +50,11 @@ const Login = () => {
     } catch {
       console.log("he");
     }
+    navigate('/play')
   };
 
   return (
-    <div className="w-1/4 space-y-2 flex flex-col items-center">
+    <div className="w-full sm:w-1/2 md:w-1/4 space-y-2 flex flex-col items-center mx-4 sm:mx-0">
       <div
         onClick={() => setIsOpen(true)}
         className="flex items-cent justify-center border-2 border-purple rounded-full pb-5 w-44 h-44 cursor-pointer"
@@ -76,7 +80,7 @@ const Login = () => {
         <Button
           id="room"
           buttonIcon={RoomIcon}
-          variant="secondary"
+          variant="shadowSecondary"
           buttonText="Odalar"
           onClick={handleLogin}
           disabled={isLoading}
