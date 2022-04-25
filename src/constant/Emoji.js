@@ -35,3 +35,23 @@ export const EmojiList = {
   16: Emoji16,
   17: Emoji17,
 };
+
+export const TextedEmojiList = {
+  1: { emoji: Emoji1, text: 'Sassy Room' },
+  2: { emoji: Emoji2, text: 'Laugh Room' },
+  3: { emoji: Emoji3, text: 'Big Smile Room' },
+  4: { emoji: Emoji4, text: 'Happy Room' },
+  5: { emoji: Emoji5, text: "Angel's Room" },
+  6: { emoji: Emoji6, text: "Love Room" },
+  7: { emoji: Emoji7, text: "Cool Room" },
+  8: { emoji: Emoji8, text: "Kiss Room" },
+  9: { emoji: Emoji9, text: 'Tired Room' },
+  10: { emoji: Emoji10, text: 'Scared Room' },
+  11: { emoji: Emoji11, text: 'Confused Room' },
+  12: { emoji: Emoji12, text: 'Emotional Room' },
+  13: { emoji: Emoji13, text: 'Sly Room' },
+  14: { emoji: Emoji14, text: 'Crazy Room' },
+  15: { emoji: Emoji15, text: 'Pedant Room' },
+  16: { emoji: Emoji16, text: 'Winners Room' },
+  17: { emoji: Emoji17, text: 'Cowboy Room' },
+};

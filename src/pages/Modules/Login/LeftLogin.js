@@ -65,7 +65,7 @@ const LeftLogin = () => {
   const handleQuickLogin = () => {
     apiResHandler(quickJoin(), (res) => {
       const { room } = res;
-      dispatch(updateRoom(room))
+      dispatch(updateRoom(room));
       navigate(`/play/${room.roomId}`);
     });
   };
@@ -75,7 +75,7 @@ const LeftLogin = () => {
   }
 
   const handleGoToRoomList = () => {
-    handleLogin(() => navigate(`/rooms`))
+    handleLogin(() => navigate(`/createroom`))
   }
 
   return (
