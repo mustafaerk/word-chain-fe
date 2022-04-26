@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Input({ placeholder, labelText, LabelIcon, onChange, id, inputName }) {
+function Input({ placeholder, labelText, LabelIcon, onChange, id, inputName, value }) {
   return (
     <div id={id} className="flex flex-col  gap-y-2 p-1  w-full">
       {labelText && (
@@ -17,6 +17,7 @@ function Input({ placeholder, labelText, LabelIcon, onChange, id, inputName }) {
         placeholder={placeholder}
         onChange={onChange}
         maxLength={30}
+        value={value}
       />
     </div>
   );
@@ -28,6 +29,7 @@ Input.propTypes = {
   inputName: PropTypes.string,
   id: PropTypes.string,
   LabelIcon: PropTypes.any,
+  value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
 };
 export default Input;
