@@ -19,14 +19,18 @@ function Button({
         return "bg-secondary";
       case "purple":
         return "bg-purple";
+      case "green":
+        return "bg-green";
       case "shadowPrimary":
         return "bg-primary shadow-primary";
       case "shadowSecondary":
         return "bg-secondary shadow-secondary";
       case "shadowPurple":
         return "bg-purple shadow-purple";
+      case "shadowGreen":
+        return "bg-green shadow-green";
       default:
-        break;
+        return "bg-transparent";
     }
   };
   const handleBorder = () => {
@@ -71,7 +75,6 @@ Button.propTypes = {
 Button.defaultProps = {
   borderType: false,
   disabled: false,
-  variant: "primary",
   onClick: () => {},
   buttonClass: "",
 };

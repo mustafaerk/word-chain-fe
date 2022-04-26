@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 function WordItem({ englishWord, nativeWord }) {
   return (
-    <div className="flex p-2 gap-x-2">
-      <div className="flex bg-primary w-2/3 rounded-xl justify-between md:h-14 h-10 items-center">
+    <div className="flex p-2 gap-x-6">
+      <div className="flex bg-primary w-2/3 rounded-xl justify-between md:h-12 h-8 items-center">
         <span className="mx-auto text-white font-semibold text-base md:text-lg">
           {englishWord}
         </span>
@@ -13,7 +13,9 @@ function WordItem({ englishWord, nativeWord }) {
         </div>
       </div>
       <div className="flex w-1/3 bg-primary items-center justify-center rounded-xl">
-        <span className="text-white font-semibold text-base md:text-lg">{nativeWord}</span>
+        <span className="text-white font-semibold text-base md:text-lg">
+          {nativeWord}
+        </span>
       </div>
     </div>
   );

@@ -75,14 +75,14 @@ const LeftLogin = () => {
   }
 
   const handleGoToRoomList = () => {
-    handleLogin(() => navigate(`/createroom`))
+    handleLogin(() => navigate(`/rooms`))
   }
 
   return (
     <div className="w-full sm:w-1/2  md:w-1/3 space-y-2 flex flex-col items-center mx-4 sm:mx-0">
       <div
         onClick={() => setIsOpen(true)}
-        className="relative flex items-cent justify-center border-2 border-purple rounded-full pb-5 w-44 h-44 cursor-pointer"
+        className="relative flex items-cent justify-center border-2 border-purple rounded-full w-40 h-40 cursor-pointer items-center"
       >
         <img src={avatarList[avatarId]} className="w-36 h-36" alt="avatar" />
         <img src={EditIcon} alt="" className="absolute top-0 right-0"   />
