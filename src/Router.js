@@ -11,6 +11,7 @@ import { getStoragedItem } from "utils/localstorage";
 const Example = React.lazy(() => import("pages/Views/Example"));
 const Login = React.lazy(() => import("pages/Views/Login"));
 const Game = React.lazy(() => import("pages/Views/Game"));
+const Rooms = React.lazy(() => import("pages/Views/Rooms"));
 const CreateRoom = React.lazy(() => import("pages/Views/CreateRoom"));
 
 function Router() {
@@ -72,7 +73,15 @@ function Router() {
           }
         />
         <Route
-          path="/createroom"
+          path="/rooms"
+          element={
+            <React.Suspense fallback={<>...</>}>
+              <Rooms />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="/createRoom"
           element={
             <React.Suspense fallback={<>...</>}>
               <CreateRoom />

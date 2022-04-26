@@ -51,6 +51,7 @@ module.exports = {
         s13: "85%",
         s14: "92%",
         s15: "100%",
+        roomWidth: "32%",
       },
     },
     container: {
@@ -64,7 +65,7 @@ module.exports = {
       purple: "#7B61FF",
       green: "#26B8A2",
       darkPurple: "#9073B5",
-      darkGray: "rgb(55, 62, 81)",
+      darkGray: "#373e51",
       lightGray: "#D8D8D8",
       lightPurple: "#B8AAFF",
       sky: "#3D4559",
@@ -75,11 +76,13 @@ module.exports = {
       borderNone: "none",
       borderyes: "1px solid #E5E5E5",
       borderProgress: "1px solid #7B61FF",
+      borderDarkGray: "3px solid #373e51",
     },
     boxShadow: {
       primary: "3px 4px 1px -1px rgb(66 74 95 / 0.6) !important",
       secondary: "3px 4px 1px -1px rgb(38 184 161 / 0.6) !important",
       purple: "3px 4px 1px -1px rgb(123 97 255 / 0.6) !important",
+      green: "3px 4px 1px -1px rgb(38 184 162 / 0.6) !important",
     },
   },
   variants: {
