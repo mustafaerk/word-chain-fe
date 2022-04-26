@@ -8,7 +8,7 @@ const CurrentUser = ({ point }) => {
   return (
     <div className="flex box-border h-36 gap-y-2">
       <div className="bg-transparent md:bg-primary flex p-2 w-full md:w-3/4 m-2 rounded-xl ">
-        <UserCard avatarId={"1"} point={10} name={"Ahmet"} isActive={true} />
+        <UserCard avatarId={"1"} point={10} name={"Ahmet"} isActive={false} />
       </div>
       <div className="hidden md:flex md:flex-col w-1/4 bg-primary h-full items-center justify-center rounded-xl   ">
         <img src={PointIcon} alt="point" className="w-16" />
