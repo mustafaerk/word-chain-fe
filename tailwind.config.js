@@ -94,7 +94,7 @@ module.exports = {
         ".container": {
           maxWidth: "100%",
           "@screen sm": {
-            maxWidth: "640px",
+            maxWidth: "100%",
           },
           "@screen md": {
             maxWidth: "768px",

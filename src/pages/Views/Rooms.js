@@ -52,7 +52,7 @@ const Login = () => {
           />
         </div>
       </div>
-      <div className="bg-darkGray rounded-lg p-5 h-5/6 overflow-y-scroll grid gap-x-8 gap-y-4 grid-cols-3 lg:grid-cols-4">
+      <div className="bg-darkGray rounded-lg p-5 h-5/6 overflow-y-scroll grid gap-x-8 gap-y-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <Room
           id="1"
           isStarted={false}

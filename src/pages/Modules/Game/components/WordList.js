@@ -19,15 +19,9 @@ const WordList = () => {
 
   return (
     <div className="h-full overflow-y-auto">
-      <TransitionGroup
-        transitionName="example"
-        transitionAppear={true}
-        transitionAppearTimeout={300}
-        transitionEnter={false}
-        transitionLeave={false}
-      >
+      <TransitionGroup>
         {wordList.map((word, idx) => (
-          <CSSTransition key={idx} timeout={300} classNames="item">
+          <CSSTransition key={idx} timeout={400} classNames="item">
             <WordItem
               key={word.ownerId + idx}
               englishWord={word.word}

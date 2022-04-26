@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import SendIcon from "assets/icons/send.svg";
 import { Button, Input } from "components";
 import WordList from "pages/Modules/Game/components/WordList";
 /* import CurrentUser from "pages/Modules/Game/components/CurrentUser";*/
-import { updateRoomWords } from "redux/slices/room/roomSlice";
 
 const GameGround = () => {
   const dispatch = useDispatch();
   const [word, setWord] = useState("");
 
+  useEffect(() => {
+    dispatch({ type: "JOIN_ROOM" });
+    dispatch({ type: "LISTEN_ROOM" });
+  }, [])
+
   const handleSendWord = () => {
-    const data = { word: "yummy", ownerId: "" };
-    dispatch(updateRoomWords(data));
+    dispatch({ type: "NEW_MESSAGE", payload: word });
+    setWord("")
   };
 
   return (

@@ -6,9 +6,6 @@ export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: axiosBaseQuery(),
   endpoints: (builder) => ({
-    getPokemonByName: builder.query({
-      query: () => `pokemon?limit=100000&offset=0`,
-    }),
     login: builder.mutation({
       query: ({ data }) => ({
         data,
@@ -38,4 +35,4 @@ export const userApiReducerName = userApi.reducerPath;
 export const userApiReducer = userApi.reducer;
 export const userApiMiddleware = userApi.middleware;
 
-export const { useGetPokemonByNameQuery, useLoginMutation, useQuickJoinMutation, useJoinRoomMutation } = userApi;
+export const { useLoginMutation, useQuickJoinMutation, useJoinRoomMutation } = userApi;
