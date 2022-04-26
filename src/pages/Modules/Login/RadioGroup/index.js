@@ -23,7 +23,7 @@ export default function AvatarRadioGroup({
               checked
                 ? "bg-purple bg-opacity-75 text-white border-white border"
                 : "bg-white"
-            } md:w-32 md:h-32  h-28 w-28 relative rounded-lg shadow-md px-5 py-4 cursor-pointer flex focus:outline-none`
+            } md:w-32 md:h-32  h-28 w-28 relative rounded-lg shadow-md px-5 py-5 cursor-pointer flex focus:outline-none`
           }
         >
           {() => (

@@ -17,8 +17,13 @@ const Login = () => {
   const [selectedRoom, setSelectedRoom] = useState(RoomList[0]);
 
   const handleGoBack = () => {
-    navigate(`/`);
+    navigate(-1);
   };
+
+  const handleCreateRoomRoute = () => {
+    navigate('/createroom');
+  };
+
   return (
     <Main>
       <div className="flex justify-between mb-2">
@@ -43,10 +48,11 @@ const Login = () => {
             buttonText="New Room"
             buttonClass="w-40"
             variant="shadowGreen"
+            onClick={handleCreateRoomRoute}
           />
         </div>
       </div>
-      <div className="bg-darkGray rounded-lg p-5 h-5/6 overflow-y-scroll grid gap-x-8 gap-y-4 grid-cols-3">
+      <div className="bg-darkGray rounded-lg p-5 h-5/6 overflow-y-scroll grid gap-x-8 gap-y-4 grid-cols-3 lg:grid-cols-4">
         <Room
           id="1"
           isStarted={false}

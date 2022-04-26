@@ -9,7 +9,7 @@ function UserCard({ id, name, point, isActive, avatarId }) {
       id={id}
       className={`flex items-center justify-between md:flex-row flex-col text-white ${
         isActive ? "md:bg-purple" : "md:bg-primary"
-      }  rounded-lg p-2 gap-x-4`}
+      }  rounded-lg p-4 gap-x-4`}
     >
       <div
         className={`rounded-full ${
