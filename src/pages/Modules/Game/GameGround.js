@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import SendIcon from "assets/icons/send.svg";
 import { Button, Input } from "components";
 import WordList from "pages/Modules/Game/components/WordList";
+import { useLeaveRoomMutation } from "redux/slices/room/roomApi";
+import { roomIdSelector } from "redux/slices/room/roomSlice";
+import { apiResHandler } from "utils/axiosBaseQuery";
 
 const GameGround = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [word, setWord] = useState("");
+  const roomId = useSelector(roomIdSelector);
+
+  const [leaveRoom, { isLoading: i1 }] = useLeaveRoomMutation();
 
   useEffect(() => {
     dispatch({ type: "LISTEN_ROOM" });
     dispatch({ type: "LISTEN_JOIN_ROOM" });
+    dispatch({ type: "LISTEN_LEAVE_ROOM" });
   }, []);
 
   const handleSendWord = () => {
@@ -23,6 +33,14 @@ const GameGround = () => {
     if (e.key === "Enter") {
       handleSendWord();
     }
+  };
+
+  const handleLeaveRoom = () => {
+    const data = { roomId };
+    apiResHandler(leaveRoom({ data }), () => {
+      dispatch({ type: "LEAVE_ROOM" });
+      navigate(`/rooms`);
+    });
   };
 
   return (
@@ -42,8 +60,9 @@ const GameGround = () => {
           buttonIcon={SendIcon}
           variant="purple"
           buttonText="Send"
+          disabled={i1}
           buttonClass="absolute right-0 w-24 h-full"
-          onClick={handleSendWord}
+          onClick={handleLeaveRoom}
         />
       </div>
     </div>

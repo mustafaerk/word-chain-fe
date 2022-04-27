@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 function WordItem({ englishWord, nativeWord }) {
   return (
     <div className="flex p-2 gap-x-6">
-      <div className="flex bg-primary w-2/3 rounded-xl justify-between md:h-12 h-8 items-center">
+      <div className="flex bg-primary w-1/2 rounded-xl justify-between md:h-12 h-8 items-center">
         <span className="mx-auto text-white font-semibold text-base md:text-lg">
           {englishWord}
         </span>
@@ -12,7 +12,7 @@ function WordItem({ englishWord, nativeWord }) {
           {englishWord.slice(-1).toUpperCase()}
         </div>
       </div>
-      <div className="flex w-1/3 bg-primary items-center justify-center rounded-xl">
+      <div className="flex w-1/2 bg-primary items-center justify-center rounded-xl">
         <span className="text-white font-semibold text-base md:text-lg">
           {nativeWord}
         </span>

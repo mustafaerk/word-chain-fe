@@ -1,6 +1,10 @@
 import io from "socket.io-client";
 
-import { updateRoomWords, updateUserList } from "../room/roomSlice";
+import {
+  updateRoomWords,
+  updateUserList,
+  removeUserFromList,
+} from "../room/roomSlice";
 
 const socketMiddleware = () => {
   let socket = io.connect("http://localhost:3001");
@@ -13,6 +17,12 @@ const socketMiddleware = () => {
         }
         socket = null;
         console.log("websocket closed");
+        break;
+      case "LEAVE_ROOM":
+        socket.emit("leave", {
+          roomId: store.getState().room.room.roomId,
+          user: store.getState().user.userInfo,
+        });
         break;
       case "JOIN_ROOM":
         socket.emit("joinRoom", {
@@ -43,6 +53,11 @@ const socketMiddleware = () => {
       case "LISTEN_JOIN_ROOM":
         socket.on("join", (data) => {
           store.dispatch(updateUserList(data.user));
+        });
+        break;
+      case "LISTEN_LEAVE_ROOM":
+        socket.on("leave", (data) => {
+          store.dispatch(removeUserFromList(data.message.user));
         });
         break;
       default:
