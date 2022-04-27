@@ -21,7 +21,10 @@ import {
   userInfoSelector,
   selectUserAvatarId,
 } from "redux/slices/user/userSlice";
-import { useLoginMutation, useQuickJoinMutation } from "redux/slices/user/userApi";
+import {
+  useLoginMutation,
+  useQuickJoinMutation,
+} from "redux/slices/user/userApi";
 import { updateToken } from "redux/slices/app/appSlice";
 import { updateRoom } from "redux/slices/room/roomSlice";
 
@@ -52,31 +55,32 @@ const LeftLogin = () => {
         ...userInfo,
       };
       apiResHandler(login({ data }), (res) => {
-        storageItem('u_tkn', res?.token);
+        storageItem("u_tkn", res?.token);
         dispatch(updateToken(res?.token));
         callback();
       });
     } catch {
       // TODO: PUT ERROR MESSAGE HERE.
-      navigate('/');
+      navigate("/");
     }
-  }
+  };
 
   const handleQuickLogin = () => {
     apiResHandler(quickJoin(), (res) => {
       const { room } = res;
       dispatch(updateRoom(room));
+      dispatch({ type: "JOIN_ROOM" });
       navigate(`/play/${room.roomId}`);
     });
   };
 
   const handlePlay = () => {
-    handleLogin(() => handleQuickLogin())
-  }
+    handleLogin(() => handleQuickLogin());
+  };
 
   const handleGoToRoomList = () => {
-    handleLogin(() => navigate(`/rooms`))
-  }
+    handleLogin(() => navigate(`/rooms`));
+  };
 
   return (
     <div className="w-full sm:w-1/2  md:w-1/3 space-y-2 flex flex-col items-center mx-4 sm:mx-0">
@@ -85,7 +89,7 @@ const LeftLogin = () => {
         className="relative flex items-cent justify-center border-2 border-purple rounded-full w-40 h-40 cursor-pointer items-center"
       >
         <img src={avatarList[avatarId]} className="w-36 h-36" alt="avatar" />
-        <img src={EditIcon} alt="" className="absolute top-0 right-0"   />
+        <img src={EditIcon} alt="" className="absolute top-0 right-0" />
       </div>
       <Input
         id="u_name"

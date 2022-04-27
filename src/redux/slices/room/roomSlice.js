@@ -3,15 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   room: {
     users: [],
-    words: [
-      { word: "apple", ownerId: "" },
-      { word: "Enemy", ownerId: "" },
-      { word: "Yourself", ownerId: "" },
-      { word: "Found", ownerId: "" },
-      { word: "Door", ownerId: "" },
-      { word: "room", ownerId: "" },
-      { word: "money", ownerId: "" },
-    ],
+    words: [],
   },
 };
 
@@ -23,18 +15,21 @@ export const roomSlice = createSlice({
       state.room = action.payload;
     },
     updateRoomWords: (state, action) => {
-        console.log(action.payload)
+      console.log(action.payload);
       state.room.words = [...state.room.words, action.payload];
     },
     updateUserList: (state, action) => {
-      state.room.users = [state.room.users, ...action.payload];
+      console.log(action.payload)
+      state.room.users = [...state.room.users, action.payload];
     },
   },
 });
 
 export const wordListSelector = (state) => state.room.room.words;
+export const userListSelector = (state) => state.room.room.users;
 
-export const { updateRoom, updateRoomWords } = roomSlice.actions;
+export const { updateRoom, updateRoomWords, updateUserList } =
+  roomSlice.actions;
 
 export const roomSliceReducer = roomSlice.reducer;
 export const roomSliceReducerName = roomSlice.name;

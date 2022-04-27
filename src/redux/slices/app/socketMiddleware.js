@@ -1,44 +1,54 @@
 import io from "socket.io-client";
 
-import { updateRoomWords } from "../room/roomSlice";
+import { updateRoomWords, updateUserList } from "../room/roomSlice";
 
 const socketMiddleware = () => {
-    let socket = io.connect("http://localhost:3001");
+  let socket = io.connect("http://localhost:3001");
 
-    return (store) => (next) => (action) => {
-        switch (action.type) {
-            case 'WS_DISCONNECT':
-                if (socket !== null) {
-                    socket.close();
-                }
-                socket = null;
-                console.log('websocket closed');
-                break;
-            case 'JOIN_ROOM':
-                console.log(store.getState().user.userInfo)
-                socket.emit("joinRoom", {
-                    roomId: "d7e1dc4f-024c-49ff-ae3b-9c4d9fe331e1",
-                    userId: store.getState().user.userInfo,
-                });
-                break;
-            case 'NEW_MESSAGE':
-                console.log('sending a message', action);
-                socket.emit("gameMessage", {
-                    action_type: "MESSAGE",
-                    message: { word: action.payload, ownerId: store.getState().user.userInfo.id },
-                    roomId: "d7e1dc4f-024c-49ff-ae3b-9c4d9fe331e1",
-                });
-                break;
-            case 'LISTEN_ROOM':
-                socket?.on('gameMessage', (data) => {
-                    const body = { word: data.message.message.word, ownerId: data.message.message.ownerId };
-                    store.dispatch(updateRoomWords(body))
-                });
-                break;
-            default:
-                return next(action);
+  return (store) => (next) => (action) => {
+    switch (action.type) {
+      case "WS_DISCONNECT":
+        if (socket !== null) {
+          socket.close();
         }
-    };
+        socket = null;
+        console.log("websocket closed");
+        break;
+      case "JOIN_ROOM":
+        socket.emit("joinRoom", {
+          roomId: store.getState().room.room.roomId,
+          user: store.getState().user.userInfo,
+        });
+        break;
+      case "NEW_MESSAGE":
+        console.log("sending a message", action);
+        socket.emit("gameMessage", {
+          action_type: "MESSAGE",
+          message: {
+            word: action.payload,
+            ownerId: store.getState().user.userInfo.id,
+          },
+          roomId: store.getState().room.room.roomId,
+        });
+        break;
+      case "LISTEN_ROOM":
+        socket?.on("gameMessage", (data) => {
+          const body = {
+            word: data.message.message.word,
+            ownerId: data.message.message.ownerId,
+          };
+          store.dispatch(updateRoomWords(body));
+        });
+        break;
+      case "LISTEN_JOIN_ROOM":
+        socket.on("join", (data) => {
+          store.dispatch(updateUserList(data.user));
+        });
+        break;
+      default:
+        return next(action);
+    }
+  };
 };
 
 export default socketMiddleware();

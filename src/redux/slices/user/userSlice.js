@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  userInfo: { avatarId: "8", name: "", language: "es", id: "" },
+  userInfo: { userAvatarId: "8", name: "", language: "es", id: "" },
 };
 
 export const userSlice = createSlice({
@@ -15,13 +15,13 @@ export const userSlice = createSlice({
       state.userInfo[action.payload.field] = action.payload.value;
     },
     updateUserAvatar: (state, action) => {
-      state.userInfo.avatarId = action.payload;
+      state.userInfo.userAvatarId = action.payload;
     },
   },
 });
 
 export const userInfoSelector = (state) => state.user.userInfo;
-export const selectUserAvatarId = (state) => state.user.userInfo.avatarId;
+export const selectUserAvatarId = (state) => state.user.userInfo.userAvatarId;
 
 export const { updateUserInfo, updateUserInfoField, updateUserAvatar } =
   userSlice.actions;

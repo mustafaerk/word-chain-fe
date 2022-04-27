@@ -1,7 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Input({ placeholder, labelText, LabelIcon, onChange, id, inputName, value }) {
+function Input({
+  placeholder,
+  labelText,
+  LabelIcon,
+  onChange,
+  id,
+  inputName,
+  value,
+  onKeyDown,
+}) {
   return (
     <div id={id} className="flex flex-col  gap-y-2 p-1  w-full">
       {labelText && (
@@ -18,6 +27,7 @@ function Input({ placeholder, labelText, LabelIcon, onChange, id, inputName, val
         onChange={onChange}
         maxLength={30}
         value={value}
+        onKeyDown={onKeyDown}
       />
     </div>
   );
@@ -31,5 +41,6 @@ Input.propTypes = {
   LabelIcon: PropTypes.any,
   value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
+  onKeyDown: PropTypes.func,
 };
 export default Input;
