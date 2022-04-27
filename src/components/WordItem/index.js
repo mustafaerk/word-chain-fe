@@ -5,7 +5,7 @@ function WordItem({ englishWord, nativeWord }) {
   return (
     <div className="flex p-2 gap-x-6">
       <div className="flex bg-primary w-1/2 rounded-xl justify-between md:h-12 h-8 items-center">
-        <span className="mx-auto text-white font-semibold text-base md:text-lg">
+        <span className="mx-auto text-white font-semibold text-sm md:text-base lg:text-lg">
           {englishWord}
         </span>
         <div className="flex w-10 lg:w-12 md:w-10 h-full bg-purple px-1 text-white font-semibold rounded-xl  items-center justify-center">
@@ -13,7 +13,7 @@ function WordItem({ englishWord, nativeWord }) {
         </div>
       </div>
       <div className="flex w-1/2 bg-primary items-center justify-center rounded-xl">
-        <span className="text-white font-semibold text-base md:text-lg">
+        <span className="text-white font-semibold text-sm md:text-base lg:text-lg">
           {nativeWord}
         </span>
       </div>

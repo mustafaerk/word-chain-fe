@@ -42,22 +42,18 @@ const socketMiddleware = () => {
         });
         break;
       case "LISTEN_ROOM":
+        socket.on("join", (data) => {
+          store.dispatch(updateUserList(data.user));
+        });
+        socket.on("leave", (data) => {
+          store.dispatch(removeUserFromList(data.message.user));
+        });
         socket?.on("gameMessage", (data) => {
           const body = {
             word: data.message.message.word,
             ownerId: data.message.message.ownerId,
           };
           store.dispatch(updateRoomWords(body));
-        });
-        break;
-      case "LISTEN_JOIN_ROOM":
-        socket.on("join", (data) => {
-          store.dispatch(updateUserList(data.user));
-        });
-        break;
-      case "LISTEN_LEAVE_ROOM":
-        socket.on("leave", (data) => {
-          store.dispatch(removeUserFromList(data.message.user));
         });
         break;
       default:
