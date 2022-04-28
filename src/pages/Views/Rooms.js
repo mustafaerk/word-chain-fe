@@ -1,155 +1,55 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import Main from "pages/Layout/Main";
-import Room from "pages/Modules/Room";
-import { Button } from "components";
-
-import doorIcon from "assets/icons/door.svg";
 import gameIcon from "assets/icons/game.svg";
-import backIcon from "assets/icons/back.svg";
-import { RoomList } from "constant/Rooms";
-import RadioGroup from "pages/Modules/Room/RoomRadioGroup";
+import { Button } from "components";
+import RoomList from "pages/Modules/Room/RoomList";
+import Main from "pages/Layout/Main";
+import UpperArea from "pages/Modules/Room/UpperArea";
+import { useJoinRoomMutation } from "redux/slices/user/userApi";
+import { updateRoom } from "redux/slices/room/roomSlice";
+import { updateRoomId } from "redux/slices/room/createRoomSlice";
+import { selectedRoomIdSelector } from "redux/slices/room/createRoomSlice";
+import { apiResHandler } from "utils/axiosBaseQuery";
 
-const Login = () => {
+const Rooms = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const roomId = useSelector(selectedRoomIdSelector);
 
-  const [selectedRoom, setSelectedRoom] = useState(RoomList[0]);
+  const [joinRoom, { isLoading: i1 }] = useJoinRoomMutation();
 
-  const handleGoBack = () => {
-    navigate(-1);
-  };
+  const handleJoinRoom = () => {
+    const data = { roomId }
 
-  const handleCreateRoomRoute = () => {
-    navigate('/createroom');
+    apiResHandler(joinRoom({ data }), (res) => {
+      console.log(res)
+      const { room } = res;
+      dispatch(updateRoom(room));
+      dispatch({ type: "JOIN_ROOM" });
+      dispatch(updateRoomId(""))
+      navigate(`/play/${room.roomId}`);
+    });
   };
 
   return (
     <Main>
-      <div className="flex justify-between mb-2">
-        <div className="">
-          <Button
-            borderType={false}
-            buttonIcon={backIcon}
-            onClick={handleGoBack}
-          />
-        </div>
-        <div className="flex justify-end">
-          <Button
-            borderType
-            buttonIcon={gameIcon}
-            buttonText="Play"
-            buttonClass="w-40"
-            variant="shadowPurple"
-          />
-          <Button
-            borderType
-            buttonIcon={doorIcon}
-            buttonText="New Room"
-            buttonClass="w-40"
-            variant="shadowGreen"
-            onClick={handleCreateRoomRoute}
-          />
-        </div>
-      </div>
-      <div className="bg-darkGray rounded-lg p-5 h-5/6 overflow-y-scroll grid gap-x-8 gap-y-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        <Room
-          id="1"
-          isStarted={false}
-          roomAvatarId={1}
-          roomCode="#343434"
-          roomUserLength={5}
-          roomUserLimit={8}
-          roomName="Cigi's Room"
-        />
-        <Room
-          id="2"
-          isStarted
-          roomAvatarId={2}
-          roomCode="#333"
-          roomUserLength={8}
-          roomUserLimit={8}
-          roomName="Musti's Room"
-        />
-        <Room
-          id="3"
-          isStarted
-          roomAvatarId={3}
-          roomCode="#333"
-          roomUserLength={8}
-          roomUserLimit={8}
-          roomName="CHATTING Room :)"
-        />
-        <Room
-          id="4"
-          isStarted
-          roomAvatarId={4}
-          roomCode="#333"
-          roomUserLength={3}
-          roomUserLimit={8}
-          roomName="NEW ROOM"
-        />
-        <Room
-          id="5"
-          isStarted={false}
-          roomAvatarId={5}
-          roomCode="#333"
-          roomUserLength={4}
-          roomUserLimit={8}
-          roomName="COME COME"
-        />
-        <Room
-          id="6"
-          isStarted={false}
-          roomAvatarId={6}
-          roomCode="#343434"
-          roomUserLength={5}
-          roomUserLimit={8}
-          roomName="Cigi's Room"
-        />
-        <Room
-          id="7"
-          isStarted
-          roomAvatarId={7}
-          roomCode="#333"
-          roomUserLength={8}
-          roomUserLimit={8}
-          roomName="Musti's Room"
-        />
-        <Room
-          id="8"
-          isStarted
-          roomAvatarId={8}
-          roomCode="#333"
-          roomUserLength={8}
-          roomUserLimit={8}
-          roomName="CHATTING Room :)"
-        />
-        <Room
-          id="9"
-          isStarted
-          roomAvatarId={9}
-          roomCode="#333"
-          roomUserLength={3}
-          roomUserLimit={8}
-          roomName="NEW ROOM"
-        />
-        <Room
-          id="10"
-          isStarted={false}
-          roomAvatarId={10}
-          roomCode="#333"
-          roomUserLength={4}
-          roomUserLimit={8}
-          roomName="COME COME"
+      <UpperArea joinRoom={handleJoinRoom} isLoadingJoin={i1} />
+      <RoomList />
+      <div className="block sm:hidden absolute bottom-0 left-0 w-full pb-4">
+        <Button
+          borderType
+          buttonIcon={gameIcon}
+          buttonText="Play"
+          buttonClass="w-11/12 m-auto"
+          variant="shadowPurple"
+          disabled={i1}
+          onClick={handleJoinRoom}
         />
       </div>
-      <RadioGroup
-        selectedAvatar={selectedRoom}
-        setSelectedAvatar={setSelectedRoom}
-      />
     </Main>
   );
 };
 
-export default Login;
+export default Rooms;

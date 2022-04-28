@@ -4,6 +4,7 @@ const initialState = {
   room: {
     users: [],
     words: [],
+    roomId:"",
   },
 };
 

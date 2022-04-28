@@ -7,14 +7,12 @@ function UserCard({ id, name, point, isActive, avatarId }) {
   return (
     <div
       id={id}
-      className={`flex items-center justify-between md:flex-row flex-col text-white ${
-        isActive ? "md:bg-purple" : "md:bg-primary"
-      }  rounded-lg p-4 gap-x-4`}
+      className={`flex items-center justify-between md:flex-row flex-col text-white ${isActive ? "md:bg-purple" : "md:bg-primary"
+        }  rounded-lg p-4 gap-x-4`}
     >
       <div
-        className={`rounded-full ${
-          isActive ? "bg-lightPurple md:bg-darkGray" : "bg-sky"
-        }`}
+        className={`rounded-full ${isActive ? "bg-lightPurple md:bg-darkGray" : "bg-sky"
+          }`}
       >
         <img
           className="rounded-full w-16 md:w-16"
@@ -32,13 +30,14 @@ function UserCard({ id, name, point, isActive, avatarId }) {
 }
 
 UserCard.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number,
   name: PropTypes.string.isRequired,
   avatarId: PropTypes.number.isRequired,
   point: PropTypes.number,
   isActive: PropTypes.bool,
 };
 UserCard.defaultProps = {
+  id: "userCard",
   point: 0,
   isActive: false,
 };

@@ -20,6 +20,12 @@ export const roomApi = createApi({
         path: "leaveRoom",
       }),
     }),
+    listRooms: builder.query({
+      query: () => ({
+        method: "GET",
+        path: "listRooms",
+      }),
+    }),
   }),
 });
 
@@ -29,4 +35,4 @@ export const roomApiReducerName = roomApi.reducerPath;
 export const roomApiReducer = roomApi.reducer;
 export const roomApiMiddleware = roomApi.middleware;
 
-export const { useCreateRoomMutation, useLeaveRoomMutation } = roomApi;
+export const { useCreateRoomMutation, useLeaveRoomMutation, useListRoomsQuery } = roomApi;

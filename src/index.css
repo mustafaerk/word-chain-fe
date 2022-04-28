@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html { font-family: 'Inter', sans-serif; }
-
+html {
+  font-family: "Inter", sans-serif;
+}
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -30,11 +31,25 @@ html { font-family: 'Inter', sans-serif; }
   background-size: cover;
 }
 
-.room-card-avatar{
+.room-card-avatar {
   -webkit-transform: translate(-50%, 0);
   -moz-transform: translate(-50%, 0);
   -ms-transform: translate(-50%, 0);
   -o-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
-  left:50%;
+  left: 50%;
+}
+
+.mobile-room-card-avatar {
+  -webkit-transform: translate(0, -50%);
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  top: 50%;
+  left: -46px;
+}
+
+.roomItem {
+  grid-auto-rows: 20%;
 }
