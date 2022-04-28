@@ -6,7 +6,8 @@ const initialState = {
         roomSize: "",
         roomName: "",
         isPublic: false,
-    }
+    },
+    selectedRoomId: "",
 };
 
 export const createRoomSlice = createSlice({
@@ -16,12 +17,17 @@ export const createRoomSlice = createSlice({
         updateRoomField: (state, action) => {
             state.room[action.payload.field] = action.payload.value;
         },
+        updateRoomId: (state, action) => {
+            state.selectedRoomId = action.payload;
+        },
     },
 });
 
 
-export const { updateRoomField } = createRoomSlice.actions;
 export const createRoomInfo = (state) => state.createroom.room;
+export const selectedRoomIdSelector = (state) => state.createroom.selectedRoomId;
+
+export const { updateRoomField, updateRoomId } = createRoomSlice.actions;
 
 export const createRoomSliceReducer = createRoomSlice.reducer;
 export const createRoomSliceReducerName = createRoomSlice.name;

@@ -21,10 +21,9 @@ export const roomApi = createApi({
       }),
     }),
     listRooms: builder.query({
-      query: ({ data }) => ({
-        data,
+      query: () => ({
         method: "GET",
-        path: "rooms",
+        path: "listRooms",
       }),
     }),
   }),

@@ -1,21 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import backIcon from "assets/icons/back.svg";
 import doorIcon from "assets/icons/door.svg";
 import gameIcon from "assets/icons/game.svg";
 import { Button } from "components";
 
-const UpperArea = () => {
+const UpperArea = ({ joinRoom, isLoadingJoin }) => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate(-1);
+    navigate("/");
   };
 
   const handleCreateRoomRoute = () => {
     navigate("/createroom");
   };
+
   return (
     <div className="flex justify-between mb-2">
       <div className="">
@@ -33,6 +35,8 @@ const UpperArea = () => {
             buttonText="Play"
             buttonClass="w-40"
             variant="shadowPurple"
+            onClick={joinRoom}
+            disabled={isLoadingJoin}
           />
         </div>
         <Button
@@ -46,6 +50,11 @@ const UpperArea = () => {
       </div>
     </div>
   );
+};
+
+UpperArea.propTypes = {
+  isLoadingJoin: PropTypes.bool.isRequired,
+  joinRoom: PropTypes.func.isRequired,
 };
 
 export default UpperArea;
