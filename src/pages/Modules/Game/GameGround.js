@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import SendIcon from "assets/icons/send.svg";
-import { Button, Input } from "components";
+import { Button, Input, ProgressBar } from "components";
 import WordList from "pages/Modules/Game/components/WordList";
 import { useLeaveRoomMutation } from "redux/slices/room/roomApi";
 import { roomIdSelector } from "redux/slices/room/roomSlice";
@@ -46,6 +46,7 @@ const GameGround = () => {
   return (
     <div className="bg-darkGray flex flex-col w-full h-full md:w-3/5 mx-auto rounded-md p-6 space-y-4">
       <WordList />
+      <ProgressBar />
       <div className="flex relative h-14">
         <Input
           id="input1"
