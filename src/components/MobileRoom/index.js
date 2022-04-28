@@ -4,8 +4,12 @@ import PropTypes from "prop-types";
 import { EmojiList } from "constant/Emoji";
 import started from "assets/icons/started.svg";
 import starting from "assets/icons/starting.svg";
+import startingWhite from "assets/icons/startingWhite.svg";
+import grayHead from "assets/icons/grayHead.svg";
+import whiteHead from "assets/icons/whiteHead.svg";
+import purpleHead from "assets/icons/purpleHead.svg";
 
-function Room({
+function MobileRoom({
   id,
   roomAvatarId,
   roomName,
@@ -14,11 +18,12 @@ function Room({
   roomUserLimit,
   isStarted,
   onClick,
+  isSelected,
 }) {
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    if (isStarted || !roomUserLimit > roomUserLength) setDisabled(true);
+    if (isStarted || roomUserLimit == roomUserLength) setDisabled(true);
   });
 
   const handleAvatarColor = () => {
@@ -28,15 +33,15 @@ function Room({
     return "bg-purple";
   };
 
-  /*const handleRoomColor = () => {
-    if (disabled) {
+  const handleRoomColor = () => {
+    if (!isSelected) {
       return "bg-primary";
     }
     return "bg-purple";
-  };*/
+  };
 
   const handleTextColor = () => {
-    if (isStarted || !roomUserLimit > roomUserLength) {
+    if (disabled) {
       return "text-lightGray";
     }
     return "text-white";
@@ -47,27 +52,34 @@ function Room({
     }
     return "cursor-not-allowed";
   };
-  const handleOnClick = () => {
-    if (isStarted || !roomUserLimit > roomUserLength) {
-      return;
-    } else {
-      onClick();
-    }
-  };
   const handleStartImage = () => {
     if (isStarted) {
       return started;
+    } else if (isSelected) {
+      return startingWhite;
+    } else {
+      return starting;
     }
-    return starting;
   };
-  return ( 
+  const handleHeadImage = () => {
+    if (disabled) {
+      return grayHead;
+    } else if (isSelected) {
+      return whiteHead;
+    } else {
+      return purpleHead;
+    }
+  };
+  return (
     <div
       id={id}
-      className={`my-11 m-auto pt-10 pb-4 relative flex float-left flex-col ${handleCursor()} bg-primary w-full rounded-md`}
-      onClick={handleOnClick}
+      className={`ml-7 pt-5 pb-6 relative flex flex-col ${handleCursor()} ${handleRoomColor()} w-11/12 rounded-md`}
+      onClick={disabled ? onclick : () => onClick(id, roomCode)}
       disabled={disabled}
     >
-      <div className={`absolute room-card-avatar -top-14 rounded-full ${handleAvatarColor()} w-fit p-3 border-8 border-[#373e51]`}>
+      <div
+        className={`absolute mobile-room-card-avatar -top-14 rounded-full ${handleAvatarColor()} w-fit p-3 border-8 border-[#373e51]`}
+      >
         <img width="50" src={EmojiList[roomAvatarId]} />
       </div>
       <div className="flex flex-col items-center gap-y-3">
@@ -76,8 +88,11 @@ function Room({
         </div>
         <div className={`${handleTextColor()} text-xs`}>{roomCode}</div>
         <div className={`${handleTextColor()} text-xs flex gap-x-4`}>
-          <div className="">
-            {roomUserLength}/{roomUserLimit}
+          <div className="flex gap-x-1">
+            <img width={14} src={handleHeadImage()} />
+            <span className="">
+              {roomUserLength}/{roomUserLimit}
+            </span>
           </div>
           <div className="flex gap-x-1">
             <img width={14} src={handleStartImage()} />
@@ -89,7 +104,7 @@ function Room({
   );
 }
 
-Room.propTypes = {
+MobileRoom.propTypes = {
   id: PropTypes.string.isRequired,
   roomAvatarId: PropTypes.number.isRequired,
   roomName: PropTypes.string.isRequired,
@@ -98,8 +113,9 @@ Room.propTypes = {
   roomUserLimit: PropTypes.number.isRequired,
   isStarted: PropTypes.bool.isRequired,
   onClick: PropTypes.func,
+  isSelected: PropTypes.bool.isRequired,
 };
-Room.defaultProps = {
+MobileRoom.defaultProps = {
   onClick: () => {},
 };
-export default Room;
+export default MobileRoom;

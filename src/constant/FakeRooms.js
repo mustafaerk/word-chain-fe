@@ -1,15 +1,15 @@
-export const RoomList = [
+export const FakeRooms = [
   {
-    id: "1",
+    id: "0",
     isStarted: false,
     roomAvatarId: 1,
     roomCode: "#343434",
-    roomUserLength: 5,
+    roomUserLength: 8,
     roomUserLimit: 8,
     roomName: "Cigi's Room",
   },
   {
-    id: "2",
+    id: "1",
     isStarted: false,
     roomAvatarId: 2,
     roomCode: "#343434",
@@ -18,8 +18,8 @@ export const RoomList = [
     roomName: "Cigi's Room",
   },
   {
-    id: "3",
-    isStarted: false,
+    id: "2",
+    isStarted: true,
     roomAvatarId: 3,
     roomCode: "#343434",
     roomUserLength: 5,
@@ -27,7 +27,7 @@ export const RoomList = [
     roomName: "Cigi's Room",
   },
   {
-    id: "4",
+    id: "3",
     isStarted: false,
     roomAvatarId: 4,
     roomCode: "#343434",
@@ -36,7 +36,7 @@ export const RoomList = [
     roomName: "Cigi's Room",
   },
   {
-    id: "5",
+    id: "4",
     isStarted: false,
     roomAvatarId: 5,
     roomCode: "#343434",
@@ -45,7 +45,7 @@ export const RoomList = [
     roomName: "Cigi's Room",
   },
   {
-    id: "6",
+    id: "5",
     isStarted: false,
     roomAvatarId: 6,
     roomCode: "#343434",
