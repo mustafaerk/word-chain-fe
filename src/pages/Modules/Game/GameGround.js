@@ -20,8 +20,6 @@ const GameGround = () => {
 
   useEffect(() => {
     dispatch({ type: "LISTEN_ROOM" });
-    dispatch({ type: "LISTEN_JOIN_ROOM" });
-    dispatch({ type: "LISTEN_LEAVE_ROOM" });
   }, []);
 
   const handleSendWord = () => {
