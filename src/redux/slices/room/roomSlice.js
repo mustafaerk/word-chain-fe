@@ -4,7 +4,8 @@ const initialState = {
   room: {
     users: [],
     words: [],
-    roomId:"",
+    roomId: "",
+    currentUserTurn: "",
   },
 };
 
@@ -16,8 +17,8 @@ export const roomSlice = createSlice({
       state.room = action.payload;
     },
     updateRoomWords: (state, action) => {
-      console.log(action.payload);
-      state.room.words = [...state.room.words, action.payload];
+      state.room.currentUserTurn = action.payload.nextUserId;
+      state.room.words = [...state.room.words, action.payload.word];
     },
     updateUserList: (state, action) => {
       state.room.users = [...state.room.users, action.payload];
@@ -35,6 +36,7 @@ export const roomSlice = createSlice({
 
 export const wordListSelector = (state) => state.room.room.words;
 export const userListSelector = (state) => state.room.room.users;
+export const currentUserSelector = (state) => state.room.room.currentUserTurn;
 export const roomIdSelector = (state) => state.room.room.roomId;
 
 export const {

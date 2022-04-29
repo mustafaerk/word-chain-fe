@@ -36,10 +36,10 @@ function Router() {
       updateUserInfoField({ value: userLang.slice(0, 2), field: "language" })
     );
 
+    const unique_id = uuid();
     if (data) {
-      dispatch(updateUserInfoField({ value: data.IPv4, field: "id" }));
+      dispatch(updateUserInfoField({ value: unique_id, field: "id" }));
     } else {
-      const unique_id = uuid();
       dispatch(updateUserInfoField({ value: unique_id, field: "id" }));
     }
   }, [data]);

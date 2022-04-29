@@ -1,9 +1,9 @@
 import io from "socket.io-client";
 
 import {
-  updateRoomWords,
   updateUserList,
   removeUserFromList,
+  updateRoomWords
 } from "../room/roomSlice";
 
 const socketMiddleware = () => {
@@ -49,11 +49,11 @@ const socketMiddleware = () => {
           store.dispatch(removeUserFromList(data.message.user));
         });
         socket?.on("gameMessage", (data) => {
-          const body = {
+          const word = {
             word: data.message.message.word,
             ownerId: data.message.message.ownerId,
           };
-          store.dispatch(updateRoomWords(body));
+          store.dispatch(updateRoomWords({ word, nextUserId: data.nextUserId }));
         });
         break;
       default:
