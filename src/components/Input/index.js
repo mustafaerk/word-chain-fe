@@ -10,6 +10,8 @@ function Input({
   inputName,
   value,
   onKeyDown,
+  disabled,
+  autoFocusInput
 }) {
   return (
     <div id={id} className="flex flex-col  gap-y-2 p-1  w-full">
@@ -20,7 +22,7 @@ function Input({
         </label>
       )}
       <input
-        className="h-12 outline-none bg-primary  p-7 rounded-lg text-lightGray"
+        className={`h-12 outline-none bg-primary  p-7 rounded-lg text-lightGray ${disabled ? "cursor-not-allowed" : "cursor-auto"}`}
         id={inputName}
         name={inputName}
         placeholder={placeholder}
@@ -28,6 +30,9 @@ function Input({
         maxLength={30}
         value={value}
         onKeyDown={onKeyDown}
+        disabled={disabled}
+        autoComplete="off"
+        autoFocus={autoFocusInput}
       />
     </div>
   );
@@ -42,5 +47,7 @@ Input.propTypes = {
   value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
   onKeyDown: PropTypes.func,
+  disabled: PropTypes.bool,
+  autoFocusInput: PropTypes.bool,
 };
 export default Input;
