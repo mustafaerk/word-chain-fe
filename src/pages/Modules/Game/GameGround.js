@@ -1,21 +1,17 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-/* import { useNavigate } from "react-router-dom";
- */
+
 import SendIcon from "assets/icons/send.svg";
 import { Button, Input, ProgressBar } from "components";
 import WordList from "pages/Modules/Game/components/WordList";
 import { currentUserInfoSelector, lastLetterSelector } from "redux/slices/room/roomSlice";
 import { userInfoSelector } from "redux/slices/user/userSlice";
 import { CheckIsWordEnglish } from "localization/translate";
-/* import { useLeaveRoomMutation } from "redux/slices/room/roomApi";
-import { roomIdSelector } from "redux/slices/room/roomSlice";
-import { apiResHandler } from "utils/axiosBaseQuery"; */
+
 
 const GameGround = () => {
   const dispatch = useDispatch();
-  /*   const navigate = useNavigate();
-   */
+
   const currentUserInfo = useSelector(currentUserInfoSelector);
   const lastLetter = useSelector(lastLetterSelector);
   const userInfo = useSelector(userInfoSelector);
@@ -23,11 +19,8 @@ const GameGround = () => {
 
   const isMyTurn = useMemo(() => currentUserInfo.id == userInfo.id, [currentUserInfo]);
   const inputPlaceHolder = useMemo(() => isMyTurn ? `You must type a word start by ${lastLetter}` : `Now,${currentUserInfo.name}'s turn!`, [isMyTurn])
-  /*   const roomId = useSelector(roomIdSelector);
-   */
-  /*   const [leaveRoom, { isLoading: i1 }] = useLeaveRoomMutation();
-   */
-
+ 
+ 
   useEffect(() => {
     dispatch({ type: "LISTEN_ROOM" });
   }, []);
@@ -48,13 +41,7 @@ const GameGround = () => {
     }
   };
 
-  /*  const handleLeaveRoom = () => {
-     const data = { roomId };
-     apiResHandler(leaveRoom({ data }), () => {
-       dispatch({ type: "LEAVE_ROOM" });
-       navigate(`/rooms`);
-     });
-   }; */
+  
 
   return (
     <div className="bg-darkGray flex flex-col w-full h-full md:w-3/5 mx-auto rounded-md p-6 space-y-4">

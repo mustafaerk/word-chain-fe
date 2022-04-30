@@ -16,6 +16,9 @@ export const roomSlice = createSlice({
     updateRoom: (state, action) => {
       state.room = action.payload;
     },
+    clearRoom: (state) => {
+      state.room = initialState.room;
+    },
     updateRoomWords: (state, action) => {
       state.room.currentUserTurn = action.payload.nextUserId;
       state.room.words = [...state.room.words, action.payload.word];
@@ -23,16 +26,20 @@ export const roomSlice = createSlice({
     updateUserList: (state, action) => {
       state.room.users = [...state.room.users, action.payload];
     },
-    removeUserFromList: (state, action) => {
-      console.log(
-        [...state.room.users].filter((user) => user.id != action.payload.id)
-      );
-      state.room.users = state.room.users.filter(
-        (user) => user.id != action.payload.id
-      );
+    changeUserList: (state, action) => {
+      state.room.users = action.payload;
     },
   },
 });
+
+export const removeUserFromList = (data) => {
+  return async (dispatch, getState) => {
+    const userList = getState().room.room.users;
+    console.log(data, getState().room)
+    const newUserList = userList.filter(user => user.id == data.id);
+    dispatch(changeUserList(newUserList))
+  };
+};
 
 export const wordListSelector = (state) => state.room.room.words;
 export const userListSelector = (state) => state.room.room.users;
@@ -43,9 +50,10 @@ export const lastLetterSelector = (state) => state.room.room.words[state.room.ro
 
 export const {
   updateRoom,
+  clearRoom,
   updateRoomWords,
   updateUserList,
-  removeUserFromList,
+  changeUserList
 } = roomSlice.actions;
 
 export const roomSliceReducer = roomSlice.reducer;
