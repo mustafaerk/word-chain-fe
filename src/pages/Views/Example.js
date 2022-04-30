@@ -10,6 +10,7 @@ import {
   Modal,
   UserCard,
   ProgressBar,
+  MiniUserCard,
 } from "components";
 
 const Example = () => {
@@ -18,6 +19,7 @@ const Example = () => {
 
   return (
     <div className="bg-darkGray w-full md:w-3/4 h-full m-auto">
+      <MiniUserCard id="budakart" name="Cigi" avatarId="4" />
       <div className="w-96 m-auto">
         <UserCard
           id="userCard"
