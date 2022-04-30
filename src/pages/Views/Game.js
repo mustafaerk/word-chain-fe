@@ -7,7 +7,7 @@ import Main from "pages/Layout/Main";
 const Game = () => {
   return (
     <Main>
-      <div className="flex gap-x-4 h-full">
+      <div className="flex gap-x-4 h-full flex-col sm:flex-row">
         <UserList />
         <GameGround />
       </div>

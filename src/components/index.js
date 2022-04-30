@@ -4,6 +4,7 @@ export { default as Select } from "components/Select";
 export { default as Button } from "components/Button";
 export { default as Modal } from "components/Modal";
 export { default as UserCard } from "components/UserCard";
+export { default as MobileUserCard } from "components/MobileUserCard";
 export { default as ProgressBar } from "components/ProgressBar";
 export { default as MobileRoom } from "components/MobileRoom";
 export { default as Room } from "components/Room";
