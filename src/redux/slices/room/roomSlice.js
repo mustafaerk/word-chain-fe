@@ -37,7 +37,9 @@ export const roomSlice = createSlice({
 export const wordListSelector = (state) => state.room.room.words;
 export const userListSelector = (state) => state.room.room.users;
 export const currentUserSelector = (state) => state.room.room.currentUserTurn;
+export const currentUserInfoSelector = (state) => state.room.room.users.find(user => user.id == state.room.room.currentUserTurn);
 export const roomIdSelector = (state) => state.room.room.roomId;
+export const lastLetterSelector = (state) => state.room.room.words[state.room.room.words.length - 1]?.word?.slice(-1) || '';
 
 export const {
   updateRoom,

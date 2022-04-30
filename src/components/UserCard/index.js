@@ -30,9 +30,9 @@ function UserCard({ id, name, point, isActive, avatarId }) {
 }
 
 UserCard.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   name: PropTypes.string.isRequired,
-  avatarId: PropTypes.number.isRequired,
+  avatarId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   point: PropTypes.number,
   isActive: PropTypes.bool,
 };
