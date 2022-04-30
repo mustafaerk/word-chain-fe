@@ -6,6 +6,7 @@ const initialState = {
     words: [],
     roomId: "",
     currentUserTurn: "",
+    isStarted: false
   },
 };
 
@@ -29,6 +30,9 @@ export const roomSlice = createSlice({
     changeUserList: (state, action) => {
       state.room.users = action.payload;
     },
+    updateRoomStartStatus: (state, action) => {
+      state.room.isStarted = action.payload;
+    },
   },
 });
 
@@ -43,8 +47,10 @@ export const removeUserFromList = (data) => {
 
 export const wordListSelector = (state) => state.room.room.words;
 export const userListSelector = (state) => state.room.room.users;
+export const isRoomStartedSelector = (state) => state.room.room.isStarted;
 export const currentUserSelector = (state) => state.room.room.currentUserTurn;
 export const currentUserInfoSelector = (state) => state.room.room.users.find(user => user.id == state.room.room.currentUserTurn);
+export const roomOwnerSelector = (state) => state.room.room.users.find(user => user.id == state.room.room.ownerId);
 export const roomIdSelector = (state) => state.room.room.roomId;
 export const lastLetterSelector = (state) => state.room.room.words[state.room.room.words.length - 1]?.word?.slice(-1) || '';
 
@@ -53,7 +59,8 @@ export const {
   clearRoom,
   updateRoomWords,
   updateUserList,
-  changeUserList
+  changeUserList,
+  updateRoomStartStatus
 } = roomSlice.actions;
 
 export const roomSliceReducer = roomSlice.reducer;

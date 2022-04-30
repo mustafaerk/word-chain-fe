@@ -3,7 +3,8 @@ import io from "socket.io-client";
 import {
   updateUserList,
   removeUserFromList,
-  updateRoomWords
+  updateRoomWords,
+  updateRoomStartStatus
 } from "../room/roomSlice";
 
 const socketMiddleware = () => {
@@ -30,6 +31,14 @@ const socketMiddleware = () => {
           user: store.getState().user.userInfo,
         });
         break;
+      case "START_ROOM":
+        console.log("hello")
+        socket.emit("start", { status: true });
+        break;
+      case "END_ROOM":
+        console.log("hello")
+        socket.emit("gameFinish", { status: true });
+        break;
       case "NEW_MESSAGE":
         console.log("sending a message", action);
         socket.emit("gameMessage", {
@@ -48,6 +57,15 @@ const socketMiddleware = () => {
         socket.on("leave", (data) => {
           store.dispatch(removeUserFromList(data.message.user));
         });
+        socket.on("gameFinish", (data) => {
+          console.log(data)
+        });
+
+        socket?.on("start", (data) => {
+          console.log(data)
+          store.dispatch(updateRoomStartStatus(data.message.status));
+        });
+
         socket?.on("gameMessage", (data) => {
           const word = {
             word: data.message.message.word,
