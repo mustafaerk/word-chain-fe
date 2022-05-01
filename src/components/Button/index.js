@@ -48,14 +48,14 @@ function Button({
   return (
     <div
       id={id}
-      className={`flex items-center justify-center text-white gap-x-2 shadow-3xl w-full ${handleButtonColor()} ${handleBorder()} cursor-pointer rounded-lg m-1 h-12 ${buttonClass} ${
+      className={`flex items-center justify-center text-white gap-x-2 shadow-3xl w-full ${handleButtonColor()} ${handleBorder()} cursor-pointer sm:rounded-lg rounded-2xl m-1 h-12 ${buttonClass} ${
         disabled ? "cursor-not-allowed" : ""
       }`}
       onClick={handleOnClick}
       disabled={disabled}
     >
       <img className="" width={25} src={buttonIcon} alt="Icon" />
-      <span>
+      <span className="hidden sm-block">
         {buttonText ?? null} {borderType}
       </span>
     </div>

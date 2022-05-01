@@ -11,6 +11,7 @@ import {
   UserCard,
   ProgressBar,
   MiniUserCard,
+  MobileUserCard,
 } from "components";
 
 const Example = () => {
@@ -19,6 +20,46 @@ const Example = () => {
 
   return (
     <div className="bg-darkGray w-full md:w-3/4 h-full m-auto">
+      <div
+        id="MUC"
+        className="flex overflow-x-auto overflow-y-hidden scroll-smooth"
+      >
+        <MobileUserCard
+          id={1}
+          avatarId={2}
+          isActive={true}
+          point={100}
+          name="Mustafa"
+        />
+        <MobileUserCard
+          id={2}
+          avatarId={3}
+          isActive={false}
+          point={100}
+          name="Cigi"
+        />
+        <MobileUserCard
+          id={3}
+          avatarId={4}
+          isActive={false}
+          point={100}
+          name="Ayşe"
+        />
+        <MobileUserCard
+          id={4}
+          avatarId={5}
+          isActive={false}
+          point={100}
+          name="Muhammed"
+        />
+        <MobileUserCard
+          id={5}
+          avatarId={6}
+          isActive={false}
+          point={100}
+          name="Ahmet"
+        />
+      </div>
       <MiniUserCard id="budakart" name="Cigi" avatarId="4" />
       <div className="w-96 m-auto">
         <UserCard

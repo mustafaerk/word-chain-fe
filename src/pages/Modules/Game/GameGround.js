@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo ,useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import SendIcon from "assets/icons/send.svg";
@@ -11,6 +11,7 @@ import { CheckIsWordEnglish } from "localization/translate";
 
 
 const GameGround = () => {
+  const progressBarRef = useRef();
   const dispatch = useDispatch();
 
   const currentUserInfo = useSelector(currentUserInfoSelector);
@@ -18,6 +19,8 @@ const GameGround = () => {
   const userInfo = useSelector(userInfoSelector);
   const isRoomStarted = useSelector(isRoomStartedSelector);
   const [word, setWord] = useState("");
+  const isMobile = window.innerWidth < 640;
+  
 
   const isMyTurn = useMemo(() => currentUserInfo.id == userInfo.id, [currentUserInfo]);
   const inputPlaceHolder = useMemo(() => isMyTurn ? `You must type a word start by ${lastLetter}` : `Now,${currentUserInfo.name}'s turn!`, [isMyTurn])
@@ -27,13 +30,29 @@ const GameGround = () => {
     dispatch({ type: "LISTEN_ROOM" });
   }, []);
 
+  if (isMobile) {
+    useEffect(() => {
+      handleUserGetMiddle();
+    }, [currentUserInfo]);
+
+    const handleUserGetMiddle = () => {
+      const mobileUsers = document.getElementById("mobileUserList");
+      const middle = parseInt(mobileUsers.childElementCount / 2);
+      const getActiveUser = document.getElementById(currentUserInfo.id);
+      if (middle > 0)
+        if (getActiveUser != mobileUsers.childNodes[middle - 1])
+          mobileUsers.childNodes[middle].before(getActiveUser);
+        else mobileUsers.childNodes[middle].after(getActiveUser);
+    };
+  }
+
   const handleSendWord = () => {
     const checkWordExist = CheckIsWordEnglish(word);
     if (checkWordExist) {
       dispatch({ type: "NEW_MESSAGE", payload: word });
       setWord("");
     } else {
-      alert('Word is not English')
+      alert("Word is not English");
     }
   };
 
@@ -52,7 +71,7 @@ const GameGround = () => {
         :
         <>
           <WordList />
-          <ProgressBar />
+          <ProgressBar ref={progressBarRef} />
           <div className="flex relative h-14">
             <Input
               id="gameword"

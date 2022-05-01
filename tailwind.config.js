@@ -22,6 +22,9 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontSize: {
+      '2xs': '.5rem'
+    },
     extend: {
       animation: {
         "bar-load": "ease 3s linear infinite",
