@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     room: {
-        roomAvatarId: "",
+        roomAvatarId: "1",
         roomSize: "",
         roomName: "",
         isPublic: false,

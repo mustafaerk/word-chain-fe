@@ -35,6 +35,7 @@ const LeftLogin = () => {
   const userInfo = useSelector(userInfoSelector);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
   const [selectedAvatar, setSelectedAvatar] = useState(avatars[0]);
 
   const [login, { isLoading }] = useLoginMutation();
@@ -46,6 +47,7 @@ const LeftLogin = () => {
   };
 
   const handleUserInfoChange = (value, field) => {
+    (value.length > 2 && value.length < 15) ? setIsDisabled(false) : setIsDisabled(true);
     dispatch(updateUserInfoField({ value, field }));
   };
 
@@ -94,7 +96,7 @@ const LeftLogin = () => {
       <Input
         id="u_name"
         inputName="u_name"
-        placeholder="Username"
+        placeholder="Username(3-15 chars)"
         LabelIcon={UserIcon}
         labelText="Username"
         onChange={(e) => handleUserInfoChange(e.target.value, "name")}
@@ -113,7 +115,7 @@ const LeftLogin = () => {
           variant="shadowSecondary"
           buttonText="Rooms"
           onClick={handleGoToRoomList}
-          disabled={isLoading || i1}
+          disabled={isLoading || i1 || isDisabled}
         />
         <Button
           id="button1"
@@ -121,7 +123,7 @@ const LeftLogin = () => {
           variant="shadowPurple"
           buttonText="Play"
           onClick={handlePlay}
-          disabled={isLoading || i1}
+          disabled={isLoading || i1 || isDisabled}
         />
       </div>
       <Modal isOpen={isOpen} handleModalClose={() => setIsOpen(false)}>
