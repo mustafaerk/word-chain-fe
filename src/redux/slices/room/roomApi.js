@@ -26,6 +26,13 @@ export const roomApi = createApi({
         path: "listRooms",
       }),
     }),
+    startGame: builder.mutation({
+      query: ({ data }) => ({
+        data,
+        method: "POST",
+        path: "startGame",
+      }),
+    }),
   }),
 });
 
@@ -35,4 +42,4 @@ export const roomApiReducerName = roomApi.reducerPath;
 export const roomApiReducer = roomApi.reducer;
 export const roomApiMiddleware = roomApi.middleware;
 
-export const { useCreateRoomMutation, useLeaveRoomMutation, useListRoomsQuery } = roomApi;
+export const { useCreateRoomMutation, useLeaveRoomMutation, useListRoomsQuery, useStartGameMutation } = roomApi;

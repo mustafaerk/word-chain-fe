@@ -6,6 +6,7 @@ const initialState = {
     words: [],
     roomId: "",
     currentUserTurn: "",
+    isStarted: false
   },
 };
 
@@ -16,6 +17,9 @@ export const roomSlice = createSlice({
     updateRoom: (state, action) => {
       state.room = action.payload;
     },
+    clearRoom: (state) => {
+      state.room = initialState.room;
+    },
     updateRoomWords: (state, action) => {
       state.room.currentUserTurn = action.payload.nextUserId;
       state.room.words = [...state.room.words, action.payload.word];
@@ -23,29 +27,40 @@ export const roomSlice = createSlice({
     updateUserList: (state, action) => {
       state.room.users = [...state.room.users, action.payload];
     },
-    removeUserFromList: (state, action) => {
-      console.log(
-        [...state.room.users].filter((user) => user.id != action.payload.id)
-      );
-      state.room.users = state.room.users.filter(
-        (user) => user.id != action.payload.id
-      );
+    changeUserList: (state, action) => {
+      state.room.users = action.payload;
+    },
+    updateRoomStartStatus: (state, action) => {
+      state.room.isStarted = action.payload;
     },
   },
 });
 
+export const removeUserFromList = (data) => {
+  return async (dispatch, getState) => {
+    const userList = getState().room.room.users;
+    console.log(data, getState().room)
+    const newUserList = userList.filter(user => user.id == data.id);
+    dispatch(changeUserList(newUserList))
+  };
+};
+
 export const wordListSelector = (state) => state.room.room.words;
 export const userListSelector = (state) => state.room.room.users;
+export const isRoomStartedSelector = (state) => state.room.room.isStarted;
 export const currentUserSelector = (state) => state.room.room.currentUserTurn;
 export const currentUserInfoSelector = (state) => state.room.room.users.find(user => user.id == state.room.room.currentUserTurn);
+export const roomOwnerSelector = (state) => state.room.room.users.find(user => user.id == state.room.room.ownerId);
 export const roomIdSelector = (state) => state.room.room.roomId;
 export const lastLetterSelector = (state) => state.room.room.words[state.room.room.words.length - 1]?.word?.slice(-1) || '';
 
 export const {
   updateRoom,
+  clearRoom,
   updateRoomWords,
   updateUserList,
-  removeUserFromList,
+  changeUserList,
+  updateRoomStartStatus
 } = roomSlice.actions;
 
 export const roomSliceReducer = roomSlice.reducer;
