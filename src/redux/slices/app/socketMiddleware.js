@@ -10,7 +10,7 @@ import {
 } from "../room/roomSlice";
 
 const socketMiddleware = () => {
-  let socket = io.connect("https://wordchaingame.herokuapp.com/");
+  let socket = io.connect("https://wordchaingame.herokuapp.com");
 
   return (store) => (next) => (action) => {
     switch (action.type) {
