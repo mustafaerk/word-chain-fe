@@ -55,7 +55,7 @@ function Button({
       disabled={disabled}
     >
       <img className="" width={25} src={buttonIcon} alt="Icon" />
-      <span className="hidden sm-block">
+      <span className="hidden sm:block">
         {buttonText ?? null} {borderType}
       </span>
     </div>
