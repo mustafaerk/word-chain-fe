@@ -7,7 +7,7 @@ function MobileUserCard({ id, name, point, isActive, avatarId }) {
   return (
     <div
       id={id}
-      className={`transition-all flex gap-y-1 items-center justify-around ${isActive ? "scale-125" : ""} flex-col text-white p-4`}
+      className={`transition-all flex gap-y-1 items-center justify-around ${isActive ? "scale-105" : ""} flex-col text-white px-2 py-4`}
     >
       <div
         className={`rounded-full ${isActive ? "bg-lightPurple md:bg-darkGray" : "bg-sky"
@@ -29,9 +29,9 @@ function MobileUserCard({ id, name, point, isActive, avatarId }) {
 }
 
 MobileUserCard.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   name: PropTypes.string.isRequired,
-  avatarId: PropTypes.number.isRequired,
+  avatarId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   point: PropTypes.number,
   isActive: PropTypes.bool,
 };

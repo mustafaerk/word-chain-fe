@@ -1,32 +1,57 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import PropTypes from "prop-types";
 
 let loop;
 
-const ProgressBar = ({ id, duration ,endCallBack}) => {
+// eslint-disable-next-line react/display-name
+const ProgressBar = forwardRef(({ id, duration, endCallBack }, ref) => {
   const [currentWidth, setCurrentWidth] = useState(duration);
+  const [isStarted, setIsStarted] = useState(false);
+
+  const handleStopProgress = () => {
+    setIsStarted(false);
+    setCurrentWidth(duration);
+  };
+  useImperativeHandle(ref, () => ({
+    handleStartProgress() {
+      handleStopProgress();
+      setTimeout(() => {
+        setIsStarted(true);
+      }, 1000);
+    },
+  }));
 
   useEffect(() => {
-    loop = setInterval(() => {
-        setCurrentWidth(currentWidth => (currentWidth - 1));
-    }, 1000);
-  }, []);
-
-  useEffect(() => {
-    if (currentWidth == 0) {
-      clearInterval(loop);
-      endCallBack();
+    if (isStarted) {
+      loop = setInterval(() => {
+        setCurrentWidth((currentWidth) => currentWidth - 1);
+        if (currentWidth == 0) {
+          handleStopProgress();
+          endCallBack(isStarted);
+        }
+      }, 1000);
+    } else {
+      setCurrentWidth(duration);
     }
-  }, [currentWidth]);
+    return () => clearInterval(loop);
+  }, [isStarted]);
 
   return (
-    <div id={id} className="progress-bar-container h-4 bg-primary m-2 rounded-lg border-[#7B61FF] border">
+    <div
+      id={id}
+      className="progress-bar-container h-4 bg-primary m-2 rounded-lg border-[#7B61FF] border"
+    >
       <div
         className={`progress bg-purple transition-[width] duration-[1000ms] rounded-lg h-full w-s${currentWidth}`}
       ></div>
     </div>
   );
-};
+});
 
 ProgressBar.propTypes = {
   id: PropTypes.string,
@@ -36,7 +61,9 @@ ProgressBar.propTypes = {
 ProgressBar.defaultProps = {
   id: "progress-bar",
   duration: 15,
-  endCallBack: () => {console.log("Time is Up!")},
+  endCallBack: () => {
+    console.log("Time is Up!");
+  },
 };
 
 export default ProgressBar;

@@ -17,9 +17,11 @@ const UserList = () => {
     const mobileUsers = document.getElementById("mobileUserList");
     const middle = parseInt(mobileUsers.childElementCount / 2);
     const getActiveUser = document.getElementById("1"); //Will be change to CurrentUserID
-    mobileUsers.childNodes[middle].after(getActiveUser);
+    mobileUsers.childNodes[middle-1].after(getActiveUser);
   };
   */
+
+  
 
   return isMobile ? (
     <div
@@ -41,7 +43,7 @@ const UserList = () => {
     <div className="lg:w-1/4 md:w-1/3 hidden md:block space-y-2 bg-darkGray p-3 h-full overflow-y-auto rounded-md">
       {userList.map((user, idx) => (
         <UserCard
-          id={user.userAvatarId}
+          id={user.id}
           key={user.name + user.userAvatarId + idx}
           avatarId={user.userAvatarId}
           point={user.point}
