@@ -10,7 +10,7 @@ function MiniUserCard({
 }) {
 
   return (
-    <div id={id} className="flex items-center text-white gap-x-2 p-2">
+    <div id={id} className="flex items-center text-white gap-x-2 p-2 absolute -top-12">
       <span>
         {name ?? null}
       </span>
@@ -23,7 +23,7 @@ function MiniUserCard({
 
 MiniUserCard.propTypes = {
   id: PropTypes.string,
-  avatarId: PropTypes.string,
+  avatarId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   name: PropTypes.string,
 };
 

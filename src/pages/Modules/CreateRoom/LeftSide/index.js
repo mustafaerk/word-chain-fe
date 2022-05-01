@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -24,6 +24,7 @@ const LeftSide = () => {
   const roomInfo = useSelector(createRoomInfo);
 
   const [createRoom, { isLoading }] = useCreateRoomMutation();
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const handleCreateRoom = () => {
     const data = { ...roomInfo };
@@ -44,12 +45,15 @@ const LeftSide = () => {
           inputName="roomname"
           LabelIcon={RoomPurpleIcon}
           labelText="Room Name"
-          placeholder="Room Name"
-          onChange={(e) =>
+          placeholder="Room Name(3-15 chars)"
+          onChange={(e) => {
             dispatch(
               updateRoomField({ field: "roomName", value: e.target.value })
-            )
-          }
+            ),
+              e.target.value.length > 2 && e.target.value.length < 15
+                ? setIsDisabled(false)
+                : setIsDisabled(true);
+          }}
         />
         <Select
           data={[
@@ -74,7 +78,7 @@ const LeftSide = () => {
         buttonClass="mt-auto"
         id="createButton"
         buttonIcon={GameIcon}
-        disabled={isLoading}
+        disabled={isLoading || isDisabled}
         variant="shadowPurple"
         buttonText="Create Room"
         onClick={handleCreateRoom}

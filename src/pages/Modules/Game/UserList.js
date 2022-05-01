@@ -26,7 +26,7 @@ const UserList = () => {
   return isMobile ? (
     <div
       id="mobileUserList"
-      className="flex overflow-x-auto overflow-y-hidden scroll-smooth"
+      className="flex overflow-x-auto block sm:hidden overflow-y-hidden scroll-smooth"
     >
       {userList.map((user, idx) => (
         <MobileUserCard
@@ -40,7 +40,7 @@ const UserList = () => {
       ))}
     </div>
   ) : (
-    <div className="lg:w-1/4 md:w-1/3 hidden md:block space-y-2 bg-darkGray p-3 h-full overflow-y-auto rounded-md">
+    <div className="lg:w-1/4 md:w-1/3 hidden sm:block space-y-2 bg-darkGray p-3 h-full overflow-y-auto rounded-md">
       {userList.map((user, idx) => (
         <UserCard
           id={user.id}
