@@ -9,3 +9,4 @@ export { default as ProgressBar } from "components/ProgressBar";
 export { default as MobileRoom } from "components/MobileRoom";
 export { default as Room } from "components/Room";
 export { default as MiniUserCard } from "components/MiniUserCard";
+export { default as Lottie } from "components/Lottie";

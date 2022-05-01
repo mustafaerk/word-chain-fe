@@ -23,7 +23,16 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontSize: {
-      '2xs': '.5rem'
+      '2xs': '0.5rem',
+      'xs': '0.700rem',
+      'sm': '0.875rem',
+      'md': '1rem',
+      'lg': '1.125rem',
+      'xl': '1.25rem',
+      '2xl': '1.5rem',
+      '3xl': '1.875rem',
+      '4xl': '2.25rem',
+      '6xl': '3.75rem',
     },
     extend: {
       animation: {

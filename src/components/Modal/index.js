@@ -8,7 +8,8 @@ export default function Modal({
   isOpen,
   handleModalClose,
   ModalTitle,
-  ModalContentClass
+  ModalContentClass,
+  ModalClass
 }) {
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -46,7 +47,7 @@ export default function Modal({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="inline-block w-full max-w-2xl	 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+            <div className={`inline-block w-full max-w-2xl p-6 my-8 text-left align-middle transition-all transform shadow-xl rounded-2xl ${ModalClass}`}>
               <Dialog.Title
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
@@ -58,7 +59,7 @@ export default function Modal({
           </Transition.Child>
 
         </div>
-      
+
       </Dialog>
     </Transition>
   );
@@ -68,6 +69,7 @@ Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   ModalTitle: PropTypes.string,
   ModalContentClass: PropTypes.string,
+  ModalClass: PropTypes.string,
   children: PropTypes.any,
   handleModalClose: PropTypes.func.isRequired,
 };

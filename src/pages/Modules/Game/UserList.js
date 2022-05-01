@@ -21,7 +21,7 @@ const UserList = () => {
   };
   */
 
-  
+
 
   return isMobile ? (
     <div
@@ -49,6 +49,7 @@ const UserList = () => {
           point={user.point}
           name={user.name}
           isActive={user.id == currentUser}
+          isEliminated={user.isEliminated}
         />
       ))}
     </div>

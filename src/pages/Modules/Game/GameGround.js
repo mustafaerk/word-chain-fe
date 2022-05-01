@@ -1,34 +1,85 @@
-import React, { useEffect, useState, useMemo ,useRef } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import RoomPurpleIcon from "assets/icons/roomPurple.svg";
+import GameIcon from "assets/icons/game.svg";
 import SendIcon from "assets/icons/send.svg";
-import { Button, Input, ProgressBar } from "components";
+import WinnerAnimation from "assets/animation/winner.json";
+
+import { avatarList } from "constant/Avatar";
+import { Button, Input, ProgressBar, Modal, Lottie } from "components";
 import WordList from "pages/Modules/Game/components/WordList";
 import NotStartedGame from "pages/Modules/Game/components/NotStartedGame";
-import { currentUserInfoSelector, lastLetterSelector, isRoomStartedSelector } from "redux/slices/room/roomSlice";
+import { currentUserInfoSelector, lastWordSelector, isRoomStartedSelector, roomIdSelector, winnerInfoSelector, updateWinnerUser, currentUserSelector } from "redux/slices/room/roomSlice";
+import { useEliminateUserMutation } from "redux/slices/room/roomApi";
 import { userInfoSelector } from "redux/slices/user/userSlice";
 import { CheckIsWordEnglish } from "localization/translate";
+import { apiResHandler } from "utils/axiosBaseQuery";
 
 
 const GameGround = () => {
   const progressBarRef = useRef();
   const dispatch = useDispatch();
 
+  const [showWinnerModal, setShowWinnerModal] = useState(false)
+  const [word, setWord] = useState("");
+
+  const [eliminateUser] = useEliminateUserMutation();
+
+  const currentUser = useSelector(currentUserSelector);
+
+  const winnerInfo = useSelector(winnerInfoSelector);
   const currentUserInfo = useSelector(currentUserInfoSelector);
-  const lastLetter = useSelector(lastLetterSelector);
+  const lastWord = useSelector(lastWordSelector);
   const userInfo = useSelector(userInfoSelector);
   const isRoomStarted = useSelector(isRoomStartedSelector);
-  const [word, setWord] = useState("");
+  const roomId = useSelector(roomIdSelector);
+
   const isMobile = window.innerWidth < 640;
-  
+
 
   const isMyTurn = useMemo(() => currentUserInfo.id == userInfo.id, [currentUserInfo]);
-  const inputPlaceHolder = useMemo(() => isMyTurn ? `You must type a word start by ${lastLetter}` : `Now,${currentUserInfo.name}'s turn!`, [isMyTurn])
+  const inputPlaceHolder = useMemo(() => isMyTurn ? `You must type a word start by ${lastWord?.slice(-1)}` : `Now,${currentUserInfo.name}'s turn!`, [isMyTurn])
 
+
+  const handleHandleEliminateUser = () => {
+    if (isMyTurn) {
+      const data = { roomId }
+      apiResHandler(eliminateUser({ data }), (res) => {
+        console.log(res)
+        if (res.gameStatus == "eliminated") {
+          dispatch({ type: "ELIMINATE_USER", payload: res.nextUserId });
+        } else if (res.gameStatus == "finish") {
+          dispatch({ type: "FINISH_GAME", payload: res.winner });
+        }
+      });
+    }
+  }
+
+  const handleCloseWinnerModal = () => {
+    setShowWinnerModal(false);
+    dispatch(updateWinnerUser({}));
+  }
 
   useEffect(() => {
     dispatch({ type: "LISTEN_ROOM" });
   }, []);
+
+  useEffect(() => {
+    if (winnerInfo.id) {
+      setShowWinnerModal(true)
+    }
+  }, [winnerInfo]);
+
+  const handleStartProgress = () => {
+    progressBarRef.current.handleStartProgress();
+  }
+
+  useEffect(() => {
+    if (isRoomStarted && currentUser) {
+      handleStartProgress();
+    }
+  }, [isRoomStarted, currentUser])
 
   if (isMobile) {
     useEffect(() => {
@@ -71,12 +122,12 @@ const GameGround = () => {
         :
         <>
           <WordList />
-          <ProgressBar ref={progressBarRef} />
+          <ProgressBar ref={progressBarRef} endCallBack={handleHandleEliminateUser} />
           <div className="flex relative h-14">
             <Input
               id="gameword"
               inputName="gameword"
-              placeholder={isMyTurn && !lastLetter ? "You must start game with any English word!" : inputPlaceHolder}
+              placeholder={isMyTurn && !lastWord?.slice(-1) ? "You must start game with any English word!" : inputPlaceHolder}
               value={word}
               onChange={(e) => setWord(e.target.value)}
               onKeyDown={handleEnterPress}
@@ -95,6 +146,33 @@ const GameGround = () => {
           </div>
         </>
       }
+      <Modal ModalContentClass="relative" ModalClass="bg-purple" isOpen={showWinnerModal} handleModalClose={handleCloseWinnerModal}>
+        <Lottie animation={WinnerAnimation} containerClass="absolute winner-animation w-96 h-96" st />
+        <div className="h-80 overflow-y-scroll p-2 flex flex-col  items-center justify-center text-center gap-y-4">
+          <p className="flex text-white text-2xl font-semibold items-center justify-center gap-4 ">
+            <img src={avatarList[winnerInfo.userAvatarId]} className="bg-primary w-16  r h-16 rounded-full" alt="" />   {winnerInfo.name} is Winner!
+          </p>
+          <p className="text-white text-lg w-1/2">
+            You can continue to learn and win by starting the new game right now 😊
+          </p>
+        </div>
+        <div className="flex">
+          <Button
+            id="okay"
+            buttonIcon={GameIcon}
+            variant="shadowGreen"
+            buttonClass="mx-auto mt-2 w-28"
+            buttonText="Start Game"
+          />
+          <Button
+            id="okay"
+            buttonIcon={RoomPurpleIcon}
+            variant="shadowPrimary"
+            buttonClass="mx-auto mt-2 w-28"
+            buttonText="Leave Game"
+          />
+        </div>
+      </Modal>
     </div>
   );
 };

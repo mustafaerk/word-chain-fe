@@ -15,7 +15,6 @@ const ProgressBar = forwardRef(({ id, duration, endCallBack }, ref) => {
 
   const handleStopProgress = () => {
     setIsStarted(false);
-    setCurrentWidth(duration);
   };
   useImperativeHandle(ref, () => ({
     handleStartProgress() {
@@ -27,13 +26,18 @@ const ProgressBar = forwardRef(({ id, duration, endCallBack }, ref) => {
   }));
 
   useEffect(() => {
+    if (currentWidth == 0) {
+      console.log({ currentWidth })
+      clearInterval(loop);
+      console.log("finish")
+      endCallBack(isStarted);
+    }
+  }, [currentWidth])
+
+  useEffect(() => {
     if (isStarted) {
       loop = setInterval(() => {
         setCurrentWidth((currentWidth) => currentWidth - 1);
-        if (currentWidth == 0) {
-          handleStopProgress();
-          endCallBack(isStarted);
-        }
       }, 1000);
     } else {
       setCurrentWidth(duration);

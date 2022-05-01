@@ -25,7 +25,7 @@ const NotStartedGame = () => {
     }
 
     return (
-        <div className='flex flex-col items-center justify-center h-full gap-y-4'>
+        <div className='flex flex-col items-center justify-center h-full gap-y-4 text-center'>
             <div className='text-4xl text-white font-semibold'>The game has not started yet!</div>
             <img className='w-14 h-14' src={avatarList[roomOwner.userAvatarId]} />
             <span className='flex text-2xl text-white items-center'>

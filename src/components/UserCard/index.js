@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 
 import { avatarList } from "constant/Avatar";
 
-function UserCard({ id, name, point, isActive, avatarId }) {
+function UserCard({ id, name, point, isActive, isEliminated, avatarId }) {
   return (
     <div
       id={id}
       className={`flex items-center justify-between md:flex-row flex-col text-white ${isActive ? "md:bg-purple" : "md:bg-primary"
-        }  rounded-lg p-4 gap-x-4`}
+        } ${isEliminated ? "line-through" : null}  rounded-lg p-4 gap-x-4`}
     >
       <div
         className={`rounded-full ${isActive ? "bg-lightPurple md:bg-darkGray" : "bg-sky"
@@ -35,11 +35,13 @@ UserCard.propTypes = {
   avatarId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   point: PropTypes.number,
   isActive: PropTypes.bool,
+  isEliminated: PropTypes.bool,
 };
 UserCard.defaultProps = {
   id: "userCard",
   point: 0,
   isActive: false,
+  isEliminated: false,
 };
 
 export default UserCard;

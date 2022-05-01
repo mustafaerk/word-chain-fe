@@ -4,7 +4,9 @@ import {
   updateUserList,
   removeUserFromList,
   updateRoomWords,
-  updateRoomStartStatus
+  updateRoomStartStatus,
+  eliminateUserFromList,
+  updateWinnerUser
 } from "../room/roomSlice";
 
 const socketMiddleware = () => {
@@ -32,15 +34,25 @@ const socketMiddleware = () => {
         });
         break;
       case "START_ROOM":
-        console.log("hello")
         socket.emit("start", { status: true });
         break;
       case "END_ROOM":
-        console.log("hello")
         socket.emit("gameFinish", { status: true });
         break;
+      case "ELIMINATE_USER":
+        socket.emit("eliminate", {
+          roomId: store.getState().room.room.roomId,
+          user: store.getState().user.userInfo,
+          nextUserId: action.payload
+        });
+        break;
+      case "FINISH_GAME":
+        socket.emit("gameFinish", {
+          roomId: store.getState().room.room.roomId,
+          winner: action.payload
+        });
+        break;
       case "NEW_MESSAGE":
-        console.log("sending a message", action);
         socket.emit("gameMessage", {
           action_type: "MESSAGE",
           message: {
@@ -52,17 +64,23 @@ const socketMiddleware = () => {
         break;
       case "LISTEN_ROOM":
         socket.on("join", (data) => {
-          store.dispatch(updateUserList(data.user));
+          store.dispatch(updateUserList({ ...data.user, isEliminated: false }));
         });
+
         socket.on("leave", (data) => {
           store.dispatch(removeUserFromList(data.message.user));
         });
+
+        socket.on("eliminate", (data) => {
+          store.dispatch(eliminateUserFromList(data.message.user.id, data.message.nextUserId));
+        });
+
         socket.on("gameFinish", (data) => {
           console.log(data)
+          store.dispatch(updateWinnerUser(data.message.winner));
         });
 
         socket?.on("start", (data) => {
-          console.log(data)
           store.dispatch(updateRoomStartStatus(data.message.status));
         });
 
