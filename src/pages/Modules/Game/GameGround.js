@@ -99,11 +99,13 @@ const GameGround = () => {
 
   const handleSendWord = () => {
     const checkWordExist = CheckIsWordEnglish(word);
+    const wordInput = document.getElementById("game-word-input");
     if (checkWordExist) {
       dispatch({ type: "NEW_MESSAGE", payload: word });
       setWord("");
+      wordInput.style.border="1px solid transparent";
     } else {
-      alert("Word is not English");
+      wordInput.style.border="1px solid red";
     }
   };
 
@@ -126,7 +128,7 @@ const GameGround = () => {
           <div className="flex relative h-14">
             <Input
               id="gameword"
-              inputName="gameword"
+              inputName="game-word-input"
               placeholder={isMyTurn && !lastWord?.slice(-1) ? "You must start game with any English word!" : inputPlaceHolder}
               value={word}
               onChange={(e) => setWord(e.target.value)}
@@ -139,7 +141,7 @@ const GameGround = () => {
               buttonIcon={SendIcon}
               variant="purple"
               buttonText="Send"
-              buttonClass="absolute right-0 w-24 h-full"
+              buttonClass="absolute w-24 h-full send-word-button-align"
               onClick={handleEnterPress}
               disabled={!isMyTurn}
             />

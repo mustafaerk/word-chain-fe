@@ -47,7 +47,10 @@ const LeftLogin = () => {
   };
 
   const handleUserInfoChange = (value, field) => {
-    (value.length > 2 && value.length < 15) ? setIsDisabled(false) : setIsDisabled(true);
+    if (field == "name")
+      value.length > 2 && value.length < 15
+        ? setIsDisabled(false)
+        : setIsDisabled(true);
     dispatch(updateUserInfoField({ value, field }));
   };
 

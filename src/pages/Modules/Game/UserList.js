@@ -26,7 +26,7 @@ const UserList = () => {
   return isMobile ? (
     <div
       id="mobileUserList"
-      className="flex overflow-x-auto block sm:hidden overflow-y-hidden scroll-smooth"
+      className="flex overflow-x-auto sm:hidden overflow-y-hidden scroll-smooth"
     >
       {userList.map((user, idx) => (
         <MobileUserCard

@@ -10,13 +10,13 @@ function MiniUserCard({
 }) {
 
   return (
-    <div id={id} className="flex items-center text-white gap-x-2 p-2 absolute -top-12">
-      <span>
-        {name ?? null}
-      </span>
+    <div id={id} className="flex items-center text-white gap-x-2 p-2 absolute top-0 sm:-top-12">
       <div className="rounded-full bg-primary">
         <img className="" width={45} src={avatarList[avatarId]} alt="Icon" />
       </div>
+      <span>
+        {name ?? null}
+      </span>
     </div>
   );
 }

@@ -63,3 +63,12 @@ html {
 .roomItem {
   grid-auto-rows: 20%;
 }
+
+.send-word-button-align{
+  top:1px;
+  right:1px;
+}
+
+@media only screen and (max-width: 640px) {
+
+}
