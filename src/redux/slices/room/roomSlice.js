@@ -12,7 +12,7 @@ const initialState = {
     id: "",
     name: "",
   },
-  lastWord : "",
+  lastWord: "",
 };
 
 export const roomSlice = createSlice({
@@ -54,9 +54,19 @@ export const roomSlice = createSlice({
 export const removeUserFromList = (data) => {
   return async (dispatch, getState) => {
     const userList = getState().room.room.users;
-    console.log(data, getState().room)
     const newUserList = userList.filter(user => user.id == data.id);
     dispatch(changeUserList(newUserList))
+  };
+};
+
+export const updatePointOfUser = (point, ownerId) => {
+  return async (dispatch, getState) => {
+    let userList = getState().room.room.users;
+    const newList = userList.map((user) => ({
+      ...user,
+      point: user.id == ownerId ? user.point + point : user.point
+    }));
+    dispatch(changeUserList(newList))
   };
 };
 

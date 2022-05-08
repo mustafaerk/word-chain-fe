@@ -47,14 +47,14 @@ const GameGround = () => {
   const isMobile = window.innerWidth < 640;
 
   const isMyTurn = useMemo(
-    () => currentUserInfo.id == userInfo.id,
+    () => currentUserInfo?.id == userInfo?.id,
     [currentUserInfo]
   );
   const inputPlaceHolder = useMemo(
     () =>
       isMyTurn
         ? `You must type a word start by ${lastWord?.slice(-1)}`
-        : `Now,${currentUserInfo.name}'s turn!`,
+        : `Now,${currentUserInfo?.name}'s turn!`,
     [isMyTurn]
   );
 

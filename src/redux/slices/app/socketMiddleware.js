@@ -6,7 +6,8 @@ import {
   updateRoomWords,
   updateRoomStartStatus,
   eliminateUserFromList,
-  updateWinnerUser
+  updateWinnerUser,
+  updatePointOfUser
 } from "../room/roomSlice";
 
 const socketMiddleware = () => {
@@ -85,11 +86,14 @@ const socketMiddleware = () => {
         });
 
         socket?.on("gameMessage", (data) => {
+          console.log(data)
           const word = {
             word: data.message.message.word,
             ownerId: data.message.message.ownerId,
+            point: data.point,
           };
           store.dispatch(updateRoomWords({ word, nextUserId: data.nextUserId }));
+          store.dispatch(updatePointOfUser(data.point, data.message.message.ownerId));
         });
         break;
       default:
