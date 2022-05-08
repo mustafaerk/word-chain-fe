@@ -129,7 +129,7 @@ const LeftLogin = () => {
           disabled={isLoading || i1 || isDisabled}
         />
       </div>
-      <Modal isOpen={isOpen} handleModalClose={() => setIsOpen(false)}>
+      <Modal ModalClass="bg-white" isOpen={isOpen} handleModalClose={() => setIsOpen(false)}>
         <div className="h-80 overflow-y-scroll p-2 bg-darkGray ">
           <RadioGroup
             selectedAvatar={selectedAvatar}
