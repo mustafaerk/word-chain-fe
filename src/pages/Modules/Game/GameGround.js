@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useSpeechSynthesis } from 'react-speech-kit';
+import { useNavigate } from "react-router-dom";
 
 import RoomPurpleIcon from "assets/icons/roomPurple.svg";
 import GameIcon from "assets/icons/game.svg";
@@ -29,6 +31,13 @@ import { apiResHandler } from "utils/axiosBaseQuery";
 const GameGround = () => {
   const progressBarRef = useRef();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+
+  const { speak, supported, voices } = useSpeechSynthesis();
+
+  const voice = voices[3] || null;
+
 
   const [showWinnerModal, setShowWinnerModal] = useState(false);
   const [word, setWord] = useState("");
@@ -91,30 +100,43 @@ const GameGround = () => {
     progressBarRef.current.handleStartProgress();
   };
 
+  const handleSpeak = (text) => {
+    speak({ text, voice })
+  }
+
   useEffect(() => {
     if (isRoomStarted && currentUser) {
       handleStartProgress();
     }
   }, [isRoomStarted, currentUser]);
 
-  if (isMobile) {
-    useEffect(() => {
-      handleUserGetMiddle();
-    }, [currentUserInfo]);
 
-    const handleUserGetMiddle = () => {
-      const mobileUsers = document.getElementById("mobileUserList");
-      const middle = parseInt(mobileUsers.childElementCount / 2);
-      const getActiveUser = document.getElementById(currentUserInfo.id);
-      if (middle > 0)
-        if (getActiveUser != mobileUsers.childNodes[middle - 1])
-          mobileUsers.childNodes[middle].before(getActiveUser);
-        else mobileUsers.childNodes[middle].after(getActiveUser);
-    };
-  }
+
+  useEffect(() => {
+    if (isMobile) {
+      handleUserGetMiddle();
+    }
+  }, [currentUserInfo]);
+
+  useEffect(() => {
+    if (lastWord && supported) {
+      handleSpeak(lastWord)
+    }
+  }, [lastWord]);
+
+  const handleUserGetMiddle = () => {
+    const mobileUsers = document.getElementById("mobileUserList");
+    const middle = parseInt(mobileUsers.childElementCount / 2);
+    const getActiveUser = document.getElementById(currentUserInfo.id);
+    if (middle > 0)
+      if (getActiveUser != mobileUsers.childNodes[middle - 1])
+        mobileUsers.childNodes[middle].before(getActiveUser);
+      else mobileUsers.childNodes[middle].after(getActiveUser);
+  };
+
 
   const handleInputError = (isError) => {
-    
+
     const wordInput = document.getElementById("game-word-input");
     if (isError) wordInput.style.border = "1px solid red";
     else wordInput.style.border = "1px solid transparent";
@@ -126,7 +148,7 @@ const GameGround = () => {
 
   const handleSendWord = () => {
     dispatch(updateLastWord(word));
-    
+
     console.log(isWrited);
     if (lastWord != "") {
       if (word.charAt(0).toLowerCase() != lastWord.slice(-1)) {
@@ -154,7 +176,7 @@ const GameGround = () => {
         <NotStartedGame />
       ) : (
         <>
-          <WordList />
+          <WordList handleSpeak={handleSpeak} />
           <ProgressBar
             ref={progressBarRef}
             endCallBack={handleHandleEliminateUser}
@@ -228,6 +250,7 @@ const GameGround = () => {
             variant="shadowPrimary"
             buttonClass="mx-auto mt-2 w-28"
             buttonText="Leave Game"
+            onClick={() => navigate('/rooms')}
           />
         </div>
       </Modal>

@@ -1,13 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 import { WordItem } from "components";
 import { wordListSelector } from "redux/slices/room/roomSlice";
 
 import "./wordList.css";
 
-const WordList = () => {
+const WordList = ({ handleSpeak }) => {
   const divRef = useRef(null);
   const wordList = useSelector(wordListSelector);
 
@@ -15,6 +16,10 @@ const WordList = () => {
     divRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleEnglishWordClick = (text) => {
+    handleSpeak(text)
+  }
+  
   useEffect(scrollToBottom, [wordList]);
 
   return (
@@ -23,6 +28,7 @@ const WordList = () => {
         {wordList.map((word, idx) => (
           <CSSTransition key={idx} timeout={400} classNames="item">
             <WordItem
+              handleEnglishWordClick={() => handleEnglishWordClick(word.word || '')}
               key={word.ownerId + idx}
               englishWord={word.word}
               nativeWord={word.word}
@@ -34,5 +40,15 @@ const WordList = () => {
     </div>
   );
 };
+
+
+WordList.propTypes = {
+
+  handleSpeak: PropTypes.func,
+};
+
+WordList.defaultProps = {
+  handleEnglishWordClick: () => { }
+}
 
 export default WordList;
