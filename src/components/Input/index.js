@@ -27,7 +27,7 @@ function Input({
         name={inputName}
         placeholder={placeholder}
         onChange={onChange}
-        maxLength={30}
+        maxLength={15}
         value={value}
         onKeyDown={onKeyDown}
         disabled={disabled}
