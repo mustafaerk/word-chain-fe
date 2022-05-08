@@ -77,7 +77,6 @@ const socketMiddleware = () => {
         });
 
         socket.on("gameFinish", (data) => {
-          console.log(data)
           store.dispatch(updateWinnerUser(data.message.winner));
         });
 
@@ -86,7 +85,6 @@ const socketMiddleware = () => {
         });
 
         socket?.on("gameMessage", (data) => {
-          console.log(data)
           const word = {
             word: data.message.message.word,
             ownerId: data.message.message.ownerId,

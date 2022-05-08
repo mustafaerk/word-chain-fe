@@ -15,7 +15,6 @@ const RightSide = () => {
 
   const handleSelectAvatar = (val) => {
     dispatch(updateRoomField({ field: "roomAvatarId", value: val || 2}));
-    console.log(val)
   };
 
   return Object.keys(TextedEmojiList).map((key, idx) => {

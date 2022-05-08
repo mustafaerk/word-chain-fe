@@ -24,7 +24,6 @@ const Rooms = () => {
     const data = { roomId }
 
     apiResHandler(joinRoom({ data }), (res) => {
-      console.log(res)
       const { room } = res;
       dispatch(updateRoom(room));
       dispatch({ type: "JOIN_ROOM" });

@@ -71,7 +71,6 @@ const GameGround = () => {
     if (isMyTurn) {
       const data = { roomId };
       apiResHandler(eliminateUser({ data }), (res) => {
-        console.log(res);
         if (res.gameStatus == "eliminated") {
           dispatch({ type: "ELIMINATE_USER", payload: res.nextUserId });
         } else if (res.gameStatus == "finish") {
@@ -149,7 +148,6 @@ const GameGround = () => {
   const handleSendWord = () => {
     dispatch(updateLastWord(word));
 
-    console.log(isWrited);
     if (lastWord != "") {
       if (word.charAt(0).toLowerCase() != lastWord.slice(-1)) {
         handleInputError(true);
