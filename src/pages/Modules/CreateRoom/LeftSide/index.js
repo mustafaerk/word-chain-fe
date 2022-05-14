@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -9,31 +9,28 @@ import LogoImage from "assets/logo.png";
 
 import { Button, Input, Select } from "components";
 import PublicRoomSelector from "pages/Modules/CreateRoom/LeftSide/PublicRoomSelector";
-import {
-  updateRoomField,
-  createRoomInfo,
-} from "redux/slices/room/createRoomSlice";
-import { useCreateRoomMutation } from "redux/slices/room/roomApi";
-import { updateRoom } from "redux/slices/room/roomSlice";
-import { apiResHandler } from "utils/axiosBaseQuery";
+import { updateRoomField } from "redux/slices/room/createRoomSlice";
+import { roomIdSelector } from "redux/slices/room/roomSlice";
+
 
 const LeftSide = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const roomId = useSelector(roomIdSelector);
 
-  const roomInfo = useSelector(createRoomInfo);
 
-  const [createRoom, { isLoading }] = useCreateRoomMutation();
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const handleCreateRoom = () => {
-    const data = { ...roomInfo };
-    apiResHandler(createRoom({ data }), (res) => {
-      const { room } = res;
-      dispatch(updateRoom(room));
-      navigate(`/play/${room.roomId}`);
-    });
+    setIsDisabled(true)
+    dispatch({ type: "CREATE_ROOM" })
   };
+
+  useEffect(() => {
+    if (roomId) {
+      navigate(`/play/${roomId}`);
+    }
+  }, [roomId])
 
   return (
     <>
@@ -82,7 +79,7 @@ const LeftSide = () => {
         buttonClass="mt-auto"
         id="createButton"
         buttonIcon={GameIcon}
-        disabled={isLoading || isDisabled}
+        disabled={isDisabled}
         variant="shadowPurple"
         buttonText="Create Room"
         onClick={handleCreateRoom}

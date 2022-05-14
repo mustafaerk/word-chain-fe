@@ -19,6 +19,10 @@ function Router() {
 
   const { data } = useGetUserIpQuery();
 
+  useEffect(() => {
+    dispatch({ type: "LISTEN_ROOM" });
+  }, []);
+
   const getToken = async () => {
     const token = await getStoragedItem({ key: 'u_tkn' });
     if (token.value) {

@@ -15,7 +15,7 @@ import {
 } from "../room/roomSlice";
 
 const socketMiddleware = () => {
-  let socket = io.connect("https://word-chain-be.herokuapp.com");
+  let socket = io.connect("http://localhost:3001");
 
   return (store) => (next) => (action) => {
     switch (action.type) {

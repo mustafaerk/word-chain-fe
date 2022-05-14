@@ -85,9 +85,7 @@ const GameGround = () => {
     dispatch(updateWinnerUser({}));
   };
 
-  useEffect(() => {
-    dispatch({ type: "LISTEN_ROOM" });
-  }, []);
+
 
   useEffect(() => {
     if (winnerInfo.id) {
