@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -21,25 +21,27 @@ import {
   userInfoSelector,
   selectUserAvatarId,
 } from "redux/slices/user/userSlice";
-import {
-  useLoginMutation,
-  useQuickJoinMutation,
-} from "redux/slices/user/userApi";
+import { useLoginMutation } from "redux/slices/user/userApi";
 import { updateToken } from "redux/slices/app/appSlice";
-import { updateRoom } from "redux/slices/room/roomSlice";
-
+import { roomIdSelector } from "redux/slices/room/roomSlice";
 const LeftLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const avatarId = useSelector(selectUserAvatarId);
   const userInfo = useSelector(userInfoSelector);
+  const roomId = useSelector(roomIdSelector);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [selectedAvatar, setSelectedAvatar] = useState(avatars[0]);
 
   const [login, { isLoading }] = useLoginMutation();
-  const [quickJoin, { isLoading: i1 }] = useQuickJoinMutation();
+
+  useEffect(() => {
+    if (roomId) {
+      navigate(`/play/${roomId}`);
+    }
+  }, [roomId])
 
   const handleSelectAvatar = () => {
     dispatch(updateUserAvatar(selectedAvatar.val));
@@ -70,17 +72,8 @@ const LeftLogin = () => {
     }
   };
 
-  const handleQuickLogin = () => {
-    apiResHandler(quickJoin(), (res) => {
-      const { room } = res;
-      dispatch(updateRoom(room));
-      dispatch({ type: "JOIN_ROOM" });
-      navigate(`/play/${room.roomId}`);
-    });
-  };
-
   const handlePlay = () => {
-    handleLogin(() => handleQuickLogin());
+    handleLogin(() => dispatch({ type: "QUICK_JOIN" }));
   };
 
   const handleGoToRoomList = () => {
@@ -118,7 +111,7 @@ const LeftLogin = () => {
           variant="shadowSecondary"
           buttonText="Rooms"
           onClick={handleGoToRoomList}
-          disabled={isLoading || i1 || isDisabled}
+          disabled={isLoading || isDisabled}
         />
         <Button
           id="button1"
@@ -126,7 +119,7 @@ const LeftLogin = () => {
           variant="shadowPurple"
           buttonText="Play"
           onClick={handlePlay}
-          disabled={isLoading || i1 || isDisabled}
+          disabled={isLoading || isDisabled}
         />
       </div>
       <Modal ModalClass="bg-white" isOpen={isOpen} handleModalClose={() => setIsOpen(false)}>

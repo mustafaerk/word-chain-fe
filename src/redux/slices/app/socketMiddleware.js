@@ -26,11 +26,13 @@ const socketMiddleware = () => {
         socket = null;
         console.log("websocket closed");
         break;
+
       case "QUICK_JOIN":
         socket.emit("quickJoin", {
           user: store.getState().user.userInfo,
         });
         break;
+
       case "CREATE_ROOM":
         socket.emit("createRoom", {
           user: store.getState().user.userInfo,
