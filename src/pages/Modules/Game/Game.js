@@ -1,4 +1,10 @@
-import React, { useLayoutEffect, useEffect, useState, useMemo, useRef } from "react";
+import React, {
+  useLayoutEffect,
+  useEffect,
+  useState,
+  useMemo,
+  useRef,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -14,219 +20,218 @@ import NotStartedGame from "pages/Modules/Game/components/NotStartedGame";
 import { userInfoSelector } from "redux/slices/user/userSlice";
 import { CheckIsWordEnglish } from "localization/translate";
 import {
-    currentUserInfoSelector,
-    lastWordSelector,
-    isRoomStartedSelector,
-    roomIdSelector,
-    wordListSelector,
-    winnerInfoSelector,
-    updateWinnerUser,
-    currentUserSelector,
-    isFinishStatusSelector,
-    updateRoomFinishStatus
+  currentUserInfoSelector,
+  lastWordSelector,
+  isRoomStartedSelector,
+  roomIdSelector,
+  wordListSelector,
+  winnerInfoSelector,
+  updateWinnerUser,
+  currentUserSelector,
+  isFinishStatusSelector,
+  updateRoomFinishStatus,
 } from "redux/slices/room/roomSlice";
 
-
 const GameGround = () => {
-    const progressBarRef = useRef();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    // User Selectors
-    const myUserInfo = useSelector(userInfoSelector);
+  const progressBarRef = useRef();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // User Selectors
+  const myUserInfo = useSelector(userInfoSelector);
 
-    // Rooms Selectors
-    const roomId = useSelector(roomIdSelector);
-    const currentTurnUserInfo = useSelector(currentUserInfoSelector);
-    const currentTurnUserId = useSelector(currentUserSelector);
-    const isGameStarted = useSelector(isRoomStartedSelector);
-    const lastWord = useSelector(lastWordSelector);
-    const wordList = useSelector(wordListSelector);
-    const winnerInfo = useSelector(winnerInfoSelector);
-    const isGameFinish = useSelector(isFinishStatusSelector);
+  // Rooms Selectors
+  const roomId = useSelector(roomIdSelector);
+  const currentTurnUserInfo = useSelector(currentUserInfoSelector);
+  const currentTurnUserId = useSelector(currentUserSelector);
+  const isGameStarted = useSelector(isRoomStartedSelector);
+  const lastWord = useSelector(lastWordSelector);
+  const wordList = useSelector(wordListSelector);
+  const winnerInfo = useSelector(winnerInfoSelector);
+  const isGameFinish = useSelector(isFinishStatusSelector);
 
-    const [word, setWord] = useState("");
+  const [word, setWord] = useState("");
 
-    useLayoutEffect(() => {
-        if (roomId) {
-            dispatch({ type: "JOIN_ROOM" });
-        }
-        return () => {
-            console.log('we leave bro');
-        }
-    }, [roomId])
+  useLayoutEffect(() => {
+    if (roomId) {
+      dispatch({ type: "JOIN_ROOM" });
+    }
+  }, [roomId]);
 
 
+  const isMobile = useMemo(() => window.innerWidth < 640, [window]);
 
-    const isMobile = useMemo(() => window.innerWidth < 640, [window]);
+  const isMyTurn = useMemo(
+    () => currentTurnUserId == myUserInfo?.id,
+    [currentTurnUserId]
+  );
 
-    const isMyTurn = useMemo(
-        () => currentTurnUserId == myUserInfo?.id,
-        [currentTurnUserId]
-    );
+  const inputPlaceHolder = useMemo(
+    () =>
+      isMyTurn
+        ? `You must type a word start by ${lastWord?.slice(-1)}`
+        : `Now,${currentTurnUserInfo?.name}'s turn!`,
+    [isMyTurn, currentTurnUserId]
+  );
 
-    const inputPlaceHolder = useMemo(
-        () =>
-            isMyTurn
-                ? `You must type a word start by ${lastWord?.slice(-1)}`
-                : `Now,${currentTurnUserInfo?.name}'s turn!`,
-        [isMyTurn, currentTurnUserId]
-    );
+  const handleEndConcert = async () => {
+    console.log("leaving brah");
+    dispatch({ type: "LEAVE_ROOM" });
+  };
+  const handleCloseWinnerModal = () => {
+    dispatch(updateRoomFinishStatus(false));
+    dispatch(updateWinnerUser({}));
+  };
 
-    const handleCloseWinnerModal = () => {
-        dispatch(updateRoomFinishStatus(false));
-        dispatch(updateWinnerUser({}));
-    };
+  const handleStartProgress = () => {
+    progressBarRef.current.handleStartProgress();
+  };
 
-    const handleStartProgress = () => {
-        progressBarRef.current.handleStartProgress();
-    };
-
-    useEffect(() => {
-        if (isGameStarted && currentTurnUserId) {
-            handleStartProgress();
-        }
-    }, [isGameStarted, currentTurnUserId]);
-
-
-    useEffect(() => {
-        if (isMobile) {
-            handleUserGetMiddle();
-        }
-    }, [currentTurnUserId]);
-
-    const handleEnterPress = (e) => {
-        if (e.key === "Enter") {
-            handleSendWord();
-        }
-    };
-
-    const handleUserGetMiddle = () => {
-        const mobileUsers = document.getElementById("mobileUserList");
-        const middle = parseInt(mobileUsers.childElementCount / 2);
-        const getActiveUser = document.getElementById(currentTurnUserId);
-        if (middle > 0) {
-            if (getActiveUser != mobileUsers.childNodes[middle - 1])
-                mobileUsers.childNodes[middle].before(getActiveUser);
-            else mobileUsers.childNodes[middle].after(getActiveUser);
-        }
-    };
+  useEffect(() => {
+    return () => handleEndConcert();
+  }, []);
 
 
-    const handleInputError = (isError) => {
-        const wordInput = document.getElementById("game-word-input");
-        if (isError) wordInput.style.border = "1px solid red";
-        else wordInput.style.border = "1px solid transparent";
-    };
+  useEffect(() => {
+    if (isGameStarted && currentTurnUserId) {
+      handleStartProgress();
+    }
+  }, [isGameStarted, currentTurnUserId]);
 
-    const handleSendWord = () => {
-        if (lastWord != "") {
-            if (word.charAt(0).toLowerCase() != lastWord.slice(-1)) {
-                handleInputError(true);
-                return;
-            }
-        }
-        const checkWordEnglish = CheckIsWordEnglish(word);
-        const checkWordExist = wordList.find(exWord => exWord.word == word);
+  useEffect(() => {
+    if (isMobile) {
+      handleUserGetMiddle();
+    }
+  }, [currentTurnUserId]);
 
-        if (checkWordEnglish && !checkWordExist) {
-            dispatch({ type: "SEND_WORD", payload: word });
-            setWord("");
-            handleInputError(false);
-        } else handleInputError(true);
-    };
+  const handleEnterPress = (e) => {
+    if (e.key === "Enter") {
+      handleSendWord();
+    }
+  };
 
-    const handleHandleTimeUp = () => {
-        if (isMyTurn) {
-            dispatch({ type: "TIME_UP" });
-        }
-    };
+  const handleUserGetMiddle = () => {
+    const mobileUsers = document.getElementById("mobileUserList");
+    const middle = parseInt(mobileUsers.childElementCount / 2);
+    const getActiveUser = document.getElementById(currentTurnUserId);
+    if (middle > 0) {
+      if (getActiveUser != mobileUsers.childNodes[middle - 1])
+        mobileUsers.childNodes[middle].before(getActiveUser);
+      else mobileUsers.childNodes[middle].after(getActiveUser);
+    }
+  };
 
+  const handleInputError = (isError) => {
+    const wordInput = document.getElementById("game-word-input");
+    if (isError) wordInput.style.border = "1px solid red";
+    else wordInput.style.border = "1px solid transparent";
+  };
 
-    return (
-        <div className="bg-darkGray flex flex-col w-full h-full md:w-3/5 mx-auto rounded-md p-6 space-y-4">
-            {!isGameStarted ? (
-                <NotStartedGame />
-            ) : (
-                <>
-                    <WordList />
-                    <ProgressBar
-                        ref={progressBarRef}
-                        endCallBack={handleHandleTimeUp}
-                    />
-                    <div className="flex relative h-14">
-                        <Input
-                            id="gameword"
-                            inputName="game-word-input"
-                            placeholder={
-                                isMyTurn && !lastWord?.slice(-1)
-                                    ? "You must start game with any English word!"
-                                    : inputPlaceHolder
-                            }
-                            value={word}
-                            onChange={(e) => {
-                                setWord(e.target.value);
-                            }}
-                            onKeyDown={handleEnterPress}
-                            disabled={!isMyTurn}
-                            autoFocusInput={isMyTurn}
-                        />
-                        <Button
-                            id="button1"
-                            buttonIcon={SendIcon}
-                            variant="purple"
-                            buttonText="Send"
-                            buttonClass="absolute w-24 h-full send-word-button-align"
-                            onClick={handleSendWord}
-                            disabled={!isMyTurn}
-                        />
-                    </div>
-                </>
-            )}
-            <Modal
-                ModalContentClass="relative"
-                ModalClass="bg-purple"
-                isOpen={isGameFinish}
-                handleModalClose={handleCloseWinnerModal}
-            >
-                <Lottie
-                    animation={WinnerAnimation}
-                    containerClass="absolute winner-animation w-96 h-96"
-                    st
-                />
-                <div className="h-80 overflow-y-scroll p-2 flex flex-col  items-center justify-center text-center gap-y-4">
-                    <p className="flex text-white text-2xl font-semibold items-center justify-center gap-4 ">
-                        <img
-                            src={avatarList[winnerInfo.userAvatarId]}
-                            className="bg-primary w-16  r h-16 rounded-full"
-                            alt=""
-                        />{" "}
-                        {winnerInfo.name} is Winner!
-                    </p>
-                    <p className="text-white text-lg w-1/2">
-                        You can continue to learn and win by starting the new game right now
-                        😊
-                    </p>
-                </div>
-                <div className="flex">
-                    <Button
-                        id="okay"
-                        buttonIcon={GameIcon}
-                        variant="shadowGreen"
-                        buttonClass="mx-auto mt-2 w-28"
-                        buttonText="Start Game"
-                    />
-                    <Button
-                        id="okay"
-                        buttonIcon={RoomPurpleIcon}
-                        variant="shadowPrimary"
-                        buttonClass="mx-auto mt-2 w-28"
-                        buttonText="Leave Game"
-                        onClick={() => navigate('/rooms')}
-                    />
-                </div>
-            </Modal>
+  const handleSendWord = () => {
+    if (lastWord != "") {
+      if (word.charAt(0).toLowerCase() != lastWord.slice(-1)) {
+        handleInputError(true);
+        return;
+      }
+    }
+    const checkWordEnglish = CheckIsWordEnglish(word);
+    const checkWordExist = wordList.find((exWord) => exWord.word == word);
+
+    if (checkWordEnglish && !checkWordExist) {
+      dispatch({ type: "SEND_WORD", payload: word });
+      setWord("");
+      handleInputError(false);
+    } else handleInputError(true);
+  };
+
+  const handleHandleTimeUp = () => {
+    if (isMyTurn) {
+      dispatch({ type: "TIME_UP" });
+    }
+  };
+
+  return (
+    <div className="bg-darkGray flex flex-col w-full h-full md:w-3/5 mx-auto rounded-md p-6 space-y-4">
+      {!isGameStarted ? (
+        <NotStartedGame />
+      ) : (
+        <>
+          <WordList />
+          <ProgressBar ref={progressBarRef} endCallBack={handleHandleTimeUp} />
+          <div className="flex relative h-14">
+            <Input
+              id="gameword"
+              inputName="game-word-input"
+              placeholder={
+                isMyTurn && !lastWord?.slice(-1)
+                  ? "You must start game with any English word!"
+                  : inputPlaceHolder
+              }
+              value={word}
+              onChange={(e) => {
+                setWord(e.target.value);
+              }}
+              onKeyDown={handleEnterPress}
+              disabled={!isMyTurn}
+              autoFocusInput={isMyTurn}
+            />
+            <Button
+              id="button1"
+              buttonIcon={SendIcon}
+              variant="purple"
+              buttonText="Send"
+              buttonClass="absolute w-24 h-full send-word-button-align"
+              onClick={handleSendWord}
+              disabled={!isMyTurn}
+            />
+          </div>
+        </>
+      )}
+      <Modal
+        ModalContentClass="relative"
+        ModalClass="bg-purple"
+        isOpen={isGameFinish}
+        handleModalClose={handleCloseWinnerModal}
+      >
+        <Lottie
+          animation={WinnerAnimation}
+          containerClass="absolute winner-animation w-96 h-96"
+          st
+        />
+        <div className="h-80 overflow-y-scroll p-2 flex flex-col  items-center justify-center text-center gap-y-4">
+          <p className="flex text-white text-2xl font-semibold items-center justify-center gap-4 ">
+            <img
+              src={avatarList[winnerInfo.userAvatarId]}
+              className="bg-primary w-16  r h-16 rounded-full"
+              alt=""
+            />{" "}
+            {winnerInfo.name} is Winner!
+          </p>
+          <p className="text-white text-lg w-1/2">
+            You can continue to learn and win by starting the new game right now
+            😊
+          </p>
         </div>
-    );
+        <div className="flex flex-col md:flex-row">
+          <Button
+            id="okay"
+            buttonIcon={GameIcon}
+            variant="shadowGreen"
+            buttonClass="mx-auto mt-2 w-1/3"
+            buttonText="Start Game"
+            onClick={handleCloseWinnerModal}
+          />
+          <Button
+            id="okay"
+            buttonIcon={RoomPurpleIcon}
+            variant="shadowPrimary"
+            buttonClass="mx-auto mt-2 w-1/3"
+            buttonText="Leave Game"
+            onClick={() => navigate("/rooms")}
+          />
+        </div>
+      </Modal>
+    </div>
+  );
 };
 
 export default GameGround;
