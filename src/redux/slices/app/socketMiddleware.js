@@ -26,47 +26,44 @@ const socketMiddleware = () => {
         socket = null;
         console.log("websocket closed");
         break;
-      case "LEAVE_ROOM":
-        socket.emit("leave", {
-          roomId: store.getState().room.room.roomId,
+      case "QUICK_JOIN":
+        socket.emit("quickJoin", {
           user: store.getState().user.userInfo,
         });
         break;
+      case "CREATE_ROOM":
+        socket.emit("createRoom", {
+          user: store.getState().user.userInfo,
+          room: store.getState().createroom.room,
+        });
+        break;
+
       case "JOIN_ROOM":
-        socket.emit("joinRoom", {
+        socket.emit("join", {
           roomId: store.getState().room.room.roomId,
           user: store.getState().user.userInfo,
         });
         break;
+
+
       case "START_ROOM":
-        socket.emit("start", { status: true });
+        socket.emit("start");
         break;
-      case "END_ROOM":
-        socket.emit("gameFinish", { status: true });
-        break;
-      case "ELIMINATE_USER":
-        socket.emit("eliminate", {
-          roomId: store.getState().room.room.roomId,
-          user: store.getState().user.userInfo,
-          nextUserId: action.payload
-        });
-        break;
-      case "FINISH_GAME":
-        socket.emit("gameFinish", {
-          roomId: store.getState().room.room.roomId,
-          winner: action.payload
-        });
-        break;
+
       case "NEW_MESSAGE":
-        socket.emit("gameMessage", {
-          action_type: "MESSAGE",
-          message: {
-            word: action.payload,
-            ownerId: store.getState().user.userInfo.id,
-          },
-          roomId: store.getState().room.room.roomId,
+        socket.emit("word", {
+          word: action.payload,
         });
         break;
+
+      case "TIME_UP":
+        socket.emit("timeUp");
+        break;
+
+      case "LEAVE_ROOM":
+        socket.emit("leave");
+        break;
+
       case "LISTEN_ROOM":
         socket.on("room", (room) => {
           store.dispatch(updateRoom(room));
