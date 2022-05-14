@@ -57,7 +57,6 @@ const GameGround = () => {
     }
   }, [roomId]);
 
-
   const isMobile = useMemo(() => window.innerWidth < 640, [window]);
 
   const isMyTurn = useMemo(
@@ -73,10 +72,6 @@ const GameGround = () => {
     [isMyTurn, currentTurnUserId]
   );
 
-  const handleEndConcert = async () => {
-    console.log("leaving brah");
-    dispatch({ type: "LEAVE_ROOM" });
-  };
   const handleCloseWinnerModal = () => {
     dispatch(updateRoomFinishStatus(false));
     dispatch(updateWinnerUser({}));
@@ -86,10 +81,26 @@ const GameGround = () => {
     progressBarRef.current.handleStartProgress();
   };
 
+  const alertUser = (e) => {
+    e.preventDefault();
+    e.returnValue = "";
+  };
   useEffect(() => {
     return () => handleEndConcert();
   }, []);
 
+  useEffect(() => {
+    window.addEventListener("beforeunload", alertUser);
+    window.addEventListener("unload", handleEndConcert);
+    return () => {
+      window.removeEventListener("beforeunload", alertUser);
+      window.removeEventListener("unload", handleEndConcert);
+    };
+  }, []);
+  const handleEndConcert = async () => {
+    dispatch({ type: "LEAVE_ROOM" });
+    console.log("leaving brah");
+  };
 
   useEffect(() => {
     if (isGameStarted && currentTurnUserId) {
