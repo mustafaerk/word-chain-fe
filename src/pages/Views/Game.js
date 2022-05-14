@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { MiniUserCard } from "components";
 import CloseSvg from "assets/icons/x.svg";
 import UserList from "pages/Modules/Game/UserList";
-import GameGround from "pages/Modules/Game/GameGround";
+import GameGround from "pages/Modules/Game/Game";
 import Main from "pages/Layout/Main";
 import {
   clearRoom,

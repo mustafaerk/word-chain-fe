@@ -12,7 +12,6 @@ const initialState = {
     id: "",
     name: "",
   },
-  lastWord: "",
   isFinish: false,
   roomJoinError: ''
 };
@@ -21,9 +20,6 @@ export const roomSlice = createSlice({
   name: "room",
   initialState,
   reducers: {
-    updateLastWord: (state, action) => {
-      state.lastWord = action.payload;
-    },
     updateRoom: (state, action) => {
       state.room = action.payload;
     },
@@ -91,6 +87,7 @@ export const eliminateUser = (userId) => {
 };
 
 
+export const isFinishStatusSelector = (state) => state.room.isFinish;
 export const wordListSelector = (state) => state.room.room.words;
 export const winnerInfoSelector = (state) => state.room.winnerUser;
 export const userListSelector = (state) => state.room.room.users;
@@ -100,7 +97,6 @@ export const currentUserInfoSelector = (state) => state.room.room.users.find(use
 export const roomOwnerSelector = (state) => state.room.room.users.find(user => user.id == state.room.room.ownerId);
 export const roomIdSelector = (state) => state.room.room.roomId;
 export const lastWordSelector = (state) => state.room.room.words[state.room.room.words.length - 1]?.word.toLowerCase() || '';
-export const isWritedSelector = (state) => state.room.room.words.find(word => word.word == state.room.lastWord);
 
 export const {
   updateLastWord,

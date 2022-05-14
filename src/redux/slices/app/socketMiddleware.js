@@ -52,10 +52,8 @@ const socketMiddleware = () => {
         socket.emit("start");
         break;
 
-      case "NEW_MESSAGE":
-        socket.emit("word", {
-          word: action.payload,
-        });
+      case "SEND_WORD":
+        socket.emit("word", action.payload);
         break;
 
       case "TIME_UP":
@@ -94,7 +92,7 @@ const socketMiddleware = () => {
 
         socket.on("word", (data) => {
           console.log(data.word, data.pointOfWord);
-          store.dispatch(updateRoomWords(true));
+          store.dispatch(updateRoomWords(data.word));
           store.dispatch(updatePointOfUser(data.pointOfWord, data.word.ownerId));
           // Update wordList of room and update User Point;
         });
