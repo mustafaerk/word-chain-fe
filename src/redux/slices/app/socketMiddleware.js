@@ -2,10 +2,14 @@ import io from "socket.io-client";
 
 import {
   updateUserList,
+  updateRoom,
+  changeUserTurn,
   removeUserFromList,
+  updateRoomJoinError,
+  updateRoomFinishStatus,
   updateRoomWords,
   updateRoomStartStatus,
-  eliminateUserFromList,
+  eliminateUser,
   updateWinnerUser,
   updatePointOfUser
 } from "../room/roomSlice";
@@ -64,35 +68,74 @@ const socketMiddleware = () => {
         });
         break;
       case "LISTEN_ROOM":
-        socket.on("join", (data) => {
-          store.dispatch(updateUserList({ ...data.user, isEliminated: false }));
+        socket.on("room", (room) => {
+          store.dispatch(updateRoom(room));
+          console.log(room);
+          // Update Redux room
         });
 
-        socket.on("leave", (data) => {
-          store.dispatch(removeUserFromList(data.message.user));
+
+        socket.on("join", (user) => {
+          console.log(user);
+          store.dispatch(updateUserList(user));
+          // push the user to room userList;
         });
 
-        socket.on("eliminate", (data) => {
-          store.dispatch(eliminateUserFromList(data.message.user.id, data.message.nextUserId));
+        socket.on("leave", (userId) => {
+          console.log(userId);
+          store.dispatch(removeUserFromList(userId));
+          // push the user to room userList;
         });
 
-        socket.on("gameFinish", (data) => {
-          store.dispatch(updateWinnerUser(data.message.winner));
+        socket.on("start", (data) => {
+          console.log(data);
+          store.dispatch(updateRoomStartStatus(true));
+          // Update room isStarted field to true and start the game
         });
 
-        socket?.on("start", (data) => {
-          store.dispatch(updateRoomStartStatus(data.message.status));
+        socket.on("word", (data) => {
+          console.log(data.word, data.pointOfWord);
+          store.dispatch(updateRoomWords(true));
+          store.dispatch(updatePointOfUser(data.pointOfWord, data.word.ownerId));
+          // Update wordList of room and update User Point;
         });
 
-        socket?.on("gameMessage", (data) => {
-          const word = {
-            word: data.message.message.word,
-            ownerId: data.message.message.ownerId,
-            point: data.point,
-          };
-          store.dispatch(updateRoomWords({ word, nextUserId: data.nextUserId }));
-          store.dispatch(updatePointOfUser(data.point, data.message.message.ownerId));
+        socket.on("turn", (nextUserId) => {
+          console.log(nextUserId);
+          store.dispatch(changeUserTurn(nextUserId));
+          // Update currentUserId for turn;
         });
+
+        socket.on("eliminate", (eliminatedUserId) => {
+          console.log(eliminatedUserId);
+          store.dispatch(eliminateUser(eliminatedUserId));
+          // Update eliminate which has eliminatedUserId ;
+        });
+
+        socket.on("winner", (winnerUser) => {
+          console.log(winnerUser);
+          store.dispatch(updateWinnerUser(winnerUser));
+          // Update  winnerSlice with winnerUser and show it on modal when modal close winner info must clear ;
+        });
+
+
+        socket.on("finish", (newRoom) => {
+          console.log(newRoom);
+          store.dispatch(updateRoomFinishStatus(true));
+          store.dispatch(updateRoom(newRoom));
+          // Update  update room info for newRoom ;
+        });
+
+
+
+        socket.on("notJoined", (data) => {
+          console.log(data.message);
+          store.dispatch(updateRoomJoinError(data.message));
+          // show Error Modal and not navigate;
+        });
+
+
+
         break;
       default:
         return next(action);

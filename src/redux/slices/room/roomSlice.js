@@ -13,6 +13,8 @@ const initialState = {
     name: "",
   },
   lastWord: "",
+  isFinish: false,
+  roomJoinError: ''
 };
 
 export const roomSlice = createSlice({
@@ -25,6 +27,12 @@ export const roomSlice = createSlice({
     updateRoom: (state, action) => {
       state.room = action.payload;
     },
+    updateRoomJoinError: (state, action) => {
+      state.roomJoinError = action.payload;
+    },
+    updateRoomFinishStatus: (state, action) => {
+      state.isFinish = action.payload;
+    },
     clearRoom: (state) => {
       state.room = initialState.room;
     },
@@ -32,8 +40,7 @@ export const roomSlice = createSlice({
       state.winnerUser = action.payload;
     },
     updateRoomWords: (state, action) => {
-      state.room.currentUserTurn = action.payload.nextUserId;
-      state.room.words = [...state.room.words, action.payload.word];
+      state.room.words = [...state.room.words, action.payload];
     },
     changeUserTurn: (state, action) => {
       state.room.currentUserTurn = action.payload;
@@ -46,15 +53,15 @@ export const roomSlice = createSlice({
     },
     updateRoomStartStatus: (state, action) => {
       state.room.isStarted = action.payload;
-      state.room.isActive = action.false;
+      state.room.isActive = false;
     },
   },
 });
 
-export const removeUserFromList = (data) => {
+export const removeUserFromList = (userId) => {
   return async (dispatch, getState) => {
     const userList = getState().room.room.users;
-    const newUserList = userList.filter(user => user.id == data.id);
+    const newUserList = userList.filter(user => user.id !== userId);
     dispatch(changeUserList(newUserList))
   };
 };
@@ -70,17 +77,16 @@ export const updatePointOfUser = (point, ownerId) => {
   };
 };
 
-export const eliminateUserFromList = (userId, nextUserId) => {
+export const eliminateUser = (userId) => {
   return async (dispatch, getState) => {
     let userList = getState().room.room.users;
     userList = userList.map((user) => {
       return {
         ...user,
-        isEliminated: user.id == userId && true
+        isEliminated: user.id == userId ? true : user.isEliminated
       };
     })
     dispatch(changeUserList(userList));
-    dispatch(changeUserTurn(nextUserId));
   };
 };
 
@@ -102,6 +108,8 @@ export const {
   clearRoom,
   updateRoomWords,
   updateUserList,
+  updateRoomJoinError,
+  updateRoomFinishStatus,
   changeUserList,
   updateRoomStartStatus,
   changeUserTurn,
