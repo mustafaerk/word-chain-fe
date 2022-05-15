@@ -37,7 +37,7 @@ const GameGround = () => {
   const progressBarRef = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [shouldNavigate , setShouldNavigate] = useState(false);
+  const [shouldNavigate, setShouldNavigate] = useState(false);
 
   // User Selectors
   const myUserInfo = useSelector(userInfoSelector);
@@ -51,7 +51,7 @@ const GameGround = () => {
   const wordList = useSelector(wordListSelector);
   const winnerInfo = useSelector(winnerInfoSelector);
   const isGameFinish = useSelector(isFinishStatusSelector);
-  
+
 
   const [word, setWord] = useState("");
 
@@ -68,11 +68,11 @@ const GameGround = () => {
     }
   }, []);
 
-  useEffect(() =>{
-    if(shouldNavigate){
+  useEffect(() => {
+    if (shouldNavigate) {
       navigate("/");
     }
-  },[shouldNavigate])
+  }, [shouldNavigate])
 
   const isMobile = useMemo(() => window.innerWidth < 640, [window]);
 
@@ -223,7 +223,6 @@ const GameGround = () => {
         <Lottie
           animation={WinnerAnimation}
           containerClass="absolute winner-animation w-96 h-96"
-          st
         />
         <div className="h-80 overflow-y-scroll p-2 flex flex-col  items-center justify-center text-center gap-y-4">
           <p className="flex text-white text-2xl font-semibold items-center justify-center gap-4 ">
