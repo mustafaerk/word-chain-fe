@@ -4,7 +4,10 @@ import { useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 
 import { useGetUserIpQuery } from "redux/slices/app/appApi";
-import { updateUserInfoField } from "redux/slices/user/userSlice";
+import {
+  updateUserInfoField,
+  updateUserInfo,
+} from "redux/slices/user/userSlice";
 import { updateToken } from "redux/slices/app/appSlice";
 import { getStoragedItem } from "utils/localstorage";
 
@@ -24,27 +27,32 @@ function Router() {
   }, []);
 
   const getToken = async () => {
-    const token = await getStoragedItem({ key: 'u_tkn' });
+    const token = await getStoragedItem({ key: "u_tkn" });
     if (token.value) {
       dispatch(updateToken(token.value));
     }
-  }
+  };
 
   useEffect(() => {
     getToken();
-  }, [])
+  }, []);
 
   useEffect(() => {
-    const userLang = navigator.language || navigator.userLanguage;
-    dispatch(
-      updateUserInfoField({ value: userLang.slice(0, 2), field: "language" })
-    );
-
-    const unique_id = uuid();
-    if (data) {
-      dispatch(updateUserInfoField({ value: unique_id, field: "id" }));
+    const oldUserInfo = getStoragedItem({ key: "u_user" });
+    if (oldUserInfo) {
+      dispatch(updateUserInfo(oldUserInfo.value.userInfo));
     } else {
-      dispatch(updateUserInfoField({ value: unique_id, field: "id" }));
+      const userLang = navigator.language || navigator.userLanguage;
+      dispatch(
+        updateUserInfoField({ value: userLang.slice(0, 2), field: "language" })
+      );
+
+      const unique_id = uuid();
+      if (data) {
+        dispatch(updateUserInfoField({ value: unique_id, field: "id" }));
+      } else {
+        dispatch(updateUserInfoField({ value: unique_id, field: "id" }));
+      }
     }
   }, [data]);
 

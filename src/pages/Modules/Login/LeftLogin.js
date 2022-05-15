@@ -37,6 +37,7 @@ const LeftLogin = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(avatars[0]);
 
   const [login, { isLoading }] = useLoginMutation();
+  const localStorageField = "user";
 
   useEffect(() => {
     if (roomId) {
@@ -50,15 +51,17 @@ const LeftLogin = () => {
   };
 
   const handleUserInfoChange = (value, field) => {
-    if (field == "name")
+    if (field == "name"){
       value.length > 2 && value.length < 16
-        ? setIsDisabled(false)
-        : setIsDisabled(true);
+      ? setIsDisabled(false)
+      : setIsDisabled(true);
+    }
     dispatch(updateUserInfoField({ value, field }));
   };
 
   const handleLogin = (callback) => {
     try {
+      storageItem("u_user", { userInfo, localStorageField });
       const data = {
         ...userInfo,
       };

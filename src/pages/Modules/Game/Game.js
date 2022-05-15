@@ -6,7 +6,7 @@ import React, {
   useRef,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import RoomPurpleIcon from "assets/icons/roomPurple.svg";
 import GameIcon from "assets/icons/game.svg";
@@ -30,12 +30,15 @@ import {
   currentUserSelector,
   isFinishStatusSelector,
   updateRoomFinishStatus,
+  updateRoomId,
 } from "redux/slices/room/roomSlice";
 
 const GameGround = () => {
   const progressBarRef = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [shouldNavigate , setShouldNavigate] = useState(false);
+
   // User Selectors
   const myUserInfo = useSelector(userInfoSelector);
 
@@ -48,14 +51,28 @@ const GameGround = () => {
   const wordList = useSelector(wordListSelector);
   const winnerInfo = useSelector(winnerInfoSelector);
   const isGameFinish = useSelector(isFinishStatusSelector);
+  
 
   const [word, setWord] = useState("");
 
+  let { id } = useParams();
+
   useLayoutEffect(() => {
-    if (roomId) {
+    if (!myUserInfo.name) {
+      setShouldNavigate(true);
+    } else {
+      if (!roomId) {
+        dispatch(updateRoomId(id));
+      }
       dispatch({ type: "JOIN_ROOM" });
     }
-  }, [roomId]);
+  }, []);
+
+  useEffect(() =>{
+    if(shouldNavigate){
+      navigate("/");
+    }
+  },[shouldNavigate])
 
   const isMobile = useMemo(() => window.innerWidth < 640, [window]);
 

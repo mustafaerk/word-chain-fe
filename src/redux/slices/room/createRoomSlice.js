@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     room: {
         roomAvatarId: "1",
-        roomSize: "",
+        roomSize: "6",
         roomName: "",
         isPublic: false,
     },
