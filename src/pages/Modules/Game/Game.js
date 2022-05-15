@@ -12,6 +12,7 @@ import RoomPurpleIcon from "assets/icons/roomPurple.svg";
 import GameIcon from "assets/icons/game.svg";
 import SendIcon from "assets/icons/send.svg";
 import WinnerAnimation from "assets/animation/winner.json";
+import bellSound from "assets/voice/bell.mp3"
 
 import { avatarList } from "constant/Avatar";
 import { Button, Input, ProgressBar, Modal, Lottie } from "components";
@@ -38,6 +39,7 @@ const GameGround = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [shouldNavigate , setShouldNavigate] = useState(false);
+
 
   // User Selectors
   const myUserInfo = useSelector(userInfoSelector);
@@ -69,6 +71,11 @@ const GameGround = () => {
   }, []);
 
   useEffect(() =>{
+    const audio = new Audio(bellSound);
+    audio.play();
+  },[currentTurnUserId])
+
+  useEffect(() =>{
     if(shouldNavigate){
       navigate("/");
     }
@@ -80,6 +87,7 @@ const GameGround = () => {
     () => currentTurnUserId == myUserInfo?.id,
     [currentTurnUserId]
   );
+
 
   const inputPlaceHolder = useMemo(
     () =>
