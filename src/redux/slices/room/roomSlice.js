@@ -23,6 +23,9 @@ export const roomSlice = createSlice({
     updateRoom: (state, action) => {
       state.room = action.payload;
     },
+    updateOwner: (state, action) => {
+      state.room.ownerId = action.payload;
+    },
     updateRoomJoinError: (state, action) => {
       state.roomJoinError = action.payload;
     },
@@ -109,7 +112,8 @@ export const {
   changeUserList,
   updateRoomStartStatus,
   changeUserTurn,
-  updateWinnerUser
+  updateWinnerUser,
+  updateOwner
 } = roomSlice.actions;
 
 export const roomSliceReducer = roomSlice.reducer;

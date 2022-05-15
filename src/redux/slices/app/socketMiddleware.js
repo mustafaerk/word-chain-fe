@@ -11,11 +11,12 @@ import {
   updateRoomStartStatus,
   eliminateUser,
   updateWinnerUser,
-  updatePointOfUser
+  updatePointOfUser,
+  updateOwner
 } from "../room/roomSlice";
 
 const socketMiddleware = () => {
-  let socket = io.connect("https://word-chain-be.herokuapp.com");
+  let socket = io.connect("http://localhost:3001");
 
   return (store) => (next) => (action) => {
     switch (action.type) {
@@ -24,7 +25,6 @@ const socketMiddleware = () => {
           socket.close();
         }
         socket = null;
-        console.log("websocket closed");
         break;
 
       case "QUICK_JOIN":
@@ -67,66 +67,59 @@ const socketMiddleware = () => {
       case "LISTEN_ROOM":
         socket.on("room", (room) => {
           store.dispatch(updateRoom(room));
-          console.log(room);
           // Update Redux room
         });
 
 
         socket.on("join", (user) => {
-          console.log(user);
           store.dispatch(updateUserList(user));
           // push the user to room userList;
         });
 
         socket.on("leave", (userId) => {
-          console.log(userId);
           store.dispatch(removeUserFromList(userId));
           // push the user to room userList;
         });
 
-        socket.on("start", (data) => {
-          console.log(data);
+        socket.on("start", () => {
           store.dispatch(updateRoomStartStatus(true));
           // Update room isStarted field to true and start the game
         });
 
         socket.on("word", (data) => {
-          console.log(data.word, data.pointOfWord);
           store.dispatch(updateRoomWords(data.word));
           store.dispatch(updatePointOfUser(data.pointOfWord, data.word.ownerId));
           // Update wordList of room and update User Point;
         });
 
+        socket.on("owner", (newOwnerId) => {
+          store.dispatch(updateOwner(newOwnerId));
+          // Update  update room info for newRoom ;
+        });
+
         socket.on("turn", (nextUserId) => {
-          console.log(nextUserId);
           store.dispatch(changeUserTurn(nextUserId));
           // Update currentUserId for turn;
         });
 
         socket.on("eliminate", (eliminatedUserId) => {
-          console.log(eliminatedUserId);
           store.dispatch(eliminateUser(eliminatedUserId));
           // Update eliminate which has eliminatedUserId ;
         });
 
         socket.on("winner", (winnerUser) => {
-          console.log(winnerUser);
           store.dispatch(updateWinnerUser(winnerUser));
           // Update  winnerSlice with winnerUser and show it on modal when modal close winner info must clear ;
         });
 
 
         socket.on("finish", (newRoom) => {
-          console.log(newRoom);
           store.dispatch(updateRoomFinishStatus(true));
           store.dispatch(updateRoom(newRoom));
           // Update  update room info for newRoom ;
         });
 
-
-
         socket.on("notJoined", (data) => {
-          console.log(data.message);
           store.dispatch(updateRoomJoinError(data.message));
           // show Error Modal and not navigate;
         });

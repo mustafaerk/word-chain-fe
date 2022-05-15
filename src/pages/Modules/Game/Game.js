@@ -81,25 +81,25 @@ const GameGround = () => {
     progressBarRef.current.handleStartProgress();
   };
 
-  const alertUser = (e) => {
-    e.preventDefault();
-    e.returnValue = "";
-  };
+  // const alertUser = (e) => {
+  //   dispatch({ type: "LEAVE_ROOM" });
+  //   e.preventDefault();
+  //   e.returnValue = "";
+  // };
   useEffect(() => {
     return () => handleEndConcert();
   }, []);
 
   useEffect(() => {
-    window.addEventListener("beforeunload", alertUser);
+    window.addEventListener("beforeunload", handleEndConcert);
     window.addEventListener("unload", handleEndConcert);
     return () => {
-      window.removeEventListener("beforeunload", alertUser);
+      window.removeEventListener("beforeunload", handleEndConcert);
       window.removeEventListener("unload", handleEndConcert);
     };
   }, []);
   const handleEndConcert = async () => {
     dispatch({ type: "LEAVE_ROOM" });
-    console.log("leaving brah");
   };
 
   useEffect(() => {
@@ -228,7 +228,7 @@ const GameGround = () => {
             buttonIcon={GameIcon}
             variant="shadowGreen"
             buttonClass="mx-auto mt-2 w-1/3"
-            buttonText="Start Game"
+            buttonText="Stay Here"
             onClick={handleCloseWinnerModal}
           />
           <Button
