@@ -204,7 +204,7 @@ const GameGround = () => {
               }
               value={word}
               onChange={(e) => {
-                setWord(e.target.value);
+                setWord(e.target.value.toLowerCase().trim());
               }}
               onKeyDown={handleEnterPress}
               disabled={!isMyTurn}
@@ -241,7 +241,7 @@ const GameGround = () => {
             />{" "}
             {winnerInfo.name} is Winner!
           </p>
-          <p className="text-white text-lg w-1/2">
+          <p className="text-white text-lg w-full  md:w-1/2">
             You can continue to learn and win by starting the new game right now
             😊
           </p>
