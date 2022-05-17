@@ -19,15 +19,27 @@ const NotStartedGame = () => {
 
     return (
         <div className='flex flex-col items-center justify-center h-full gap-y-4 text-center'>
-            <div className='text-4xl text-white font-semibold'>The game has not started yet!</div>
-            <img className='w-14 h-14' src={avatarList[roomOwner?.userAvatarId || '1']} />
+            <div className={`flex items-center justify-between flex-col text-white rounded-lg p-4 gap-x-4`}>
+                <div className={`rounded-full bg-skyDark`}>
+                    <img
+                        className="rounded-full w-16"
+                        src={avatarList[roomOwner?.userAvatarId || '1']}
+                        alt="Icon"
+                    />
+                </div>
+
+                <div className="w-full md:w-1/2 flex flex-col gap-y-2 items-center">
+                    <div className="text-md text-white">{roomOwner?.name || ''}</div>
+                </div>
+            </div>
             <Lottie
                 animation={WaitAnimation}
                 containerClass="w-42 h-42"
             />
-                
-            <span className='flex text-2xl text-white items-center'>
-                {roomOwner?.id != userInfo?.id ? `Waiting for ${roomOwner?.name || ''} to start the game!` : "You must start the game!"}
+
+            <span className='flex flex-col text-md text-white items-center'>
+                <div className='text-lightGray'>The Game Has Not Started Yet!</div>
+                <div className='text-white font-semibold'>  {roomOwner?.id != userInfo?.id ? `Waiting For ${roomOwner?.name || ''} To Start The Game!` : "You Must Start The Game!"}</div>
             </span>
 
             {roomOwner?.id == userInfo?.id && <Button

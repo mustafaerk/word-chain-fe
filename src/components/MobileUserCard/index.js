@@ -22,7 +22,7 @@ function MobileUserCard({ id, name, point, isActive, avatarId }) {
 
       <div className="w-16 flex flex-col md:items-start items-center">
         <div className={`${isActive ? "text-white" : "text-skyDark"} text-sm`}>{name}</div>
-        <div className={`${isActive ? "block" : "hidden"} text-2xs text-skyDark`}> {point} Points</div>
+        {point && <div className={`${isActive ? "block" : "hidden"} text-2xs text-skyDark`}> {point} Points</div>}
       </div>
     </div>
   );
