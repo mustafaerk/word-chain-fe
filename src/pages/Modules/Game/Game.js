@@ -70,13 +70,13 @@ const GameGround = () => {
     }
   }, []);
 
-  useEffect(() =>{
+  useEffect(() => {
     const audio = new Audio(bellSound);
     audio.play();
-  },[currentTurnUserId])
+  }, [currentTurnUserId])
 
-  useEffect(() =>{
-    if(shouldNavigate){
+  useEffect(() => {
+    if (shouldNavigate) {
       navigate("/");
     }
   }, [shouldNavigate])
@@ -261,7 +261,10 @@ const GameGround = () => {
             variant="shadowPrimary"
             buttonClass="mx-auto mt-2 w-1/3"
             buttonText="Leave Game"
-            onClick={() => navigate("/rooms")}
+            onClick={() => {
+              handleCloseWinnerModal();
+              navigate("/rooms");
+            }}
           />
         </div>
       </Modal>

@@ -7,30 +7,22 @@ import CloseSvg from "assets/icons/x.svg";
 import UserList from "pages/Modules/Game/UserList";
 import GameGround from "pages/Modules/Game/Game";
 import Main from "pages/Layout/Main";
-import {
-  clearRoom,
-  roomIdSelector /* removeUserFromList */,
-} from "redux/slices/room/roomSlice";
-import { useLeaveRoomMutation } from "redux/slices/room/roomApi";
-import { apiResHandler } from "utils/axiosBaseQuery";
+import { clearRoom, updateRoomFinishStatus, updateWinnerUser } from "redux/slices/room/roomSlice";
+
 import { userInfoSelector } from "redux/slices/user/userSlice";
 
 const Game = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const roomId = useSelector(roomIdSelector);
   const userInfo = useSelector(userInfoSelector);
 
-  const [leaveRoom] = useLeaveRoomMutation();
-
   const handleLeaveRoom = () => {
-    const data = { roomId };
-    apiResHandler(leaveRoom({ data }), () => {
-      dispatch({ type: "LEAVE_ROOM" });
-      navigate("/rooms");
-      dispatch(clearRoom());
-    });
+    dispatch({ type: "LEAVE_ROOM" });
+    dispatch(clearRoom());
+    dispatch(updateRoomFinishStatus(false));
+    dispatch(updateWinnerUser({}));
+    navigate("/rooms");
   };
 
   return (
