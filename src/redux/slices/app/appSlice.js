@@ -17,7 +17,7 @@ export const appSlice = createSlice({
     },
 });
 
-export const user_token = (state) => state.auth.authToken;
+export const authTokenSelector = (state) => state.auth.authToken;
 
 export const { updateToken, deleteToken } =
     appSlice.actions;
