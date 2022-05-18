@@ -32,7 +32,9 @@ import {
   isFinishStatusSelector,
   updateRoomFinishStatus,
   updateRoomId,
-  clearRoom
+  clearRoom,
+  roomJoinErrorSelector,
+  updateRoomJoinError
 } from "redux/slices/room/roomSlice";
 
 const GameGround = () => {
@@ -46,6 +48,7 @@ const GameGround = () => {
   const myUserInfo = useSelector(userInfoSelector);
 
   // Rooms Selectors
+  const roomError = useSelector(roomJoinErrorSelector);
   const roomId = useSelector(roomIdSelector);
   const currentTurnUserInfo = useSelector(currentUserInfoSelector);
   const currentTurnUserId = useSelector(currentUserSelector);
@@ -59,6 +62,14 @@ const GameGround = () => {
   const [word, setWord] = useState("");
 
   let { id } = useParams();
+
+  useEffect(() => {
+    if (roomError) {
+      dispatch(updateRoomJoinError(''));
+      dispatch(clearRoom());
+      navigate('/rooms');
+    }
+  }, [roomError])
 
   useLayoutEffect(() => {
     if (!myUserInfo.name) {

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from "prop-types";
 
 const Spinner = () => {
     return (
@@ -7,8 +6,5 @@ const Spinner = () => {
     )
 }
 
-Spinner.propTypes = {
-    children: PropTypes.any.isRequired,
-};
 
 export default Spinner;

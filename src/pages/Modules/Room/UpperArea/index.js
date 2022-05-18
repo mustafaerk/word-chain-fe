@@ -7,7 +7,7 @@ import doorIcon from "assets/icons/door.svg";
 import gameIcon from "assets/icons/game.svg";
 import { Button } from "components";
 
-const UpperArea = ({ joinRoom, isLoadingJoin }) => {
+const UpperArea = ({ joinRoom }) => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -36,7 +36,6 @@ const UpperArea = ({ joinRoom, isLoadingJoin }) => {
             buttonClass="w-40"
             variant="shadowPurple"
             onClick={joinRoom}
-            disabled={isLoadingJoin}
           />
         </div>
         <Button
@@ -53,7 +52,6 @@ const UpperArea = ({ joinRoom, isLoadingJoin }) => {
 };
 
 UpperArea.propTypes = {
-  isLoadingJoin: PropTypes.bool.isRequired,
   joinRoom: PropTypes.func.isRequired,
 };
 
