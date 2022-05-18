@@ -89,6 +89,7 @@ module.exports = {
       borderyes: "1px solid #E5E5E5",
       borderProgress: "1px solid #7B61FF",
       borderDarkGray: "3px solid #373e51",
+      borderRed: "1px solid red",
     },
     boxShadow: {
       primary: "3px 4px 1px -1px rgb(66 74 95 / 0.6) !important",

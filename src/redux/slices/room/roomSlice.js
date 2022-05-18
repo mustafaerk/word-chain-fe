@@ -79,6 +79,42 @@ export const updatePointOfUser = (point, ownerId) => {
   };
 };
 
+export const handleLeaveUser = (userId) => {
+  return async (dispatch, getState) => {
+    let userList = getState().room.room.users;
+    userList = userList.map((user) => {
+      return {
+        ...user,
+        isOnline: user.id == userId ? false : user.isOnline
+      };
+    })
+    console.log(userId);
+    dispatch(changeUserList(userList));
+  };
+};
+
+export const handleJoinUser = (joinedUser) => {
+  return async (dispatch, getState) => {
+    let userList = getState().room.room.users;
+    const existUser = userList.find(user => user.id == joinedUser.id);
+    if(existUser){
+      console.log("exist");
+      userList = userList.map((user) => {
+        return {
+          ...user,
+          isOnline: user.id == joinedUser.id ? true : user.isOnline
+        };
+      })
+      dispatch(changeUserList(userList));
+    }
+    else{
+      dispatch(updateUserList(joinedUser));
+      console.log("notExist");
+    }
+    
+  };
+};
+
 export const eliminateUser = (userId) => {
   return async (dispatch, getState) => {
     let userList = getState().room.room.users;
@@ -96,7 +132,7 @@ export const eliminateUser = (userId) => {
 export const isFinishStatusSelector = (state) => state.room.isFinish;
 export const wordListSelector = (state) => state.room.room.words;
 export const winnerInfoSelector = (state) => state.room.winnerUser;
-export const userListSelector = (state) => state.room.room.users.filter(user => user.isOnline);
+export const userListSelector = (state) => state.room.room.users;
 export const isRoomStartedSelector = (state) => state.room.room.isStarted;
 export const currentUserSelector = (state) => state.room.room.currentUserTurn;
 export const currentUserInfoSelector = (state) => state.room.room.users.find(user => user.id == state.room.room.currentUserTurn);
@@ -117,7 +153,7 @@ export const {
   changeUserTurn,
   updateWinnerUser,
   updateOwner,
-  updateRoomId
+  updateRoomId,
 } = roomSlice.actions;
 
 export const roomSliceReducer = roomSlice.reducer;

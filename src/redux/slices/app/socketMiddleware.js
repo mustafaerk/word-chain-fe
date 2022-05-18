@@ -1,10 +1,9 @@
 import io from "socket.io-client";
 
 import {
-  updateUserList,
   updateRoom,
   changeUserTurn,
-  removeUserFromList,
+  handleLeaveUser,
   updateRoomJoinError,
   updateRoomFinishStatus,
   updateRoomWords,
@@ -12,7 +11,8 @@ import {
   eliminateUser,
   updateWinnerUser,
   updatePointOfUser,
-  updateOwner
+  updateOwner,
+  handleJoinUser
 } from "../room/roomSlice";
 
 const socketMiddleware = () => {
@@ -72,12 +72,12 @@ const socketMiddleware = () => {
 
 
         socket.on("join", (user) => {
-          store.dispatch(updateUserList(user));
+          store.dispatch(handleJoinUser(user));
           // push the user to room userList;
         });
 
         socket.on("leave", (userId) => {
-          store.dispatch(removeUserFromList(userId));
+          store.dispatch(handleLeaveUser(userId));
           // push the user to room userList;
         });
 

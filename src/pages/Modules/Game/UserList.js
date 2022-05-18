@@ -49,6 +49,7 @@ const UserList = () => {
           point={user.point}
           name={user.name}
           isActive={user.id == currentUser}
+          isOnline={user.isOnline}
           isEliminated={user.isEliminated}
         />
       ))}
