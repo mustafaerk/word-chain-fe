@@ -118,27 +118,6 @@ const GameGround = () => {
     progressBarRef.current.handleStartProgress();
   };
 
-  // const alertUser = (e) => {
-  //   dispatch({ type: "LEAVE_ROOM" });
-  //   e.preventDefault();
-  //   e.returnValue = "";
-  // };
-  useEffect(() => {
-    return () => handleEndConcert();
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("beforeunload", handleEndConcert);
-    window.addEventListener("unload", handleEndConcert);
-    return () => {
-      window.removeEventListener("beforeunload", handleEndConcert);
-      window.removeEventListener("unload", handleEndConcert);
-    };
-  }, []);
-  const handleEndConcert = async () => {
-    dispatch({ type: "LEAVE_ROOM" });
-  };
-
   useEffect(() => {
     if (isGameStarted && currentTurnUserId) {
       handleStartProgress();
