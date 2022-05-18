@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
@@ -8,7 +8,7 @@ import { wordListSelector } from "redux/slices/room/roomSlice";
 
 import "./wordList.css";
 
-const WordList = ({ handleSpeak }) => {
+const WordList = () => {
   const divRef = useRef(null);
   const wordList = useSelector(wordListSelector);
 
@@ -16,11 +16,7 @@ const WordList = ({ handleSpeak }) => {
     divRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleEnglishWordClick = (text) => {
-    handleSpeak(text)
-  }
-  
-  useEffect(scrollToBottom, [wordList]);
+  useLayoutEffect(scrollToBottom);
 
   return (
     <div className="h-full overflow-y-auto">
@@ -28,7 +24,6 @@ const WordList = ({ handleSpeak }) => {
         {wordList.map((word, idx) => (
           <CSSTransition key={idx} timeout={400} classNames="item">
             <WordItem
-              handleEnglishWordClick={() => handleEnglishWordClick(word.word || '')}
               key={word.ownerId + idx}
               englishWord={word.word}
               nativeWord={word.word}

@@ -208,7 +208,6 @@ const GameGround = () => {
               }}
               onKeyDown={handleEnterPress}
               disabled={!isMyTurn}
-              autoFocusInput={isMyTurn}
             />
             <Button
               id="button1"

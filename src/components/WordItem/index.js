@@ -5,12 +5,12 @@ import { useSelector } from "react-redux";
 import { TranslateText } from "localization/translate";
 import { userInfoSelector } from "redux/slices/user/userSlice";
 
-function WordItem({ englishWord, nativeWord, handleEnglishWordClick }) {
+function WordItem({ englishWord, nativeWord }) {
   const userInfo = useSelector(userInfoSelector);
 
   return (
     <div className="flex p-2 gap-x-6">
-      <div onClick={handleEnglishWordClick} className="flex cursor-pointer bg-primary w-1/2 rounded-xl justify-between md:h-12 h-8 items-center">
+      <div  className="flex bg-primary w-1/2 rounded-xl justify-between md:h-12 h-8 items-center">
         <span className="mx-auto text-white font-semibold text-sm md:text-base lg:text-lg">
           {englishWord}
         </span>
