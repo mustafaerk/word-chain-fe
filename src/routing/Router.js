@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 
+import Spinner from "pages/Layout/Spinner";
 import { useGetUserIpQuery } from "redux/slices/app/appApi";
 import {
   updateUserInfoField,
@@ -61,7 +62,7 @@ function Router() {
         <Route
           path="/"
           element={
-            <React.Suspense fallback={<>...</>}>
+            <React.Suspense fallback={<Spinner />}>
               <Login />
             </React.Suspense>
           }
@@ -70,7 +71,7 @@ function Router() {
           path="/play/:id"
           element={
             <ProtectedRoute user={userInfo || authToken}>
-              <React.Suspense fallback={<>...</>}>
+              <React.Suspense fallback={<Spinner />}>
                 <Game />
               </React.Suspense>
             </ProtectedRoute>
@@ -80,7 +81,7 @@ function Router() {
           path="/rooms"
           element={
             <ProtectedRoute user={userInfo || authToken}>
-              <React.Suspense fallback={<>...</>}>
+              <React.Suspense fallback={<Spinner />}>
                 <Rooms />
               </React.Suspense>
             </ProtectedRoute>
