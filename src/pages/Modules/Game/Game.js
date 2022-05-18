@@ -32,6 +32,7 @@ import {
   isFinishStatusSelector,
   updateRoomFinishStatus,
   updateRoomId,
+  clearRoom
 } from "redux/slices/room/roomSlice";
 
 const GameGround = () => {
@@ -93,7 +94,7 @@ const GameGround = () => {
     () =>
       isMyTurn
         ? `You must type a word start by ${lastWord?.slice(-1)}`
-        : `Now,${currentTurnUserInfo?.name}'s turn!`,
+        : `Now, ${currentTurnUserInfo?.name}'s turn!`,
     [isMyTurn, currentTurnUserId]
   );
 
@@ -262,6 +263,7 @@ const GameGround = () => {
             buttonText="Leave Game"
             onClick={() => {
               handleCloseWinnerModal();
+              dispatch(clearRoom());
               navigate("/rooms");
             }}
           />
