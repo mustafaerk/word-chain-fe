@@ -94,7 +94,6 @@ function Room({
         <div className={`font-bold text-sm ${handleTextColor()}`}>
           {roomName}
         </div>
-        {/*         <div className={`${handleTextColor()} text-xs`}>{roomCode}</div> */}
         <div className={`${handleTextColor()} text-xs flex gap-x-4`}>
           <div className="flex gap-x-1">
             <img width={14} src={handleHeadImage()} />

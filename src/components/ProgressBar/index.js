@@ -26,10 +26,13 @@ const ProgressBar = forwardRef(({ id, duration, endCallBack }, ref) => {
   }));
 
   useEffect(() => {
-    if (currentWidth == 0) {
-      clearInterval(loop);
-      endCallBack(isStarted);
-    }
+    setTimeout(()=>{
+      if (currentWidth == 0) {
+        clearInterval(loop);
+        endCallBack(isStarted);
+      }
+    },1000)
+
   }, [currentWidth])
 
   useEffect(() => {

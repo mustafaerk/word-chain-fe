@@ -18,7 +18,7 @@ import { avatarList } from "constant/Avatar";
 import { Button, Input, ProgressBar, Modal, Lottie } from "components";
 import WordList from "pages/Modules/Game/components/WordList";
 import NotStartedGame from "pages/Modules/Game/components/NotStartedGame";
-import { userInfoSelector } from "redux/slices/user/userSlice";
+import { userInfoSelector , selectIsMuted} from "redux/slices/user/userSlice";
 import { CheckIsWordEnglish } from "localization/translate";
 import {
   currentUserInfoSelector,
@@ -42,10 +42,12 @@ const GameGround = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [shouldNavigate, setShouldNavigate] = useState(false);
+  
 
 
   // User Selectors
   const myUserInfo = useSelector(userInfoSelector);
+  const isMuted = useSelector(selectIsMuted);
 
   // Rooms Selectors
   const roomError = useSelector(roomJoinErrorSelector);
@@ -83,8 +85,10 @@ const GameGround = () => {
   }, []);
 
   useEffect(() => {
-    const audio = new Audio(bellSound);
-    audio.play();
+    if(!isMuted){
+      const audio = new Audio(bellSound);
+      audio.play();
+    }
   }, [currentTurnUserId])
 
   useEffect(() => {
@@ -121,14 +125,12 @@ const GameGround = () => {
   useEffect(() => {
     if (isGameStarted && currentTurnUserId) {
       handleStartProgress();
+      if (isMobile) {
+        handleUserGetFirst();
+      }
     }
   }, [isGameStarted, currentTurnUserId]);
 
-  useEffect(() => {
-    if (isMobile) {
-      handleUserGetMiddle();
-    }
-  }, [currentTurnUserId]);
 
   const handleEnterPress = (e) => {
     if (e.key === "Enter") {
@@ -136,15 +138,13 @@ const GameGround = () => {
     }
   };
 
-  const handleUserGetMiddle = () => {
+  const handleUserGetFirst = () => {
+    console.log("hi");
     const mobileUsers = document.getElementById("mobileUserList");
-    const middle = parseInt(mobileUsers.childElementCount / 2);
+    const first = parseInt(0);
     const getActiveUser = document.getElementById(currentTurnUserId);
-    if (middle > 0) {
-      if (getActiveUser != mobileUsers.childNodes[middle - 1])
-        mobileUsers.childNodes[middle].before(getActiveUser);
-      else mobileUsers.childNodes[middle].after(getActiveUser);
-    }
+    mobileUsers.childNodes[first].before(getActiveUser);
+    
   };
 
   const handleInputError = (isError) => {
@@ -185,7 +185,7 @@ const GameGround = () => {
   }
 
   return (
-    <div className="bg-darkGray flex flex-col w-full h-full md:w-3/5 mx-auto rounded-md p-6 space-y-4">
+    <div className="bg-darkGray flex-1 flex flex-col w-full md:w-3/5 mx-auto rounded-md p-6 space-y-4 overflow-y-auto">
       {!isGameStarted ? (
         <NotStartedGame />
       ) : (

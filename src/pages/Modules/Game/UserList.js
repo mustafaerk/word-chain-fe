@@ -26,7 +26,7 @@ const UserList = () => {
   return isMobile ? (
     <div
       id="mobileUserList"
-      className="flex overflow-x-auto sm:hidden overflow-y-hidden scroll-smooth"
+      className="flex overflow-x-auto h-h16 min-h-150 md:h-full sm:hidden overflow-y-hidden scroll-smooth"
     >
       {userList.map((user, idx) => (
         <MobileUserCard
@@ -36,6 +36,8 @@ const UserList = () => {
           point={user.point}
           name={user.name}
           isActive={user.id == currentUser}
+          isOnline={user.isOnline}
+          isEliminated={user.isEliminated}
         />
       ))}
     </div>
