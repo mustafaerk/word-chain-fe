@@ -176,6 +176,14 @@ const GameGround = () => {
     }
   };
 
+  const handleLeaveRoom = () => {
+    dispatch({ type: "LEAVE_ROOM" });
+    dispatch(updateRoomFinishStatus(false));
+    dispatch(updateWinnerUser({}));
+    dispatch(clearRoom());
+    navigate("/rooms");
+  }
+
   return (
     <div className="bg-darkGray flex flex-col w-full h-full md:w-3/5 mx-auto rounded-md p-6 space-y-4">
       {!isGameStarted ? (
@@ -251,11 +259,7 @@ const GameGround = () => {
             variant="shadowPrimary"
             buttonClass="mx-auto mt-2 w-1/3"
             buttonText="Leave Game"
-            onClick={() => {
-              handleCloseWinnerModal();
-              dispatch(clearRoom());
-              navigate("/rooms");
-            }}
+            onClick={handleLeaveRoom}
           />
         </div>
       </Modal>
