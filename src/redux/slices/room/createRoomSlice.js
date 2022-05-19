@@ -5,7 +5,7 @@ const initialState = {
         roomAvatarId: "1",
         roomSize: "6",
         roomName: "",
-        isPublic: false,
+        isPublic: true,
     },
     selectedRoomId: "",
 };

@@ -10,7 +10,7 @@ const RoomList = () => {
 
   return isLoading ? <span> Loading </span>
     :
-    !isMobile ? <div className="roomItem hidden sm:grid bg-darkGray rounded-lg py-14  px-5 h-5/6 overflow-y-scroll gap-x-4 gap-y-14 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    !isMobile ? <div className="roomItem hidden sm:grid bg-darkGray rounded-lg py-14  px-5 h-5/6 overflow-y-auto gap-x-4 gap-y-14 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {roomList?.map((room, idx) =>
         <Room
           id={room.roomId}
@@ -23,7 +23,7 @@ const RoomList = () => {
         />
       )}
     </div> :
-      <div className="flex sm:hidden w-full  flex-col  bg-darkGray rounded-lg p-5 h-5/6 overflow-x-hidden overflow-y-scroll gap-y-2">
+      <div className="flex sm:hidden w-full  flex-col  bg-darkGray rounded-lg p-5 h-5/6 overflow-x-hidden overflow-y-auto gap-y-2">
         {roomList?.map((room, idx) =>
           <MobileRoom
             id={room.roomId}
