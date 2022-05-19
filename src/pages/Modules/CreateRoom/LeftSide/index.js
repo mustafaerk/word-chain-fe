@@ -35,7 +35,7 @@ const LeftSide = () => {
   return (
     <>
       <img src={LogoImage} className="w-20 h-20 mx-auto" />
-      <div className="mt-10 space-y-6">
+      <div className="md:mt-10 space-y-6">
         <span className="text-xl text-white font-semibold">Room Settings</span>
         <Input
           id="input1"

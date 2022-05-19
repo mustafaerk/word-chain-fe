@@ -34,7 +34,7 @@ const NotStartedGame = () => {
             </div>
             <Lottie
                 animation={WaitAnimation}
-                containerClass="w-42 h-42"
+                containerClass="w-24 h-24 md:w-48 md:h-48"
             />
 
             <span className='flex flex-col text-md text-white items-center'>

@@ -4,10 +4,19 @@ import { useNavigate } from "react-router-dom";
 
 import { MiniUserCard } from "components";
 import CloseSvg from "assets/icons/x.svg";
+import MuteIcon from "assets/icons/mute.png";
 import UserList from "pages/Modules/Game/UserList";
 import GameGround from "pages/Modules/Game/Game";
 import Main from "pages/Layout/Main";
-import { clearRoom, updateRoomFinishStatus, updateWinnerUser } from "redux/slices/room/roomSlice";
+import {
+  updateIsMuted,
+  selectIsMuted
+} from "redux/slices/user/userSlice";
+import {
+  clearRoom,
+  updateRoomFinishStatus,
+  updateWinnerUser,
+} from "redux/slices/room/roomSlice";
 
 import { userInfoSelector } from "redux/slices/user/userSlice";
 
@@ -16,6 +25,8 @@ const Game = () => {
   const dispatch = useDispatch();
 
   const userInfo = useSelector(userInfoSelector);
+  const isMuted = useSelector(selectIsMuted);
+
 
   const handleLeaveRoom = () => {
     dispatch({ type: "LEAVE_ROOM" });
@@ -25,23 +36,35 @@ const Game = () => {
     navigate("/rooms");
   };
 
+  const handleMuted = () => {
+    dispatch(updateIsMuted(!isMuted));
+  };
+
   return (
     <Main>
-      <div className="relative mb-4 h-16 sm:h-auto bg-darkGray rounded-b-md">
+      <div className="hidden md:flex relative my-4 h-h5 rounded-b-md justify-between">
+        {
+          <MiniUserCard
+            id="myCard"
+            avatarId={userInfo.userAvatarId}
+            name={userInfo.name}
+          />
+        }
+        <img
+          src={MuteIcon}
+          onClick={handleMuted}
+          alt="mute"
+          className="cursor-pointer w-9 h-9"
+        />
         <img
           src={CloseSvg}
           onClick={handleLeaveRoom}
           alt="leave"
-          className="cursor-pointer w-9 h-9 absolute right-1 top-1 sm:right-20 sm:-top-10"
+          className="cursor-pointer w-9 h-9"
         />
-        {<MiniUserCard
-          id="myCard"
-          avatarId={userInfo.userAvatarId}
-          name={userInfo.name}
-        />}
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-x-4 h-full">
+      <div className="flex flex-col sm:flex-row gap-x-4 h-full md:h-h95">
         <UserList />
         <GameGround />
       </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 
 import { EmojiList } from "constant/Emoji";
 import started from "assets/icons/started.svg";
@@ -9,18 +10,26 @@ import grayHead from "assets/icons/grayHead.svg";
 import whiteHead from "assets/icons/whiteHead.svg";
 import purpleHead from "assets/icons/purpleHead.svg";
 
+import { updateRoomId, selectedRoomIdSelector } from "redux/slices/room/createRoomSlice";
+
 function MobileRoom({
   id,
   roomAvatarId,
   roomName,
-  roomCode,
   roomUserLength,
   roomUserLimit,
   isStarted,
-  onClick,
-  isSelected,
 }) {
+  const dispatch = useDispatch();
   const [disabled, setDisabled] = useState(false);
+
+  const roomId = useSelector(selectedRoomIdSelector);
+
+  const isSelected = id == roomId;
+
+  const handleSelectRoom = () => {
+    dispatch(updateRoomId(id))
+  }
 
   useEffect(() => {
     if (isStarted || roomUserLimit == roomUserLength) setDisabled(true);
@@ -74,7 +83,7 @@ function MobileRoom({
     <div
       id={id}
       className={`ml-7 pt-5 pb-6 relative flex flex-col ${handleCursor()} ${handleRoomColor()} w-11/12 rounded-md`}
-      onClick={disabled ? onclick : () => onClick(id, roomCode)}
+      onClick={disabled ? () => { } : () => handleSelectRoom()}
       disabled={disabled}
     >
       <div
@@ -86,7 +95,6 @@ function MobileRoom({
         <div className={`font-bold text-sm ${handleTextColor()}`}>
           {roomName}
         </div>
-        <div className={`${handleTextColor()} text-xs`}>{roomCode}</div>
         <div className={`${handleTextColor()} text-xs flex gap-x-4`}>
           <div className="flex gap-x-1">
             <img width={14} src={handleHeadImage()} />
@@ -108,14 +116,8 @@ MobileRoom.propTypes = {
   id: PropTypes.string.isRequired,
   roomAvatarId: PropTypes.number.isRequired,
   roomName: PropTypes.string.isRequired,
-  roomCode: PropTypes.string.isRequired,
   roomUserLength: PropTypes.number.isRequired,
   roomUserLimit: PropTypes.number.isRequired,
   isStarted: PropTypes.bool.isRequired,
-  onClick: PropTypes.func,
-  isSelected: PropTypes.bool.isRequired,
-};
-MobileRoom.defaultProps = {
-  onClick: () => {},
 };
 export default MobileRoom;

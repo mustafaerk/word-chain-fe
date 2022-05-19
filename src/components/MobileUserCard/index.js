@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 
 import { avatarList } from "constant/Avatar";
 
-function MobileUserCard({ id, name, point, isActive, avatarId }) {
+function MobileUserCard({ id, name, point, isActive, avatarId , isEliminated , isOnline }) {
   return (
     <div
       id={id}
-      className={`transition-all flex gap-y-1 items-center justify-around ${isActive ? "scale-105" : ""} flex-col text-white px-2 py-4`}
+      className={`${isOnline ? "" : "opacity-40"} ${isEliminated ? "line-through" : ""}  transition-all flex gap-y-1 items-center justify-around ${isActive ? "scale-105" : ""} flex-col text-white px-2 py-4`}
     >
       <div
         className={`rounded-full ${isActive ? "bg-lightPurple md:bg-darkGray" : "bg-sky"
@@ -34,6 +34,8 @@ MobileUserCard.propTypes = {
   avatarId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   point: PropTypes.number,
   isActive: PropTypes.bool,
+  isOnline: PropTypes.bool,
+  isEliminated: PropTypes.bool,
 };
 MobileUserCard.defaultProps = {
   id: "MobileUserCard",

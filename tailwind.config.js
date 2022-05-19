@@ -22,6 +22,9 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
+    minHeight: {
+      150: "150px",
+    },
     fontSize: {
       '2xs': '0.5rem',
       'xs': '0.700rem',
@@ -65,6 +68,12 @@ module.exports = {
         s15: "100%",
         roomWidth: "32%",
       },
+      height:{
+        h95: "95%",
+        h84: "84%",
+        h16: "16%",
+        h5: "5%",
+      }
     },
     container: {
       center: true,

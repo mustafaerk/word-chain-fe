@@ -21,13 +21,14 @@ const Rooms = () => {
     <Main>
       <UpperArea joinRoom={handleJoinRoom} />
       <RoomList />
-      <div className="block sm:hidden absolute bottom-0 left-0 w-full pb-4">
+      <div className="block sm:hidden w-full my-1">
         <Button
           borderType
           buttonIcon={gameIcon}
           buttonText="Play"
           buttonClass="w-11/12 m-auto"
-          variant="shadowPurple"
+          variant={roomId == "" ? "shadowPrimary" : "shadowPurple"}
+          disabled={roomId == ""}
           onClick={handleJoinRoom}
         />
       </div>
