@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { avatarList } from "constant/Avatar";
+import { flagList } from "constant/flags";
 
-function UserCard({ id, name, point, isActive, isEliminated, avatarId, isOnline }) {
+function UserCard({ id, name, point, isActive, isEliminated, avatarId, isOnline, language }) {
   return (
     <div
       id={id}
@@ -11,12 +12,18 @@ function UserCard({ id, name, point, isActive, isEliminated, avatarId, isOnline 
         } ${isEliminated ? "line-through borderRed text-red" : null} ${isOnline ? null : "opacity-40"}  rounded-lg p-4 gap-x-4`}
     >
       <div
-        className={`rounded-full ${isActive ? "bg-lightPurple md:bg-darkGray" : "bg-sky"
+        className={`rounded-full relative ${isActive ? "bg-lightPurple md:bg-darkGray" : "bg-sky"
           }`}
       >
         <img
           className="rounded-full w-16 md:w-16"
           src={avatarList[avatarId]}
+          alt="Icon"
+        />
+
+        <img
+          className="flag rounded-full w-6 md:w-6 absolute"
+          src={flagList[language]}
           alt="Icon"
         />
       </div>
@@ -32,6 +39,7 @@ function UserCard({ id, name, point, isActive, isEliminated, avatarId, isOnline 
 UserCard.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   name: PropTypes.string.isRequired,
+  language: PropTypes.string.isRequired,
   avatarId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   point: PropTypes.number,
   isActive: PropTypes.bool,

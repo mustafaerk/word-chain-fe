@@ -38,6 +38,7 @@ const UserList = () => {
           isActive={user.id == currentUser}
           isOnline={user.isOnline}
           isEliminated={user.isEliminated}
+          language={user.language}
         />
       ))}
     </div>
@@ -53,6 +54,7 @@ const UserList = () => {
           isActive={user.id == currentUser}
           isOnline={user.isOnline}
           isEliminated={user.isEliminated}
+          language={user.language}
         />
       ))}
     </div>

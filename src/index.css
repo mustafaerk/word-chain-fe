@@ -50,6 +50,11 @@ html {
   left: -46px;
 }
 
+.flag {
+  left: 30%;
+  bottom: -10px;
+}
+
 .winner-animation {
   -webkit-transform: translate(-50%, 0);
   -moz-transform: translate(-50%, 0);
@@ -64,11 +69,10 @@ html {
   grid-auto-rows: 20%;
 }
 
-.send-word-button-align{
-  top:1px;
-  right:1px;
+.send-word-button-align {
+  top: 1px;
+  right: 1px;
 }
 
 @media only screen and (max-width: 640px) {
-
 }
