@@ -24,7 +24,7 @@ const RoomList = () => {
   return isLoading ? (
     <span> Loading </span>
   ) : !isMobile ? (
-    roomList.length ?
+    roomList?.length ?
       <div className="roomItem hidden sm:grid bg-darkGray rounded-lg py-14  px-5 h-5/6 overflow-y-auto gap-x-4 gap-y-14 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {roomList?.map((room, idx) => (
           <Room
@@ -42,7 +42,7 @@ const RoomList = () => {
         <EmptyRoomList />
       </div>
   ) : (
-    roomList.length ?
+    roomList?.length ?
       <div className="roomItem hidden sm:grid bg-darkGray rounded-lg py-14  px-5 h-5/6 overflow-y-auto gap-x-4 gap-y-14 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {roomList?.map((room, idx) => (
           <MobileRoom

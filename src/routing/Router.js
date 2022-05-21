@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
@@ -32,6 +32,8 @@ function Router() {
     }
   };
 
+  const unique_id = useMemo(() => uuid(), [])
+
   useEffect(() => {
     dispatch({ type: "LISTEN_ROOM" });
   }, []);
@@ -48,7 +50,7 @@ function Router() {
       dispatch(updateUserInfo(oldUserInfo.value.userInfo));
     } else {
       const userLang = navigator.language || navigator.userLanguage || 'tr';
-      const unique_id = uuid();
+
       dispatch(
         updateUserInfoField({ value: userLang.slice(0, 2), field: "language" })
       );

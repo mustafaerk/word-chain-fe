@@ -18,7 +18,7 @@ import { avatarList } from "constant/Avatar";
 import { Button, Input, ProgressBar, Modal, Lottie } from "components";
 import WordList from "pages/Modules/Game/components/WordList";
 import NotStartedGame from "pages/Modules/Game/components/NotStartedGame";
-import { userInfoSelector , selectIsMuted} from "redux/slices/user/userSlice";
+import { userInfoSelector, selectIsMuted } from "redux/slices/user/userSlice";
 import { CheckIsWordEnglish } from "localization/translate";
 import {
   currentUserInfoSelector,
@@ -42,7 +42,7 @@ const GameGround = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [shouldNavigate, setShouldNavigate] = useState(false);
-  
+
 
 
   // User Selectors
@@ -85,7 +85,7 @@ const GameGround = () => {
   }, []);
 
   useEffect(() => {
-    if(!isMuted){
+    if (!isMuted) {
       const audio = new Audio(bellSound);
       audio.play();
     }
@@ -108,7 +108,7 @@ const GameGround = () => {
   const inputPlaceHolder = useMemo(
     () =>
       isMyTurn
-        ? `You must type a word start by ${lastWord?.slice(-1)}`
+        ? lastWord?.slice(-1) == 'x' ? 'You can type any English word' : `Type a word start by ${lastWord?.slice(-1)}`
         : `Now, ${currentTurnUserInfo?.name}'s turn!`,
     [isMyTurn, currentTurnUserId]
   );
@@ -144,7 +144,7 @@ const GameGround = () => {
     const first = parseInt(0);
     const getActiveUser = document.getElementById(currentTurnUserId);
     mobileUsers.childNodes[first].before(getActiveUser);
-    
+
   };
 
   const handleInputError = (isError) => {
@@ -154,7 +154,7 @@ const GameGround = () => {
   };
 
   const handleSendWord = () => {
-    if (lastWord != "") {
+    if (lastWord != "" && lastWord?.slice(-1) != 'x') {
       if (word.charAt(0).toLowerCase() != lastWord.slice(-1)) {
         handleInputError(true);
         return;
