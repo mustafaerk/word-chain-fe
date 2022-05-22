@@ -12,7 +12,7 @@ import RoomPurpleIcon from "assets/icons/roomPurple.svg";
 import GameIcon from "assets/icons/game.svg";
 import SendIcon from "assets/icons/send.svg";
 import WinnerAnimation from "assets/animation/winner.json";
-import bellSound from "assets/voice/bell.mp3"
+import bellSound from "assets/voice/bell.mp3";
 
 import { avatarList } from "constant/Avatar";
 import { Button, Input, ProgressBar, Modal, Lottie } from "components";
@@ -34,7 +34,7 @@ import {
   updateRoomId,
   clearRoom,
   roomJoinErrorSelector,
-  updateRoomJoinError
+  updateRoomJoinError,
 } from "redux/slices/room/roomSlice";
 
 const GameGround = () => {
@@ -42,8 +42,6 @@ const GameGround = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [shouldNavigate, setShouldNavigate] = useState(false);
-
-
 
   // User Selectors
   const myUserInfo = useSelector(userInfoSelector);
@@ -60,18 +58,17 @@ const GameGround = () => {
   const winnerInfo = useSelector(winnerInfoSelector);
   const isGameFinish = useSelector(isFinishStatusSelector);
 
-
   const [word, setWord] = useState("");
 
   let { id } = useParams();
 
   useEffect(() => {
     if (roomError) {
-      dispatch(updateRoomJoinError(''));
+      dispatch(updateRoomJoinError(""));
       dispatch(clearRoom());
-      navigate('/rooms');
+      navigate("/rooms");
     }
-  }, [roomError])
+  }, [roomError]);
 
   useLayoutEffect(() => {
     if (!myUserInfo.name) {
@@ -89,13 +86,13 @@ const GameGround = () => {
       const audio = new Audio(bellSound);
       audio.play();
     }
-  }, [currentTurnUserId])
+  }, [currentTurnUserId]);
 
   useEffect(() => {
     if (shouldNavigate) {
       navigate("/");
     }
-  }, [shouldNavigate])
+  }, [shouldNavigate]);
 
   const isMobile = useMemo(() => window.innerWidth < 640, [window]);
 
@@ -104,11 +101,12 @@ const GameGround = () => {
     [currentTurnUserId]
   );
 
-
   const inputPlaceHolder = useMemo(
     () =>
       isMyTurn
-        ? lastWord?.slice(-1) == 'x' ? 'You can type any English word' : `Type a word start by ${lastWord?.slice(-1)}`
+        ? lastWord?.slice(-1) == "x"
+          ? "You can type any English word"
+          : `Type a word start by ${lastWord?.slice(-1)}`
         : `Now, ${currentTurnUserInfo?.name}'s turn!`,
     [isMyTurn, currentTurnUserId]
   );
@@ -131,7 +129,6 @@ const GameGround = () => {
     }
   }, [isGameStarted, currentTurnUserId]);
 
-
   const handleEnterPress = (e) => {
     if (e.key === "Enter") {
       handleSendWord();
@@ -144,7 +141,6 @@ const GameGround = () => {
     const first = parseInt(0);
     const getActiveUser = document.getElementById(currentTurnUserId);
     mobileUsers.childNodes[first].before(getActiveUser);
-
   };
 
   const handleInputError = (isError) => {
@@ -154,7 +150,8 @@ const GameGround = () => {
   };
 
   const handleSendWord = () => {
-    if (lastWord != "" && lastWord?.slice(-1) != 'x') {
+    if (!isMyTurn) return;
+    if (lastWord != "" && lastWord?.slice(-1) != "x") {
       if (word.charAt(0).toLowerCase() != lastWord.slice(-1)) {
         handleInputError(true);
         return;
@@ -182,7 +179,7 @@ const GameGround = () => {
     dispatch(updateWinnerUser({}));
     dispatch(clearRoom());
     navigate("/rooms");
-  }
+  };
 
   return (
     <div className="bg-darkGray flex-1 flex flex-col w-full md:w-3/5 mx-auto rounded-md p-6 space-y-4 overflow-y-auto">
