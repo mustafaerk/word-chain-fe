@@ -12,6 +12,9 @@ function Button({
   disabled,
 }) {
   const handleButtonColor = () => {
+    if(disabled){
+      return "shadowPrimary";
+    }
     switch (variant) {
       case "primary":
         return "bg-primary";

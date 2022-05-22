@@ -116,6 +116,7 @@ const LeftLogin = () => {
           buttonText="Rooms"
           onClick={handleGoToRoomList}
           disabled={isLoading || isDisabled}
+          borderType
         />
         <Button
           id="button1"
@@ -124,6 +125,7 @@ const LeftLogin = () => {
           buttonText="Play"
           onClick={handlePlay}
           disabled={isLoading || isDisabled}
+          borderType
         />
       </div>
       <Modal ModalClass="bg-white" isOpen={isOpen} handleModalClose={() => setIsOpen(false)}>

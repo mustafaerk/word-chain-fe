@@ -19,7 +19,7 @@ const LeftSide = () => {
   const roomId = useSelector(roomIdSelector);
 
 
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const handleCreateRoom = () => {
     setIsDisabled(true)
@@ -82,6 +82,7 @@ const LeftSide = () => {
         disabled={isDisabled}
         variant="shadowPurple"
         buttonText="Create Room"
+        borderType
         onClick={handleCreateRoom}
       />
     </>

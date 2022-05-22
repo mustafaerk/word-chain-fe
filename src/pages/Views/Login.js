@@ -9,6 +9,7 @@ const Login = () => {
     <Main>
       <div className="flex items-center justify-center bg-darkGray w-full h-full gap-x-4">
         <LeftLogin className="flex-1" />
+        <div className="hidden md:block h-h84 w-1 bg-white rounded-100 mx-5"></div>
         <RightLogin className="flex-1" />
       </div>
     </Main>

@@ -5,7 +5,7 @@ import RightSide from "pages/Modules/CreateRoom/RightSide";
 
 const CreateRoom = () => {
   return (
-    <div className="flex p-4 h-screen md:h-[90vh] gap-x-4">
+    <div className="flex p-4 h-screen gap-x-4 md:h-h95">
       <div className="w-full md:w-1/4 bg-darkGray flex flex-col rounded-md p-6 gap-y-2">
         <LeftSide />
       </div>
