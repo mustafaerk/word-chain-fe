@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import { storageItem } from "utils/localstorage";
 import { MiniUserCard } from "components";
 import CloseSvg from "assets/icons/x.svg";
 import MuteIcon from "assets/icons/mute.png";
@@ -26,6 +27,7 @@ const Game = () => {
 
   const userInfo = useSelector(userInfoSelector);
   const isMuted = useSelector(selectIsMuted);
+  const localStorageField = "muted";
 
 
   const handleLeaveRoom = () => {
@@ -37,7 +39,9 @@ const Game = () => {
   };
 
   const handleMuted = () => {
-    dispatch(updateIsMuted(!isMuted));
+    const reverseMute = !isMuted;
+    storageItem("u_muted", { isMuted :reverseMute, localStorageField });
+    dispatch(updateIsMuted(reverseMute));
   };
 
   return (

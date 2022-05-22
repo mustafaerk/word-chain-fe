@@ -136,7 +136,6 @@ const GameGround = () => {
   };
 
   const handleUserGetFirst = () => {
-    console.log("hi");
     const mobileUsers = document.getElementById("mobileUserList");
     const first = parseInt(0);
     const getActiveUser = document.getElementById(currentTurnUserId);

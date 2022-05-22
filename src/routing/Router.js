@@ -8,6 +8,7 @@ import { useGetUserIpQuery } from "redux/slices/app/appApi";
 import {
   updateUserInfoField,
   updateUserInfo,
+  updateIsMuted,
 } from "redux/slices/user/userSlice";
 import { updateToken, authTokenSelector } from "redux/slices/app/appSlice";
 import { getStoragedItem } from "utils/localstorage";
@@ -45,7 +46,11 @@ function Router() {
 
   useEffect(() => {
     const oldUserInfo = getStoragedItem({ key: "u_user" });
+    const oldMutedInfo = getStoragedItem({ key: "u_muted" });
     setUserInfo(oldUserInfo)
+    if (oldMutedInfo) {
+      dispatch(updateIsMuted(oldMutedInfo.value.isMuted));
+    } 
     if (oldUserInfo) {
       dispatch(updateUserInfo(oldUserInfo.value.userInfo));
     } else {

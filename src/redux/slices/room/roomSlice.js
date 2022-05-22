@@ -88,7 +88,6 @@ export const handleLeaveUser = (userId) => {
         isOnline: user.id == userId ? false : user.isOnline
       };
     })
-    console.log(userId);
     dispatch(changeUserList(userList));
   };
 };
@@ -98,7 +97,6 @@ export const handleJoinUser = (joinedUser) => {
     let userList = getState().room.room.users;
     const existUser = userList.find(user => user.id == joinedUser.id);
     if(existUser){
-      console.log("exist");
       userList = userList.map((user) => {
         return {
           ...user,
@@ -109,7 +107,6 @@ export const handleJoinUser = (joinedUser) => {
     }
     else{
       dispatch(updateUserList(joinedUser));
-      console.log("notExist");
     }
     
   };
