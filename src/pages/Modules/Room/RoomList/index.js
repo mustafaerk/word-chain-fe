@@ -43,7 +43,7 @@ const RoomList = () => {
       </div>
   ) : (
     roomList?.length ?
-      <div className="roomItem hidden sm:grid bg-darkGray rounded-lg py-14  px-5 h-5/6 overflow-y-auto gap-x-4 gap-y-14 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="roomItem flex flex-col bg-darkGray rounded-lg py-14 px-5 h-full overflow-y-auto gap-x-4 gap-y-5">
         {roomList?.map((room, idx) => (
           <MobileRoom
             id={room.roomId}

@@ -27,9 +27,13 @@ function Room({
   const isSelected = id == roomId;
 
   const handleSelectRoom = () => {
-    dispatch(updateRoomId(id))
+    if(roomId == id) {
+      dispatch(updateRoomId(""))
+    }
+    else{
+      dispatch(updateRoomId(id))
+    }
   }
-
   useEffect(() => {
     if (isStarted || roomUserLimit == roomUserLength) setDisabled(true);
   }, []);
