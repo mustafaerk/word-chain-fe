@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import { useSelector , useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import backIcon from "assets/icons/back.svg";
 import doorIcon from "assets/icons/door.svg";
@@ -10,7 +10,6 @@ import gameIcon from "assets/icons/game.svg";
 import { Button } from "components";
 import { selectedRoomIdSelector } from "redux/slices/room/createRoomSlice";
 import { updateIsRefleshed } from "redux/slices/user/userSlice";
-
 
 const UpperArea = ({ joinRoom }) => {
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ const UpperArea = ({ joinRoom }) => {
   const handleCreateRoomRoute = () => {
     navigate("/createroom");
   };
-  
+
   const handleRestartRoomList = () => {
     dispatch(updateIsRefleshed(true));
   };
@@ -47,6 +46,14 @@ const UpperArea = ({ joinRoom }) => {
           variant="shadowGreen"
           onClick={handleRestartRoomList}
         />
+        <Button
+          borderType
+          buttonIcon={doorIcon}
+          buttonText="New Room"
+          buttonClass="w-24 md:w-40"
+          variant="shadowGreen"
+          onClick={handleCreateRoomRoute}
+        />
         <div className="hidden sm:block">
           <Button
             borderType
@@ -58,14 +65,6 @@ const UpperArea = ({ joinRoom }) => {
             onClick={joinRoom}
           />
         </div>
-        <Button
-          borderType
-          buttonIcon={doorIcon}
-          buttonText="New Room"
-          buttonClass="w-24 md:w-40"
-          variant="shadowGreen"
-          onClick={handleCreateRoomRoute}
-        />
       </div>
     </div>
   );

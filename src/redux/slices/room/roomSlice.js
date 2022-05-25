@@ -130,7 +130,7 @@ export const isFinishStatusSelector = (state) => state.room.isFinish;
 export const wordListSelector = (state) => state.room.room.words;
 export const winnerInfoSelector = (state) => state.room.winnerUser;
 export const roomJoinErrorSelector = (state) => state.room.roomJoinError;
-export const userListSelector = (state) => state.room.room.users;
+export const userListSelector = (state) => state.room.room.users.filter(user => user.isOnline);
 export const isRoomStartedSelector = (state) => state.room.room.isStarted;
 export const currentUserSelector = (state) => state.room.room.currentUserTurn;
 export const currentUserInfoSelector = (state) => state.room.room.users.find(user => user.id == state.room.room.currentUserTurn);

@@ -12,6 +12,7 @@ import {
   ProgressBar,
   MiniUserCard,
   MobileUserCard,
+  ErrorPopup,
 } from "components";
 
 const Example = () => {
@@ -24,6 +25,7 @@ const Example = () => {
         id="MUC"
         className="flex overflow-x-auto overflow-y-hidden scroll-smooth"
       >
+        <ErrorPopup id="errorPopup" errorText="Already Written" isError errorTime={3000} />
         <MobileUserCard
           id={1}
           avatarId={2}

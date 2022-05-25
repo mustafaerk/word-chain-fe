@@ -43,7 +43,17 @@ const LeftLogin = () => {
     if (roomId) {
       navigate(`/play/${roomId}`);
     }
-  }, [roomId])
+  }, [roomId]);
+
+  useEffect(() => {
+    if (userInfo.language && userInfo.name) {
+      if (userInfo.name.length > 2 && userInfo.name.length < 16) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    }
+  }, [userInfo]);
 
   const handleSelectAvatar = () => {
     dispatch(updateUserAvatar(selectedAvatar.val));
@@ -51,11 +61,6 @@ const LeftLogin = () => {
   };
 
   const handleUserInfoChange = (value, field) => {
-    if (field == "name"){
-      value.length > 2 && value.length < 16
-      ? setIsDisabled(false)
-      : setIsDisabled(true);
-    }
     dispatch(updateUserInfoField({ value, field }));
   };
 
@@ -100,6 +105,7 @@ const LeftLogin = () => {
         LabelIcon={UserIcon}
         labelText="Username"
         onChange={(e) => handleUserInfoChange(e.target.value, "name")}
+        value={userInfo.name ? userInfo.name : ""}
       />
       <Select
         data={LANGUAGE_LIST}
@@ -107,8 +113,9 @@ const LeftLogin = () => {
         onChange={(e) => handleUserInfoChange(e.value, "language")}
         LabelIcon={LanguageIcon}
         labelText="Language"
+        value={userInfo.language ? userInfo.language : ""}
       />
-      <div className="flex w-full">
+      <div className="flex w-full gap-x-4">
         <Button
           id="room"
           buttonIcon={RoomIcon}
@@ -128,7 +135,11 @@ const LeftLogin = () => {
           borderType
         />
       </div>
-      <Modal ModalClass="bg-white" isOpen={isOpen} handleModalClose={() => setIsOpen(false)}>
+      <Modal
+        ModalClass="bg-white"
+        isOpen={isOpen}
+        handleModalClose={() => setIsOpen(false)}
+      >
         <div className="h-80 overflow-y-scroll p-2 bg-darkGray ">
           <RadioGroup
             selectedAvatar={selectedAvatar}

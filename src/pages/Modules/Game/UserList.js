@@ -12,16 +12,6 @@ const UserList = () => {
   const currentUser = useSelector(currentUserSelector);
   const isMobile = window.innerWidth < 640;
 
-  /*
-  const handleUserGetMiddle = () => {
-    const mobileUsers = document.getElementById("mobileUserList");
-    const middle = parseInt(mobileUsers.childElementCount / 2);
-    const getActiveUser = document.getElementById("1"); //Will be change to CurrentUserID
-    mobileUsers.childNodes[middle-1].after(getActiveUser);
-  };
-  */
-
-
 
   return isMobile ? (
     <div
@@ -36,7 +26,6 @@ const UserList = () => {
           point={user.point}
           name={user.name}
           isActive={user.id == currentUser}
-          isOnline={user.isOnline}
           isEliminated={user.isEliminated}
           language={user.language}
         />
@@ -52,7 +41,6 @@ const UserList = () => {
           point={user.point}
           name={user.name}
           isActive={user.id == currentUser}
-          isOnline={user.isOnline}
           isEliminated={user.isEliminated}
           language={user.language}
         />

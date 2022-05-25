@@ -31,6 +31,7 @@ module.exports = {
       'lg': '0.5rem',
       'full': '9999px',
       'large': '12px',
+      'xl': '0.75rem',
     },
     minHeight: {
       150: "150px",
@@ -79,10 +80,10 @@ module.exports = {
         roomWidth: "32%",
       },
       height:{
-        h95: "95%",
+        h95: "94%",
         h84: "84%",
         h16: "16%",
-        h5: "5%",
+        h5: "6%",
       }
     },
     container: {

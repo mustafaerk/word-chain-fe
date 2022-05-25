@@ -69,6 +69,20 @@ html {
   grid-auto-rows: 20%;
 }
 
+.error{
+  top: -50px;
+  left: 30px;
+}
+
+.triangle{
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 15px solid #7B61FF;
+  position: absolute;
+  left: 0;
+  bottom: -14px;
+}
+
 .send-word-button-align {
   top: 1px;
   right: 1px;

@@ -12,13 +12,23 @@ import RoomPurpleIcon from "assets/icons/roomPurple.svg";
 import GameIcon from "assets/icons/game.svg";
 import SendIcon from "assets/icons/send.svg";
 import WinnerAnimation from "assets/animation/winner.json";
+import MuteIcon from "assets/icons/mute.svg";
+import UnMuteIcon from "assets/icons/unmute.svg";
 import bellSound from "assets/voice/bell.mp3";
 
 import { avatarList } from "constant/Avatar";
-import { Button, Input, ProgressBar, Modal, Lottie } from "components";
+import { storageItem } from "utils/localstorage";
+import {
+  Button,
+  Input,
+  ProgressBar,
+  Modal,
+  Lottie,
+  ErrorPopup,
+} from "components";
 import WordList from "pages/Modules/Game/components/WordList";
 import NotStartedGame from "pages/Modules/Game/components/NotStartedGame";
-import { userInfoSelector, selectIsMuted } from "redux/slices/user/userSlice";
+import { userInfoSelector, selectIsMuted , updateIsMuted } from "redux/slices/user/userSlice";
 import { CheckIsWordEnglish } from "localization/translate";
 import {
   currentUserInfoSelector,
@@ -42,6 +52,8 @@ const GameGround = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [shouldNavigate, setShouldNavigate] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorText, setErrorText] = useState("");
 
   // User Selectors
   const myUserInfo = useSelector(userInfoSelector);
@@ -59,6 +71,8 @@ const GameGround = () => {
   const isGameFinish = useSelector(isFinishStatusSelector);
 
   const [word, setWord] = useState("");
+
+  const localStorageField = "muted";
 
   let { id } = useParams();
 
@@ -122,6 +136,8 @@ const GameGround = () => {
 
   useEffect(() => {
     if (isGameStarted && currentTurnUserId) {
+      setWord("");
+      setIsError(false);
       handleStartProgress();
       if (isMobile) {
         handleUserGetFirst();
@@ -153,6 +169,8 @@ const GameGround = () => {
     if (lastWord != "" && lastWord?.slice(-1) != "x") {
       if (word.charAt(0).toLowerCase() != lastWord.slice(-1)) {
         handleInputError(true);
+        setIsError(true);
+        setErrorText(`Must Start With ${lastWord.slice(-1)}`);
         return;
       }
     }
@@ -163,7 +181,17 @@ const GameGround = () => {
       dispatch({ type: "SEND_WORD", payload: word });
       setWord("");
       handleInputError(false);
-    } else handleInputError(true);
+      setIsError(false);
+    } else {
+      if(!checkWordEnglish){
+        setErrorText("Not Exist");
+      }
+      else if(checkWordExist){
+        setErrorText("Already Written");
+      }
+      setIsError(true);
+      handleInputError(true);
+    }
   };
 
   const handleHandleTimeUp = () => {
@@ -180,15 +208,28 @@ const GameGround = () => {
     navigate("/rooms");
   };
 
+  const handleMuted = () => {
+    const reverseMute = !isMuted;
+    storageItem("u_muted", { isMuted: reverseMute, localStorageField });
+    dispatch(updateIsMuted(reverseMute));
+  };
+
   return (
-    <div className="bg-darkGray flex-1 flex flex-col w-full md:w-3/5 mx-auto rounded-md p-6 space-y-4 overflow-y-auto">
+    <div className="bg-darkGray relative flex-1 flex flex-col w-full md:w-3/5 mx-auto rounded-md p-6 space-y-4 overflow-y-auto">
       {!isGameStarted ? (
         <NotStartedGame />
       ) : (
         <>
+        <img
+          src={isMuted ? UnMuteIcon : MuteIcon}
+          onClick={handleMuted}
+          alt="mute"
+          className="hidden md:block cursor-pointer w-6 h-6 absolute top-3 right-3"
+        />
           <WordList />
           <ProgressBar ref={progressBarRef} endCallBack={handleHandleTimeUp} />
           <div className="flex relative h-14">
+            <ErrorPopup id="error" errorText={errorText} isError={isError} />
             <Input
               id="gameword"
               inputName="game-word-input"

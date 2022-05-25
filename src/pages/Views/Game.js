@@ -2,17 +2,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { storageItem } from "utils/localstorage";
 import { MiniUserCard } from "components";
-import CloseSvg from "assets/icons/x.svg";
-import MuteIcon from "assets/icons/mute.png";
+import BackIcon from "assets/icons/back.svg";
+
 import UserList from "pages/Modules/Game/UserList";
 import GameGround from "pages/Modules/Game/Game";
 import Main from "pages/Layout/Main";
-import {
-  updateIsMuted,
-  selectIsMuted
-} from "redux/slices/user/userSlice";
 import {
   clearRoom,
   updateRoomFinishStatus,
@@ -26,8 +21,6 @@ const Game = () => {
   const dispatch = useDispatch();
 
   const userInfo = useSelector(userInfoSelector);
-  const isMuted = useSelector(selectIsMuted);
-  const localStorageField = "muted";
 
 
   const handleLeaveRoom = () => {
@@ -38,33 +31,21 @@ const Game = () => {
     navigate("/rooms");
   };
 
-  const handleMuted = () => {
-    const reverseMute = !isMuted;
-    storageItem("u_muted", { isMuted :reverseMute, localStorageField });
-    dispatch(updateIsMuted(reverseMute));
-  };
+  
 
   return (
     <Main>
       <div className="hidden md:flex relative my-4 h-h5 rounded-b-md justify-between">
-        {
-          <MiniUserCard
-            id="myCard"
-            avatarId={userInfo.userAvatarId}
-            name={userInfo.name}
-          />
-        }
         <img
-          src={MuteIcon}
-          onClick={handleMuted}
-          alt="mute"
-          className="cursor-pointer w-9 h-9"
-        />
-        <img
-          src={CloseSvg}
+          src={BackIcon}
           onClick={handleLeaveRoom}
           alt="leave"
           className="cursor-pointer w-9 h-9"
+        />
+        <MiniUserCard
+          id="myCard"
+          avatarId={userInfo.userAvatarId}
+          name={userInfo.name}
         />
       </div>
 
