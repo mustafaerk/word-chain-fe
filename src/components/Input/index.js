@@ -14,9 +14,9 @@ function Input({
   autoFocusInput
 }) {
   return (
-    <div id={id} className="flex flex-col gap-y-2 p-1 w-full">
+    <div id={id} className="flex flex-col space-y-2 p-1 w-full">
       {labelText && (
-        <label className="flex gap-x-2 text-white items-center font-semibold">
+        <label className="flex space-x-2 text-white items-center font-semibold">
           <img className="w-4 h-4" src={LabelIcon} alt="" />
           <span> {labelText} </span>
         </label>

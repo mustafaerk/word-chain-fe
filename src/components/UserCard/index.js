@@ -9,7 +9,7 @@ function UserCard({ id, name, point, isActive, isEliminated, avatarId, language 
     <div
       id={id}
       className={`flex items-center justify-between md:flex-row flex-col text-white ${isActive ? "md:bg-purple" : "md:bg-primary"
-        } ${isEliminated ? "opacity-40" : null}  rounded-lg p-4 gap-x-4`}
+        } ${isEliminated ? "opacity-40" : null}  rounded-lg p-4 space-x-4`}
     >
       <div
         className={`rounded-full relative ${isActive ? "bg-lightPurple md:bg-darkGray" : "bg-sky"
@@ -28,7 +28,7 @@ function UserCard({ id, name, point, isActive, isEliminated, avatarId, language 
         />
       </div>
 
-      <div className="w-full md:w-1/2 flex flex-col gap-y-2 md:items-start items-center">
+      <div className="w-full md:w-1/2 flex flex-col space-y-2 md:items-start items-center">
         <div className="text-xl text-white">{name}</div>
         <div className="text-xs text-skyDark"> {point} Points</div>
       </div>

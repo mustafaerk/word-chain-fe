@@ -271,8 +271,8 @@ const GameGround = () => {
           animation={WinnerAnimation}
           containerClass="absolute winner-animation w-96 h-96"
         />
-        <div className="h-80 overflow-y-scroll p-2 flex flex-col  items-center justify-center text-center gap-y-4">
-          <p className="flex text-white text-2xl font-semibold items-center justify-center gap-4 ">
+        <div className="h-80 overflow-y-scroll p-2 flex flex-col  items-center justify-center text-center space-y-4">
+          <p className="flex text-white text-2xl font-semibold items-center justify-center space-4 ">
             <img
               src={avatarList[winnerInfo.userAvatarId]}
               className="bg-primary w-16  r h-16 rounded-full"

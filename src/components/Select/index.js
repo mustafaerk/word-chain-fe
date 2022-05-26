@@ -25,9 +25,9 @@ export default function Select({
   }, [defaultValue]);
 
   return (
-    <div className="w-full h-24 gap-y-2 p-1">
+    <div className="w-full h-24 space-y-2 p-1">
       {labelText && (
-        <label className="flex gap-x-2 text-white items-center font-semibold">
+        <label className="flex space-x-2 text-white items-center font-semibold">
           {" "}
           <img className="w-4 h-4" src={LabelIcon} alt="" />{" "}
           <span> {labelText} </span>{" "}

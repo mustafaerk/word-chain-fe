@@ -7,7 +7,7 @@ function MobileUserCard({ id, name, point, isActive, avatarId , isEliminated }) 
   return (
     <div
       id={id}
-      className={`${isEliminated ? "opacity-40" : null} transition-all flex gap-y-1 items-center justify-around ${isActive ? "scale-105" : ""} flex-col text-white px-2 py-4`}
+      className={`${isEliminated ? "opacity-40" : null} transition-all flex space-y-1 items-center justify-around ${isActive ? "scale-105" : ""} flex-col text-white px-2 py-4`}
     >
       <div
         className={`rounded-full ${isActive ? "bg-lightPurple md:bg-darkGray" : "bg-sky"

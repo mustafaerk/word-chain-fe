@@ -5,7 +5,7 @@ import { Lottie } from 'components';
 
 const NotStartedGame = () => {
     return (
-        <div className='flex flex-col items-center justify-center h-full gap-y-4 text-center'>
+        <div className='flex flex-col items-center justify-center h-full space-y-4 text-center'>
             <Lottie
                 animation={WaitAnimation}
                 containerClass="w-24 h-24 md:w-48 md:h-48"

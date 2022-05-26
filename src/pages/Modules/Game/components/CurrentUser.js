@@ -6,7 +6,7 @@ import { UserCard } from "components";
 
 const CurrentUser = ({ point }) => {
   return (
-    <div className="flex box-border h-36 gap-y-2">
+    <div className="flex box-border h-36 space-y-2">
       <div className="bg-transparent md:bg-primary flex p-2 w-full md:w-3/4 m-2 rounded-xl ">
         <UserCard avatarId={"1"} point={10} name={"Ahmet"} isActive={false} />
       </div>

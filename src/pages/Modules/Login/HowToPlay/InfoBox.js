@@ -7,11 +7,11 @@ import { EmojiList } from "constant/Emoji";
 
 const InfoBox = ({ id, iconId, infoTitle, infoText }) => {
   return (
-    <div id={id} className="flex gap-x-5 items-center">
+    <div id={id} className="flex space-x-5 items-center">
       <div className="rounded-full p-2 lg:p-3 bg-purple w-1/5 "><img className="w-full h-full" src={EmojiList[iconId]} /></div>
-      <div className="flex flex-col gap-1 justify-center w-4/5">
+      <div className="flex flex-col space-1 justify-center w-4/5">
         <span className="font-bold text-md">{infoTitle}</span>
-        <span className="text-xs text-lightGray text-xs">{infoText}</span>
+        <span className="text-xs text-lightGray">{infoText}</span>
       </div>
     </div>
   );

@@ -115,7 +115,7 @@ const LeftLogin = () => {
         labelText="Language"
         value={userInfo.language ? userInfo.language : ""}
       />
-      <div className="flex w-full gap-x-4">
+      <div className="flex w-full space-x-4">
         <Button
           id="room"
           buttonIcon={RoomIcon}

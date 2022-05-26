@@ -94,18 +94,18 @@ function Room({
       >
         <img width="50" src={EmojiList[roomAvatarId]} />
       </div>
-      <div className="flex flex-col items-center gap-y-3">
+      <div className="flex flex-col items-center space-y-3">
         <div className={`font-bold text-sm ${handleTextColor()}`}>
           {roomName}
         </div>
-        <div className={`${handleTextColor()} text-xs flex gap-x-4`}>
-          <div className="flex gap-x-1">
+        <div className={`${handleTextColor()} text-xs flex space-x-4`}>
+          <div className="flex space-x-1">
             <img width={14} src={handleHeadImage()} />
             <span className="">
               {roomUserLength}/{roomUserLimit}
             </span>
           </div>
-          <div className="flex gap-x-1">
+          <div className="flex space-x-1">
             <img width={14} src={handleStartImage()} />
             <span className="">{isStarted ? "Started" : "Starting"}</span>
           </div>

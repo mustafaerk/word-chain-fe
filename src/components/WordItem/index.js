@@ -10,7 +10,7 @@ function WordItem({ englishWord, nativeWord }) {
   const lastLetter = useMemo(() => englishWord.slice(-1).toUpperCase(), [englishWord]);
 
   return (
-    <div className="flex p-2 gap-x-6">
+    <div className="flex p-2 space-x-6">
       <div className="flex bg-primary w-1/2 rounded-xl justify-between md:h-12 h-8 items-center">
         <span className="mx-auto text-white font-semibold text-sm md:text-base lg:text-lg">
           {englishWord}

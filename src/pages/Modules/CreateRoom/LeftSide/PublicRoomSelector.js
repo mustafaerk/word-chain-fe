@@ -16,15 +16,15 @@ const PublicRoomSelector = () => {
 
     return (
         <div className='space-y-2 p-1 text-white'>
-            <label className="flex gap-x-2 text-white items-center font-semibold">
+            <label className="flex space-x-2 text-white items-center font-semibold">
                 <img className="w-4 h-4" src={EyeIcon} alt="" />
                 <span> Is Public? </span>
             </label>
-            <div className='flex gap-4 items-center flex-col xl:flex-row'>
-                <div className={`w-full flex border-2 font-semibold border-primary ${roomInfo.isPublic ? 'bg-purple' : 'bg-primary'} rounded-md py-3 px-8 gap-x-2 text-sm items-center cursor-pointer`} onClick={() => handleIsPublic(true)}>
+            <div className='flex space-4 items-center flex-row'>
+                <div className={`w-full flex border-2 font-semibold border-primary ${roomInfo.isPublic ? 'bg-purple' : 'bg-primary'} rounded-md py-3 px-8 space-x-2 text-sm items-center cursor-pointer`} onClick={() => handleIsPublic(true)}>
                     <img src={OpenIcon} alt="" /> Public
                 </div>
-                <div className={`w-full flex border-2 font-semibold border-primary ${!roomInfo.isPublic ? 'bg-purple' : 'bg-primary'} rounded-md py-3 px-8 gap-x-2 text-sm items-center cursor-pointer`} onClick={() => handleIsPublic(false)}>
+                <div className={`w-full flex border-2 font-semibold border-primary ${!roomInfo.isPublic ? 'bg-purple' : 'bg-primary'} rounded-md py-3 px-8 space-x-2 text-sm items-center cursor-pointer`} onClick={() => handleIsPublic(false)}>
                     <img src={CloseIcon} alt="" /> Private
                 </div>
             </div>

@@ -18,8 +18,8 @@ const NotStartedGame = () => {
     }
 
     return (
-        <div className='flex flex-col items-center justify-center h-full gap-y-4 text-center'>
-            <div className={`flex items-center justify-between flex-col text-white rounded-lg p-4 gap-x-4`}>
+        <div className='flex flex-col items-center justify-center h-full space-y-4 text-center'>
+            <div className={`flex items-center justify-between flex-col text-white rounded-lg p-4 space-x-4`}>
                 <div className={`rounded-full bg-skyDark`}>
                     <img
                         className="rounded-full w-16"
@@ -28,7 +28,7 @@ const NotStartedGame = () => {
                     />
                 </div>
 
-                <div className="w-full md:w-1/2 flex flex-col gap-y-2 items-center">
+                <div className="w-full md:w-1/2 flex flex-col space-y-2 items-center">
                     <div className="text-md text-white">{roomOwner?.name || ''}</div>
                 </div>
             </div>
