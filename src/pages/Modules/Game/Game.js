@@ -54,6 +54,7 @@ const GameGround = () => {
   const [shouldNavigate, setShouldNavigate] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState("");
+  const [canSend, setCanSend] = useState(true);
 
   // User Selectors
   const myUserInfo = useSelector(userInfoSelector);
@@ -166,6 +167,7 @@ const GameGround = () => {
 
   const handleSendWord = () => {
     if (!isMyTurn) return;
+    if (!canSend) return;
     if (lastWord != "" && lastWord?.slice(-1) != "x") {
       if (word.charAt(0).toLowerCase() != lastWord.slice(-1)) {
         handleInputError(true);
@@ -196,6 +198,8 @@ const GameGround = () => {
 
   const handleHandleTimeUp = () => {
     if (isMyTurn) {
+      setWord("");
+      setCanSend(false);
       dispatch({ type: "TIME_UP" });
     }
   };

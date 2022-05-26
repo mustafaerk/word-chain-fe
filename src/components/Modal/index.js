@@ -22,11 +22,11 @@ export default function Modal({
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
+            enterFrom="hidden"
+            enterTo="block"
             leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+            leaveFrom="block"
+            leaveTo="hidden"
           >
             <Dialog.Overlay className="fixed inset-0" />
           </Transition.Child>
@@ -41,11 +41,11 @@ export default function Modal({
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
+            enterFrom="hidden scale-95"
+            enterTo="block scale-100"
             leave="ease-in duration-200"
-            leaveFrom="opacity-100 scale-100"
-            leaveTo="opacity-0 scale-95"
+            leaveFrom="block scale-100"
+            leaveTo="hidden scale-95"
           >
             <div className={`inline-block w-full max-w-2xl p-6 my-8 text-left align-middle transition-all transform shadow-xl rounded-2xl ${ModalClass}`}>
               <Dialog.Title
