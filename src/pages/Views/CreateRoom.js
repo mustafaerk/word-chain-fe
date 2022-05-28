@@ -17,12 +17,12 @@ const CreateRoom = () => {
 
   return (
     <Main>
-      <div className="hidden sm:flex w-20">
+      <div className="flex w-20">
         <Button
           borderType={false}
           buttonIcon={backIcon}
           onClick={handleGoBack}
-          buttonClass="p-4 md:justify-start"
+          buttonClass="p-4 justify-start"
         />
       </div>
       <CreateRoomContent />

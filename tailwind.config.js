@@ -54,6 +54,7 @@ module.exports = {
       },
       transitionProperty: {
         width: "width",
+        top:"top",
       },
       transitionDuration: {
         0: "0ms",
