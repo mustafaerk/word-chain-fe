@@ -60,7 +60,7 @@ const Settings = () => {
         <div
           className={`${
             isSettings ? "top-10" : "-top-56"
-          } flex flex-col right-5 rounded-md p-10 w-40 items-center space-y-4 justify-center w absolute bg-purple h-52 transition-[top] duration-[1000ms] `}
+          } flex flex-col right-5 rounded-md py-10 px-3 w-40 items-center space-y-4 justify-center w absolute bg-purple h-52 transition-[top] duration-[1000ms] `}
         >
           <MiniUserCard
             id="myCard"
