@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { avatarList } from "constant/Avatar";
 import { flagList } from "constant/flags";
 
-function MobileUserCard({ id, name, point, isActive, avatarId , isEliminated, language }) {
+function MobileUserCard({ id, name, point, isActive, avatarId, isEliminated, language }) {
   return (
     <div
       id={id}
@@ -29,7 +29,7 @@ function MobileUserCard({ id, name, point, isActive, avatarId , isEliminated, la
 
       <div className="w-16 flex flex-col md:items-start items-center">
         <div className={`${isActive ? "text-white" : "text-skyDark"} text-sm`}>{name}</div>
-        {point && <div className={`${isActive ? "block" : "hidden"} text-2xs text-skyDark`}> {point} Points</div>}
+        {point ? <div className={`${isActive ? "block" : "hidden"} text-2xs text-skyDark`}> {point} Points</div> : null}
       </div>
     </div>
   );

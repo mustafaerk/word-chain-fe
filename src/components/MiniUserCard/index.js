@@ -14,7 +14,7 @@ function MiniUserCard({
       <div className="rounded-full bg-primary">
         <img className="" width={45} src={avatarList[avatarId]} alt="Icon" />
       </div>
-      <span>
+      <span className="ml-2">
         {name ?? null}
       </span>
     </div>
