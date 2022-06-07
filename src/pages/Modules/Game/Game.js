@@ -276,7 +276,7 @@ const GameGround = () => {
               className="bg-primary w-16  r h-16 rounded-full"
               alt=""
             />
-            {winnerInfo.name}{" "}&nbsp; is Winner!
+            &nbsp;{winnerInfo.name}&nbsp;is Winner!
           </p>
           <p className="text-white text-lg w-full  md:w-1/2">
             You can continue to learn and win by starting the new game right now
