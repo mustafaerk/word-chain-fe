@@ -1,2 +1,2 @@
 export const ENV = process.env.REACT_APP_ENV;
-export const API_URL = process.env.URL || "https://word-chain-be.herokuapp.com";
+export const API_URL = "http://185.255.93.106:5001";

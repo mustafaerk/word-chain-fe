@@ -19,7 +19,7 @@ const NotStartedGame = () => {
 
     return (
         <div className='flex flex-col items-center justify-center h-full space-y-4 text-center'>
-            <div className={`flex items-center justify-between flex-col text-white rounded-lg p-4 space-x-4`}>
+            <div className={`flex items-center justify-between flex-col text-white rounded-lg p-4 space-y-1`}>
                 <div className={`rounded-full bg-skyDark`}>
                     <img
                         className="rounded-full w-16"

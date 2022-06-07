@@ -1,4 +1,5 @@
 import io from "socket.io-client";
+import { API_URL } from "constant/Varible";
 
 import {
   updateRoom,
@@ -16,7 +17,7 @@ import {
 } from "../room/roomSlice";
 
 const socketMiddleware = () => {
-  let socket = io.connect("https://word-chain-be.herokuapp.com");
+  let socket = io.connect(API_URL);
 
   return (store) => (next) => (action) => {
     switch (action.type) {
