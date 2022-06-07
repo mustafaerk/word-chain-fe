@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 
 import Spinner from "pages/Layout/Spinner";
-import { useGetUserIpQuery } from "redux/slices/app/appApi";
 import {
   updateUserInfoField,
   updateUserInfo,
@@ -23,7 +22,6 @@ function Router() {
   const dispatch = useDispatch();
   const authToken = useSelector(authTokenSelector);
 
-  const { data } = useGetUserIpQuery();
   const [userInfo, setUserInfo] = useState('');
 
   const getToken = async () => {
@@ -61,7 +59,7 @@ function Router() {
       );
       dispatch(updateUserInfoField({ value: unique_id, field: "id" }));
     }
-  }, [data]);
+  }, []);
 
   return (
     <BrowserRouter>

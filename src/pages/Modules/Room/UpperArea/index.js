@@ -41,7 +41,7 @@ const UpperArea = ({ joinRoom }) => {
         <Button
           borderType
           buttonIcon={refleshIcon}
-          buttonText="Reflesh"
+          buttonText="Refresh"
           buttonClass="w-24 md:w-40"
           variant="shadowGreen"
           onClick={handleRestartRoomList}

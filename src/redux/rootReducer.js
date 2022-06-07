@@ -4,7 +4,6 @@ import {
   localizationReducerName,
 } from "redux/slices/app/localizationSlice";
 import { userApiReducer, userApiReducerName } from "redux/slices/user/userApi";
-import { appApiReducer, appApiReducerName } from "redux/slices/app/appApi";
 import { appSliceReducer, appSliceReducerName } from "redux/slices/app/appSlice";
 import { roomSliceReducer, roomSliceReducerName } from "redux/slices/room/roomSlice";
 import { roomApiReducer, roomApiReducerName } from "redux/slices/room/roomApi";
@@ -13,7 +12,6 @@ import { createRoomSliceReducer, createRoomSliceReducerName } from "redux/slices
 const rootReducer = {
   [userReducerName]: userReducer,
   [localizationReducerName]: localizationReducer,
-  [appApiReducerName]: appApiReducer,
   [userApiReducerName]: userApiReducer,
   [appSliceReducerName]: appSliceReducer,
   [roomSliceReducerName]: roomSliceReducer,
