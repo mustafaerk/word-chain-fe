@@ -11,3 +11,4 @@ export { default as Room } from "components/Room";
 export { default as MiniUserCard } from "components/MiniUserCard";
 export { default as Lottie } from "components/Lottie";
 export { default as ErrorPopup } from "components/ErrorPopup";
+export { default as Popup } from "components/Popup";

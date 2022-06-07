@@ -32,6 +32,7 @@ module.exports = {
       'full': '9999px',
       'large': '12px',
       'xl': '0.75rem',
+      '2xl': '1rem',
     },
     minHeight: {
       150: "150px",

@@ -22,13 +22,17 @@ import {
   Button,
   Input,
   ProgressBar,
-  Modal,
   Lottie,
   ErrorPopup,
+  Popup,
 } from "components";
 import WordList from "pages/Modules/Game/components/WordList";
 import NotStartedGame from "pages/Modules/Game/components/NotStartedGame";
-import { userInfoSelector, selectIsMuted, updateIsMuted } from "redux/slices/user/userSlice";
+import {
+  userInfoSelector,
+  selectIsMuted,
+  updateIsMuted,
+} from "redux/slices/user/userSlice";
 import { CheckIsWordEnglish } from "localization/translate";
 import {
   currentUserInfoSelector,
@@ -125,7 +129,6 @@ const GameGround = () => {
     [isMyTurn, currentTurnUserId]
   );
 
-
   const handleCloseWinnerModal = () => {
     dispatch(updateRoomFinishStatus(false));
     dispatch(updateWinnerUser({}));
@@ -186,8 +189,7 @@ const GameGround = () => {
     } else {
       if (!checkWordEnglish) {
         setErrorText("Not Exist");
-      }
-      else if (checkWordExist) {
+      } else if (checkWordExist) {
         setErrorText("Already Written");
       }
       setIsError(true);
@@ -259,11 +261,11 @@ const GameGround = () => {
           </div>
         </>
       )}
-      <Modal
-        ModalContentClass="relative"
-        ModalClass="bg-purple"
+      <Popup
+        PopupClass="bg-purple"
         isOpen={isGameFinish}
-        handleModalClose={() => handleCloseWinnerModal()}
+        handlePopupClose={() => handleCloseWinnerModal()}
+        PopupContentClass="relative"
       >
         <Lottie
           animation={WinnerAnimation}
@@ -272,7 +274,7 @@ const GameGround = () => {
         <div className="h-80 overflow-y-scroll p-2 flex flex-col  items-center justify-center text-center space-y-4">
           <p className="flex text-white text-2xl font-semibold items-center justify-center space-4 ">
             <img
-              src={avatarList[winnerInfo?.userAvatarId || '1']}
+              src={avatarList[winnerInfo?.userAvatarId || "1"]}
               className="bg-primary w-16  r h-16 rounded-full"
               alt=""
             />{" "}
@@ -301,7 +303,7 @@ const GameGround = () => {
             onClick={handleLeaveRoom}
           />
         </div>
-      </Modal>
+      </Popup>
     </div>
   );
 };

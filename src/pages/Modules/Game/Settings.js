@@ -49,7 +49,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="absolute block md:hidden z-10 rounded right-5">
+    <div className="absolute block md:hidden z-10 rounded right-1">
       <div className="relative">
         <img
           src={SettingIcon}

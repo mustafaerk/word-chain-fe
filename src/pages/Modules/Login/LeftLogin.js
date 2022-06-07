@@ -9,7 +9,7 @@ import EditIcon from "assets/icons/edit.svg";
 
 import LanguageIcon from "assets/icons/language.svg";
 import PlusIcon from "assets/icons/plus.svg";
-import { Button, Modal, Select, Input } from "components";
+import { Button, Popup, Select, Input } from "components";
 import { LANGUAGE_LIST } from "constant/LanguageList";
 import { avatarList, avatars } from "constant/Avatar";
 import { apiResHandler } from "utils/axiosBaseQuery";
@@ -135,10 +135,10 @@ const LeftLogin = () => {
           borderType
         />
       </div>
-      <Modal
-        ModalClass="bg-white"
+      <Popup
+        PopupClass="bg-white"
         isOpen={isOpen}
-        handleModalClose={() => setIsOpen(false)}
+        handlePopupClose={() => setIsOpen(false)}
       >
         <div className="h-80 overflow-y-scroll p-2 bg-darkGray ">
           <RadioGroup
@@ -156,7 +156,7 @@ const LeftLogin = () => {
             onClick={handleSelectAvatar}
           />
         </div>
-      </Modal>
+      </Popup>
     </div>
   );
 };
