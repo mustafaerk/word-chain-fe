@@ -28,7 +28,7 @@ import {
 } from "components";
 import WordList from "pages/Modules/Game/components/WordList";
 import NotStartedGame from "pages/Modules/Game/components/NotStartedGame";
-import { userInfoSelector, selectIsMuted , updateIsMuted } from "redux/slices/user/userSlice";
+import { userInfoSelector, selectIsMuted, updateIsMuted } from "redux/slices/user/userSlice";
 import { CheckIsWordEnglish } from "localization/translate";
 import {
   currentUserInfoSelector,
@@ -54,7 +54,6 @@ const GameGround = () => {
   const [shouldNavigate, setShouldNavigate] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState("");
-  const [canSend, setCanSend] = useState(true);
 
   // User Selectors
   const myUserInfo = useSelector(userInfoSelector);
@@ -126,6 +125,7 @@ const GameGround = () => {
     [isMyTurn, currentTurnUserId]
   );
 
+
   const handleCloseWinnerModal = () => {
     dispatch(updateRoomFinishStatus(false));
     dispatch(updateWinnerUser({}));
@@ -167,7 +167,6 @@ const GameGround = () => {
 
   const handleSendWord = () => {
     if (!isMyTurn) return;
-    if (!canSend) return;
     if (lastWord != "" && lastWord?.slice(-1) != "x") {
       if (word.charAt(0).toLowerCase() != lastWord.slice(-1)) {
         handleInputError(true);
@@ -185,10 +184,10 @@ const GameGround = () => {
       handleInputError(false);
       setIsError(false);
     } else {
-      if(!checkWordEnglish){
+      if (!checkWordEnglish) {
         setErrorText("Not Exist");
       }
-      else if(checkWordExist){
+      else if (checkWordExist) {
         setErrorText("Already Written");
       }
       setIsError(true);
@@ -199,7 +198,6 @@ const GameGround = () => {
   const handleHandleTimeUp = () => {
     if (isMyTurn) {
       setWord("");
-      setCanSend(false);
       dispatch({ type: "TIME_UP" });
     }
   };
@@ -224,12 +222,12 @@ const GameGround = () => {
         <NotStartedGame />
       ) : (
         <>
-        <img
-          src={isMuted ? UnMuteIcon : MuteIcon}
-          onClick={handleMuted}
-          alt="mute"
-          className="hidden md:block cursor-pointer w-6 h-6 absolute top-3 right-3"
-        />
+          <img
+            src={isMuted ? UnMuteIcon : MuteIcon}
+            onClick={handleMuted}
+            alt="mute"
+            className="hidden md:block cursor-pointer w-6 h-6 absolute top-3 right-3"
+          />
           <WordList />
           <ProgressBar ref={progressBarRef} endCallBack={handleHandleTimeUp} />
           <div className="flex relative h-14">
@@ -265,7 +263,7 @@ const GameGround = () => {
         ModalContentClass="relative"
         ModalClass="bg-purple"
         isOpen={isGameFinish}
-        handleModalClose={handleCloseWinnerModal}
+        handleModalClose={() => handleCloseWinnerModal()}
       >
         <Lottie
           animation={WinnerAnimation}
@@ -274,7 +272,7 @@ const GameGround = () => {
         <div className="h-80 overflow-y-scroll p-2 flex flex-col  items-center justify-center text-center space-y-4">
           <p className="flex text-white text-2xl font-semibold items-center justify-center space-4 ">
             <img
-              src={avatarList[winnerInfo.userAvatarId]}
+              src={avatarList[winnerInfo?.userAvatarId || '1']}
               className="bg-primary w-16  r h-16 rounded-full"
               alt=""
             />{" "}
@@ -292,7 +290,7 @@ const GameGround = () => {
             variant="shadowGreen"
             buttonClass="mx-auto mt-2 w-1/3"
             buttonText="Stay Here"
-            onClick={handleCloseWinnerModal}
+            onClick={() => handleCloseWinnerModal()}
           />
           <Button
             id="okay"
