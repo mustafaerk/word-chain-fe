@@ -8,21 +8,16 @@ import React, {
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
-import RoomPurpleIcon from "assets/icons/roomPurple.svg";
-import GameIcon from "assets/icons/game.svg";
 import SendIcon from "assets/icons/send.svg";
-import WinnerAnimation from "assets/animation/winner.json";
 import MuteIcon from "assets/icons/mute.svg";
 import UnMuteIcon from "assets/icons/unmute.svg";
 import bellSound from "assets/voice/bell.mp3";
 
-import { avatarList } from "constant/Avatar";
 import { storageItem } from "utils/localstorage";
 import {
   Button,
   Input,
   ProgressBar,
-  Lottie,
   ErrorPopup,
   Popup,
 } from "components";
@@ -50,6 +45,7 @@ import {
   roomJoinErrorSelector,
   updateRoomJoinError,
 } from "redux/slices/room/roomSlice";
+import WinnerModalContent from "./components/WinnerModalContent";
 
 const GameGround = () => {
   const progressBarRef = useRef();
@@ -264,45 +260,10 @@ const GameGround = () => {
       <Popup
         PopupClass="bg-purple"
         isOpen={isGameFinish}
-        handlePopupClose={() => handleCloseWinnerModal()}
+        handlePopupClose={handleCloseWinnerModal}
         PopupContentClass="relative"
       >
-        <Lottie
-          animation={WinnerAnimation}
-          containerClass="absolute winner-animation w-96 h-96"
-        />
-        <div className="h-80 overflow-y-scroll p-2 flex flex-col  items-center justify-center text-center space-y-4">
-          <p className="flex text-white text-2xl font-semibold items-center justify-center space-4 ">
-            <img
-              src={avatarList[winnerInfo?.userAvatarId || "1"]}
-              className="bg-primary w-16  r h-16 rounded-full"
-              alt=""
-            />
-            &nbsp;{winnerInfo.name}&nbsp;is Winner!
-          </p>
-          <p className="text-white text-lg w-full  md:w-1/2">
-            You can continue to learn and win by starting the new game right now
-            😊
-          </p>
-        </div>
-        <div className="flex flex-col md:flex-row">
-          <Button
-            id="okay"
-            buttonIcon={GameIcon}
-            variant="shadowGreen"
-            buttonClass="mx-auto mt-2 w-1/3"
-            buttonText="Stay Here"
-            onClick={() => handleCloseWinnerModal()}
-          />
-          <Button
-            id="okay"
-            buttonIcon={RoomPurpleIcon}
-            variant="shadowPrimary"
-            buttonClass="mx-auto mt-2 w-1/3"
-            buttonText="Leave Game"
-            onClick={handleLeaveRoom}
-          />
-        </div>
+        <WinnerModalContent handleCloseWinnerModal={handleCloseWinnerModal} handleLeaveRoom={handleLeaveRoom} winnerInfo={winnerInfo} />
       </Popup>
     </div>
   );

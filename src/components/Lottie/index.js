@@ -1,19 +1,19 @@
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import lottie from "lottie-web";
 import PropTypes from "prop-types";
 
 
 const Lottie = ({ animation, containerClass }) => {
     const anime = useRef(null);
-    useLayoutEffect(() => {
+
+    useEffect(() => {
         lottie.loadAnimation({
             container: anime.current,
-            renderer: "svg",    
+            renderer: "svg",
             loop: true,
             autoplay: true,
             animationData: animation,
         });
-        return () => lottie.stop();
     }, []);
     return <div className={containerClass} ref={anime}></div>;
 };
