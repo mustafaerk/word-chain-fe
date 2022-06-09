@@ -1,6 +1,6 @@
 {
   "name": "word-chain-fe",
-  "version": "0.3.0",
+  "version": "0.3.5",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.5.0",
@@ -26,7 +26,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set HTTPS=true&&react-scripts start",
     "build": "react-scripts build",
     "start-dev": "react-scripts start",
     "test": "react-scripts test",
