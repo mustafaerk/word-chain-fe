@@ -35,7 +35,7 @@ function Room({
     }
   }
   useEffect(() => {
-    if (isStarted || roomUserLimit == roomUserLength) setDisabled(true);
+    if (roomUserLimit == roomUserLength) setDisabled(true);
   }, []);
 
   const handleAvatarColor = () => {
