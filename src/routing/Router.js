@@ -13,10 +13,11 @@ import { updateToken, authTokenSelector } from "redux/slices/app/appSlice";
 import { getStoragedItem } from "utils/localstorage";
 import ProtectedRoute from "routing/ProtectedRoute";
 
-const Login = React.lazy(() => import("pages/Views/Login"));
-const Game = React.lazy(() => import("pages/Views/Game"));
-const Rooms = React.lazy(() => import("pages/Views/Rooms"));
-const CreateRoom = React.lazy(() => import("pages/Views/CreateRoom"));
+import Login from "pages/Views/Login";
+import Game from "pages/Views/Game";
+import Rooms from "pages/Views/Rooms";
+import CreateRoom from "pages/Views/CreateRoom";
+
 
 function Router() {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ function Router() {
     setUserInfo(oldUserInfo)
     if (oldMutedInfo) {
       dispatch(updateIsMuted(oldMutedInfo.value.isMuted));
-    } 
+    }
     if (oldUserInfo) {
       dispatch(updateUserInfo(oldUserInfo.value.userInfo));
     } else {

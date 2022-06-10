@@ -47,6 +47,8 @@ import {
 } from "redux/slices/room/roomSlice";
 import WinnerModalContent from "./components/WinnerModalContent";
 
+const audio = new Audio(bellSound);
+
 const GameGround = () => {
   const progressBarRef = useRef();
   const dispatch = useDispatch();
@@ -95,10 +97,16 @@ const GameGround = () => {
     }
   }, []);
 
+  const PlayBell = () => {
+    window.playResult = audio.play();
+    window.playResult.catch(e => {
+      window.playResultError = e;
+    })
+  }
+
   useEffect(() => {
     if (!isMuted) {
-      const audio = new Audio(bellSound);
-      audio.play();
+      PlayBell()
     }
   }, [currentTurnUserId]);
 

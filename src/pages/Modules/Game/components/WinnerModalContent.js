@@ -55,7 +55,7 @@ const WinnerModalContent = ({ handleCloseWinnerModal, handleLeaveRoom, winnerInf
 WinnerModalContent.propTypes = {
     handleCloseWinnerModal: PropTypes.func,
     handleLeaveRoom: PropTypes.func,
-    winnerInfo: PropTypes.objectOf({ name: PropTypes.string, userAvatarId: PropTypes.string }),
+    winnerInfo: PropTypes.any,
 };
 
 export default WinnerModalContent;
