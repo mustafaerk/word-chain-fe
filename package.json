@@ -1,8 +1,8 @@
 {
   "name": "word-chain-fe",
-  "version": "0.3.5",
-  "homepage": "https://github.com/mustafaerk/word-chain-fe",
-  "private": true,
+  "version": "0.4.0",
+  "homepage": "/build",
+  "private": false,
   "dependencies": {
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
@@ -27,7 +27,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set HTTPS=true&&react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "start-dev": "react-scripts start",
     "test": "react-scripts test",

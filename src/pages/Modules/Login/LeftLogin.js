@@ -14,7 +14,7 @@ import { LANGUAGE_LIST } from "constant/LanguageList";
 import { avatarList, avatars } from "constant/Avatar";
 import { apiResHandler } from "utils/axiosBaseQuery";
 import { storageItem } from "utils/localstorage";
-
+import RadioGroup from "pages/Modules/Login/RadioGroup";
 import {
   updateUserAvatar,
   updateUserInfoField,
@@ -24,8 +24,6 @@ import {
 import { useLoginMutation } from "redux/slices/user/userApi";
 import { updateToken } from "redux/slices/app/appSlice";
 import { roomIdSelector } from "redux/slices/room/roomSlice";
-
-const RadioGroup = React.lazy(() => import("pages/Modules/Login/RadioGroup"));
 
 const LeftLogin = () => {
   const navigate = useNavigate();
