@@ -1,8 +1,8 @@
 import React from "react";
 
-import LeftLogin from "pages/Modules/Login/LeftLogin";
 import Main from "pages/Layout/Main";
-import RightLogin from "pages/Modules/Login/RightLogin";
+const LeftLogin = React.lazy(() => import("pages/Modules/Login/LeftLogin"));
+const RightLogin = React.lazy(() => import("pages/Modules/Login/RightLogin"));
 
 const Login = () => {
   return (
