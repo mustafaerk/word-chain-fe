@@ -1,19 +1,20 @@
-import Avatar1 from "assets/avatar/1.png";
-import Avatar2 from "assets/avatar/2.png";
-import Avatar3 from "assets/avatar/3.png";
-import Avatar4 from "assets/avatar/4.png";
-import Avatar5 from "assets/avatar/5.png";
-import Avatar6 from "assets/avatar/6.png";
-import Avatar7 from "assets/avatar/7.png";
-import Avatar8 from "assets/avatar/8.png";
-import Avatar9 from "assets/avatar/9.png";
-import Avatar10 from "assets/avatar/10.png";
-import Avatar11 from "assets/avatar/11.png";
-import Avatar12 from "assets/avatar/12.png";
-import Avatar13 from "assets/avatar/13.png";
-import Avatar14 from "assets/avatar/14.png";
-import Avatar15 from "assets/avatar/15.png";
-import Avatar16 from "assets/avatar/16.png";
+/* eslint-disable no-undef */
+const Avatar1 = require("assets/avatar/1.png");
+const Avatar2 = require("assets/avatar/2.png");
+const Avatar3 = require("assets/avatar/3.png");
+const Avatar4 = require("assets/avatar/4.png");
+const Avatar5 = require("assets/avatar/5.png");
+const Avatar6 = require("assets/avatar/6.png");
+const Avatar7 = require("assets/avatar/7.png");
+const Avatar8 = require("assets/avatar/8.png");
+const Avatar9 = require("assets/avatar/9.png");
+const Avatar10 = require("assets/avatar/10.png");
+const Avatar11 = require("assets/avatar/11.png");
+const Avatar12 = require("assets/avatar/12.png");
+const Avatar13 = require("assets/avatar/13.png");
+const Avatar14 = require("assets/avatar/14.png");
+const Avatar15 = require("assets/avatar/15.png");
+const Avatar16 = require("assets/avatar/16.png");
 
 export const avatarList = {
   1: Avatar1,
