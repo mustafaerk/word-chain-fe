@@ -1,103 +1,85 @@
-/* eslint-disable no-undef */
-const Avatar1 = require("assets/avatar/1.png");
-const Avatar2 = require("assets/avatar/2.png");
-const Avatar3 = require("assets/avatar/3.png");
-const Avatar4 = require("assets/avatar/4.png");
-const Avatar5 = require("assets/avatar/5.png");
-const Avatar6 = require("assets/avatar/6.png");
-const Avatar7 = require("assets/avatar/7.png");
-const Avatar8 = require("assets/avatar/8.png");
-const Avatar9 = require("assets/avatar/9.png");
-const Avatar10 = require("assets/avatar/10.png");
-const Avatar11 = require("assets/avatar/11.png");
-const Avatar12 = require("assets/avatar/12.png");
-const Avatar13 = require("assets/avatar/13.png");
-const Avatar14 = require("assets/avatar/14.png");
-const Avatar15 = require("assets/avatar/15.png");
-const Avatar16 = require("assets/avatar/16.png");
-
 export const avatarList = {
-  1: Avatar1,
-  2: Avatar2,
-  3: Avatar3,
-  4: Avatar4,
-  5: Avatar5,
-  6: Avatar6,
-  7: Avatar7,
-  8: Avatar8,
-  9: Avatar9,
-  10: Avatar10,
-  11: Avatar11,
-  12: Avatar12,
-  13: Avatar13,
-  14: Avatar14,
-  15: Avatar15,
-  16: Avatar16,
+  1: "https://be.linhug.com/1.png",
+  2: "https://be.linhug.com/2.png",
+  3: "https://be.linhug.com/3.png",
+  4: "https://be.linhug.com/4.png",
+  5: "https://be.linhug.com/5.png",
+  6: "https://be.linhug.com/6.png",
+  7: "https://be.linhug.com/7.png",
+  8: "https://be.linhug.com/8.png",
+  9: "https://be.linhug.com/9.png",
+  10: "https://be.linhug.com/10.png",
+  11: "https://be.linhug.com/11.png",
+  12: "https://be.linhug.com/12.png",
+  13: "https://be.linhug.com/13.png",
+  14: "https://be.linhug.com/14.png",
+  15: "https://be.linhug.com/15.png",
+  16: "https://be.linhug.com/16.png",
 };
 
 export const avatars = [
   {
-    icon: Avatar1,
+    icon: "https://be.linhug.com/1.png",
     val: "1",
   },
   {
-    icon: Avatar2,
+    icon: "https://be.linhug.com/2.png",
     val: "2",
   },
   {
-    icon: Avatar3,
+    icon: "https://be.linhug.com/3.png",
     val: "3",
   },
   {
-    icon: Avatar4,
+    icon: "https://be.linhug.com/4.png",
     val: "4",
   },
   {
-    icon: Avatar5,
+    icon: "https://be.linhug.com/5.png",
     val: "5",
   },
   {
-    icon: Avatar6,
+    icon: "https://be.linhug.com/6.png",
     val: "6",
   },
   {
-    icon: Avatar7,
+    icon: "https://be.linhug.com/7.png",
     val: "7",
   },
   {
-    icon: Avatar8,
+    icon: "https://be.linhug.com/8.png",
     val: "8",
   },
   {
-    icon: Avatar9,
+    icon: "https://be.linhug.com/9.png",
     val: "9",
   },
   {
-    icon: Avatar10,
+    icon: "https://be.linhug.com/10.png",
     val: "10",
   },
   {
-    icon: Avatar11,
+    icon: "https://be.linhug.com/11.png",
     val: "11",
   },
   {
-    icon: Avatar12,
+    icon: "https://be.linhug.com/12.png",
     val: "12",
   },
   {
-    icon: Avatar13,
+    icon: "https://be.linhug.com/13.png",
     val: "13",
   },
   {
-    icon: Avatar14,
+    icon: "https://be.linhug.com/14.png",
     val: "14",
   },
   {
-    icon: Avatar15,
+    icon: "https://be.linhug.com/15.png",
     val: "15",
   },
   {
-    icon: Avatar16,
+    icon: "https://be.linhug.com/16.png",
     val: "16",
   },
 ];
