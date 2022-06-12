@@ -1,102 +1,87 @@
-import Avatar1 from "assets/avatar/1.png";
-import Avatar2 from "assets/avatar/2.png";
-import Avatar3 from "assets/avatar/3.png";
-import Avatar4 from "assets/avatar/4.png";
-import Avatar5 from "assets/avatar/5.png";
-import Avatar6 from "assets/avatar/6.png";
-import Avatar7 from "assets/avatar/7.png";
-import Avatar8 from "assets/avatar/8.png";
-import Avatar9 from "assets/avatar/9.png";
-import Avatar10 from "assets/avatar/10.png";
-import Avatar11 from "assets/avatar/11.png";
-import Avatar12 from "assets/avatar/12.png";
-import Avatar13 from "assets/avatar/13.png";
-import Avatar14 from "assets/avatar/14.png";
-import Avatar15 from "assets/avatar/15.png";
-import Avatar16 from "assets/avatar/16.png";
+import { API_URL } from "constant/Varible";
 
 export const avatarList = {
-  1: Avatar1,
-  2: Avatar2,
-  3: Avatar3,
-  4: Avatar4,
-  5: Avatar5,
-  6: Avatar6,
-  7: Avatar7,
-  8: Avatar8,
-  9: Avatar9,
-  10: Avatar10,
-  11: Avatar11,
-  12: Avatar12,
-  13: Avatar13,
-  14: Avatar14,
-  15: Avatar15,
-  16: Avatar16,
+  1: API_URL + "/1.png",
+  2: API_URL + "/2.png",
+  3: API_URL + "/3.png",
+  4: API_URL + "/4.png",
+  5: API_URL + "/5.png",
+  6: API_URL + "/6.png",
+  7: API_URL + "/7.png",
+  8: API_URL + "/8.png",
+  9: API_URL + "/9.png",
+  10: API_URL + "/10.png",
+  11: API_URL + "/11.png",
+  12: API_URL + "/12.png",
+  13: API_URL + "/13.png",
+  14: API_URL + "/14.png",
+  15: API_URL + "/15.png",
+  16: API_URL + "/16.png",
 };
 
 export const avatars = [
   {
-    icon: Avatar1,
+    icon: API_URL + "/1.png",
     val: "1",
   },
   {
-    icon: Avatar2,
+    icon: API_URL + "/2.png",
     val: "2",
   },
   {
-    icon: Avatar3,
+    icon: API_URL + "/3.png",
     val: "3",
   },
   {
-    icon: Avatar4,
+    icon: API_URL + "/4.png",
     val: "4",
   },
   {
-    icon: Avatar5,
+    icon: API_URL + "/5.png",
     val: "5",
   },
   {
-    icon: Avatar6,
+    icon: API_URL + "/6.png",
     val: "6",
   },
   {
-    icon: Avatar7,
+    icon: API_URL + "/7.png",
     val: "7",
   },
   {
-    icon: Avatar8,
+    icon: API_URL + "/8.png",
     val: "8",
   },
   {
-    icon: Avatar9,
+    icon: API_URL + "/9.png",
     val: "9",
   },
   {
-    icon: Avatar10,
+    icon: API_URL + "/10.png",
     val: "10",
   },
   {
-    icon: Avatar11,
+    icon: API_URL + "/11.png",
     val: "11",
   },
   {
-    icon: Avatar12,
+    icon: API_URL + "/12.png",
     val: "12",
   },
   {
-    icon: Avatar13,
+    icon: API_URL + "/13.png",
     val: "13",
   },
   {
-    icon: Avatar14,
+    icon: API_URL + "/14.png",
     val: "14",
   },
   {
-    icon: Avatar15,
+    icon: API_URL + "/15.png",
     val: "15",
   },
   {
-    icon: Avatar16,
+    icon: API_URL + "/16.png",
     val: "16",
   },
 ];

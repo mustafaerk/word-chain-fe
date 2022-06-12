@@ -12,9 +12,6 @@ function Button({
   disabled,
 }) {
   const handleButtonColor = () => {
-    if(disabled){
-      return "shadowPrimary";
-    }
     switch (variant) {
       case "primary":
         return "bg-primary";
@@ -52,8 +49,8 @@ function Button({
     <div
       id={id}
       className={`${buttonClass} flex items-center justify-center text-white space-x-2 shadow-3xl w-full ${handleButtonColor()} ${handleBorder()} cursor-pointer rounded-lg m-1 h-12 ${
-        disabled ? "cursor-not-allowed" : ""
-      }`}
+        disabled ? "cursor-not-allowed opacity-75" : "opacity-100"
+      }` }
       onClick={handleOnClick}
       disabled={disabled}
     >

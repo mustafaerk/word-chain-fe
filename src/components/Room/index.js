@@ -27,15 +27,15 @@ function Room({
   const isSelected = id == roomId;
 
   const handleSelectRoom = () => {
-    if(roomId == id) {
+    if (roomId == id) {
       dispatch(updateRoomId(""))
     }
-    else{
+    else {
       dispatch(updateRoomId(id))
     }
   }
   useEffect(() => {
-    if (isStarted || roomUserLimit == roomUserLength) setDisabled(true);
+    if (roomUserLimit == roomUserLength) setDisabled(true);
   }, []);
 
   const handleAvatarColor = () => {

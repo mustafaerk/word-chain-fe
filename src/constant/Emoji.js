@@ -1,57 +1,41 @@
-import Emoji1 from "assets/emoji/1.png";
-import Emoji2 from "assets/emoji/2.png";
-import Emoji3 from "assets/emoji/3.png";
-import Emoji4 from "assets/emoji/4.png";
-import Emoji5 from "assets/emoji/5.png";
-import Emoji6 from "assets/emoji/6.png";
-import Emoji7 from "assets/emoji/7.png";
-import Emoji8 from "assets/emoji/8.png";
-import Emoji9 from "assets/emoji/9.png";
-import Emoji10 from "assets/emoji/10.png";
-import Emoji11 from "assets/emoji/11.png";
-import Emoji12 from "assets/emoji/12.png";
-import Emoji13 from "assets/emoji/13.png";
-import Emoji14 from "assets/emoji/14.png";
-import Emoji15 from "assets/emoji/15.png";
-import Emoji16 from "assets/emoji/16.png";
-import Emoji17 from "assets/emoji/17.png";
+import { API_URL } from "constant/Varible";
 
 export const EmojiList = {
-  1: Emoji1,
-  2: Emoji2,
-  3: Emoji3,
-  4: Emoji4,
-  5: Emoji5,
-  6: Emoji6,
-  7: Emoji7,
-  8: Emoji8,
-  9: Emoji9,
-  10: Emoji10,
-  11: Emoji11,
-  12: Emoji12,
-  13: Emoji13,
-  14: Emoji14,
-  15: Emoji15,
-  16: Emoji16,
-  17: Emoji17,
+  1: API_URL + "/emoji/1.png",
+  2: API_URL + "/emoji/2.png",
+  3: API_URL + "/emoji/3.png",
+  4: API_URL + "/emoji/4.png",
+  5: API_URL + "/emoji/5.png",
+  6: API_URL + "/emoji/6.png",
+  7: API_URL + "/emoji/7.png",
+  8: API_URL + "/emoji/8.png",
+  9: API_URL + "/emoji/9.png",
+  10: API_URL + "/emoji/10.png",
+  11: API_URL + "/emoji/11.png",
+  12: API_URL + "/emoji/12.png",
+  13: API_URL + "/emoji/13.png",
+  14: API_URL + "/emoji/14.png",
+  15: API_URL + "/emoji/15.png",
+  16: API_URL + "/emoji/16.png",
+  17: API_URL + "/emoji/17.png",
 };
 
 export const TextedEmojiList = {
-  1: { emoji: Emoji1, text: 'Sassy Room' },
-  2: { emoji: Emoji2, text: 'Laugh Room' },
-  3: { emoji: Emoji3, text: 'Big Smile Room' },
-  4: { emoji: Emoji4, text: 'Happy Room' },
-  5: { emoji: Emoji5, text: "Angel's Room" },
-  6: { emoji: Emoji6, text: "Love Room" },
-  7: { emoji: Emoji7, text: "Cool Room" },
-  8: { emoji: Emoji8, text: "Kiss Room" },
-  9: { emoji: Emoji9, text: 'Tired Room' },
-  10: { emoji: Emoji10, text: 'Scared Room' },
-  11: { emoji: Emoji11, text: 'Confused Room' },
-  12: { emoji: Emoji12, text: 'Emotional Room' },
-  13: { emoji: Emoji13, text: 'Sly Room' },
-  14: { emoji: Emoji14, text: 'Crazy Room' },
-  15: { emoji: Emoji15, text: 'Pedant Room' },
-  16: { emoji: Emoji16, text: 'Winners Room' },
-  17: { emoji: Emoji17, text: 'Cowboy Room' },
+  1: { emoji: API_URL + "/emoji/1.png", text: 'Sassy Room' },
+  2: { emoji: API_URL + "/emoji/2.png", text: 'Laugh Room' },
+  3: { emoji: API_URL + "/emoji/3.png", text: 'Big Smile Room' },
+  4: { emoji: API_URL + "/emoji/4.png", text: 'Happy Room' },
+  5: { emoji: API_URL + "/emoji/5.png", text: "Angel's Room" },
+  6: { emoji: API_URL + "/emoji/6.png", text: "Love Room" },
+  7: { emoji: API_URL + "/emoji/7.png", text: "Cool Room" },
+  8: { emoji: API_URL + "/emoji/8.png", text: "Kiss Room" },
+  9: { emoji: API_URL + "/emoji/9.png", text: 'Tired Room' },
+  10: { emoji: API_URL + "/emoji/10.png", text: 'Scared Room' },
+  11: { emoji: API_URL + "/emoji/11.png", text: 'Confused Room' },
+  12: { emoji: API_URL + "/emoji/12.png", text: 'Emotional Room' },
+  13: { emoji: API_URL + "/emoji/13.png", text: 'Sly Room' },
+  14: { emoji: API_URL + "/emoji/14.png", text: 'Crazy Room' },
+  15: { emoji: API_URL + "/emoji/15.png", text: 'Pedant Room' },
+  16: { emoji: API_URL + "/emoji/16.png", text: 'Winners Room' },
+  17: { emoji: API_URL + "/emoji/17.png", text: 'Cowboy Room' },
 };

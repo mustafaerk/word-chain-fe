@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { MiniUserCard } from "components";
+import { MiniUserCard, Button } from "components";
 import BackIcon from "assets/icons/back.svg";
 
 import {
@@ -29,11 +29,11 @@ const UpperArea = () => {
 
   return (
     <div className="hidden md:flex relative my-4 h-h5 rounded-b-md justify-between">
-      <img
-        src={BackIcon}
+      <Button
+        borderType={false}
+        buttonIcon={BackIcon}
         onClick={handleLeaveRoom}
-        alt="leave"
-        className="cursor-pointer w-9 h-9"
+        buttonClass="mr-auto w-6"
       />
       <MiniUserCard
         id="myCard"
