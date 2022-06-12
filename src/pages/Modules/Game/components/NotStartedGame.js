@@ -5,12 +5,13 @@ import WaitAnimation from "assets/animation/wait.json";
 import GameIcon from "assets/icons/game.svg";
 import { avatarList } from "constant/Avatar";
 import { Button, Lottie } from 'components';
-import { roomOwnerSelector } from "redux/slices/room/roomSlice";
+import { roomOwnerSelector, userListSelector } from "redux/slices/room/roomSlice";
 import { userInfoSelector } from "redux/slices/user/userSlice";
 
 const NotStartedGame = () => {
     const dispatch = useDispatch();
     const roomOwner = useSelector(roomOwnerSelector);
+    const userList = useSelector(userListSelector);
     const userInfo = useSelector(userInfoSelector);
 
     const handleStartGame = () => {
@@ -44,6 +45,7 @@ const NotStartedGame = () => {
 
             {roomOwner?.id == userInfo?.id && <Button
                 id="startGame"
+                disabled={userList.length === 1}
                 buttonIcon={GameIcon}
                 variant="shadowSecondary"
                 buttonText="Start Game"

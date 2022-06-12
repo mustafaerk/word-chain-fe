@@ -75,7 +75,7 @@ Button.propTypes = {
 Button.defaultProps = {
   borderType: false,
   disabled: false,
-  onClick: () => {},
+  onClick: () => { },
   buttonClass: "",
 };
 

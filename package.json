@@ -1,7 +1,9 @@
 {
-  "name": "word-chain-fe",
-  "version": "0.3.5",
-  "private": true,
+  "name": "linhug",
+  "version": "0.4.6",
+  "homepage": ".",
+  "author": "WMakeGame",
+  "private": false,
   "dependencies": {
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
