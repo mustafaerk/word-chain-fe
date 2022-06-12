@@ -27,10 +27,10 @@ function Room({
   const isSelected = id == roomId;
 
   const handleSelectRoom = () => {
-    if(roomId == id) {
+    if (roomId == id) {
       dispatch(updateRoomId(""))
     }
-    else{
+    else {
       dispatch(updateRoomId(id))
     }
   }
