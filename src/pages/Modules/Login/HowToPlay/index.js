@@ -9,7 +9,7 @@ function HowToPlay({ id }) {
       id={id}
       className={`flex flex-col text-white space-y-10 shadow-3xl w-full rounded-lg m-1 h-12}`}
     >
-      <h1 className="font-bold text-lg">How To Play?</h1>
+      <h1 className="font-bold text-lg text-center">How To Play?</h1>
       <InfoBox
         id="one"
         iconId="2"
